@@ -554,23 +554,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_magneticForce: 1000
   m_rayRange: 20
-  m_vCam1: {fileID: 7767716622633601342, guid: 5188ece80280e6e4c8a6f8376e22eb3c, type: 3}
-  m_vCam2: {fileID: 7970741997294415563, guid: 4b735b15712b7434fa87d64496203e2d, type: 3}
+  m_vCam1: {fileID: 0}
+  m_vCam2: {fileID: 0}
   platformUp:
     serializedVersion: 2
     m_Bits: 512
+  sphere: {fileID: 4239048823824788993}
   m_boostSpeedTimer: 5
   m_speedMultiplier: 1.5
   m_jumpBoost: 30
   whatIsWall:
     serializedVersion: 2
     m_Bits: 128
+  cube: {fileID: 4239048824717930315}
   wallRunForce: 3000
   m_wallRunJumpMultiplier: 120
   m_yWallRunVelocity: 5
-  cube: {fileID: 4239048824717930315}
   groundCheck: {fileID: 4239048824631010905}
-  groundDistance: 0.3
+  groundDistance: 0.45
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -581,7 +582,6 @@ MonoBehaviour:
   m_jumpForce: 20
   m_jumpForceWall: 10
   m_wallJumpUpForce: 20
-  sphere: {fileID: 4239048823824788993}
   selectedShape: 0
   health: 100
 --- !u!114 &8072229362361199460
