@@ -14,6 +14,11 @@ public class BulletManager : MonoBehaviour
     //public Image cylinderPerkBar;
     //Vector3 bulletDir;
 
+    /*void Awake()
+    {
+        m_rb = GetComponent<Rigidbody>(); 
+    }*/
+
     void Start()
     {
         #region Sborrazione
@@ -40,6 +45,7 @@ public class BulletManager : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);
+            //gameObject.SetActive(false);
         }
 
         if (collision.gameObject.CompareTag("Player"))
@@ -48,10 +54,12 @@ public class BulletManager : MonoBehaviour
             {
                 playerHealth.health -= 10f;
                 Destroy(gameObject);
+                //gameObject.SetActive(false);
             }
             else if(cylinder && CylinderPerk.startCylinderPerkBar)
             {
                 Destroy(gameObject);
+                //gameObject.SetActive(false);
                 //cylinderPerkBar.enabled = true;
             }
             else if(cylinder && !CylinderPerk.startCylinderPerkBar && !CylinderPerk.startCooldownCylinder)
@@ -64,5 +72,6 @@ public class BulletManager : MonoBehaviour
     void OnBecameInvisible()
     {
         Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 }

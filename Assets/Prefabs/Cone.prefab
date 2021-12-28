@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5043500409111706929}
   - component: {fileID: 768442739428045874}
   - component: {fileID: 7778039748598829710}
-  - component: {fileID: 5344477791000994930}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -618,6 +617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bulletSpeed: 50
   m_bulletUpForce: 3
+  rb: {fileID: 5043500409111706929}
 --- !u!135 &7778039748598829710
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -631,11 +631,3 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0.5000001, y: 0.793803, z: 0.31664973}
---- !u!33 &5344477791000994930
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125577700318500433}
-  m_Mesh: {fileID: 0}

@@ -642,7 +642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c113940d5007d4b4183e0bf6a25edcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 20
   enemyTargetForward: {fileID: 0}
   enemyTargetBackward: {fileID: 0}
   player: {fileID: 0}
@@ -651,7 +650,8 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
-  attackCooldownTimer: 0.25
+  sightRange: 20
+  attackCooldownTimer: 0.15
 --- !u!54 &7523939313351429192
 Rigidbody:
   m_ObjectHideFlags: 0

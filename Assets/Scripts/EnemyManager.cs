@@ -12,16 +12,14 @@ public class EnemyManager : MonoBehaviour
 
     State state = State.idle;
 
-    [SerializeField] float sightRange;
-
     public Transform enemyTargetForward;
     public Transform enemyTargetBackward;
     public Transform player;
     public Transform firePoint;
     public GameObject bullet;
     public LayerMask whatIsPlayer;
+    [SerializeField] float sightRange;
     [SerializeField] float attackCooldownTimer;
-
     bool waitForAttack = false;
     bool m_playerDetected = false;
 
@@ -44,7 +42,6 @@ public class EnemyManager : MonoBehaviour
                         enemyAim = enemyTargetForward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
-                        //enemyTarget.gameObject.SetActive(true);
                         Debug.Log("Sparo al target davanti");
                     }
                     else if(!PlayerController.isMovingForward && PlayerController.isMoving)
@@ -52,7 +49,6 @@ public class EnemyManager : MonoBehaviour
                         enemyAim = enemyTargetBackward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
-                        //enemyTarget.gameObject.SetActive(true);
                         Debug.Log("Sparo al target dietro");
                     }     
                     else if(!PlayerController.isMoving)
@@ -62,8 +58,6 @@ public class EnemyManager : MonoBehaviour
                             enemyAim = child.position;
                             enemyAim.y -= 0.5f;
                             transform.LookAt(enemyAim);
-                            //Debug.Log(child.position);
-                            //enemyTarget.gameObject.SetActive(false);
                             Debug.Log("Sparo al player");
                         }
                     }
@@ -93,6 +87,19 @@ public class EnemyManager : MonoBehaviour
     void ShootPlayer()
     {
         Instantiate(bullet, firePoint.position, transform.rotation);
+
+        #region Pool method
+        /*GameObject bullet = ObjectPool.instance.GetPooledObject();
+
+        if (bullet != null)
+        {
+            bullet.transform.SetPositionAndRotation(firePoint.position, transform.rotation);
+            bullet.SetActive(true);
+        }
+        else
+            return;*/
+        #endregion
+
         //GameObject newBullet = Instantiate(bullet, firePoint.position, transform.rotation);
         //newBullet.GetComponent<Rigidbody>().AddRelativeForce(transform.forward * m_bulletSpeed, ForceMode.Impulse);
         //newBullet.GetComponent<Rigidbody>().velocity = (player.position - firePoint.position).normalized * m_bulletSpeed;

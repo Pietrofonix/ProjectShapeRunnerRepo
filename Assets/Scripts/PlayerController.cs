@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
             m_gravityChange = false;
 
         BoostSpeedTimer();
-        //RestartScene();
+        RestartScene();
 
         /*if (m_isWallRunning)
             m_rb.AddForce(Vector3.down * m_downForce, ForceMode.Force);*/
@@ -460,7 +460,7 @@ public class PlayerController : MonoBehaviour
 
     void RestartScene()
     {
-        if (transform.position.y <= -30f || health <= 0f)
+        if (health <= 0f)
         { 
             SceneManager.LoadScene(0);
         }
