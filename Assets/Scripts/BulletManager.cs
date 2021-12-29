@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BulletManager : MonoBehaviour
 {
     Rigidbody m_rb;
-    Transform player;
-    PlayerController playerHealth;
+    Transform m_playerRef;
+    PlayerController m_player;
     [SerializeField] float m_bulletSpeed;
     [SerializeField] float m_bulletUpForce;
     private GameObject cylinder;
@@ -21,7 +18,7 @@ public class BulletManager : MonoBehaviour
 
     void Start()
     {
-        #region Sborrazione
+        #region Robe
         /*m_rb = GetComponent<Rigidbody>();
         target = GameObject.FindObjectOfType<PlayerController>();
         bulletDir = (target.transform.position - transform.position).normalized * m_bulletSpeed;
@@ -29,10 +26,10 @@ public class BulletManager : MonoBehaviour
         //m_rb.velocity = (player.position - transform.position) * m_bulletSpeed; 
         #endregion
 
-        playerHealth = FindObjectOfType<PlayerController>();
+        m_player = FindObjectOfType<PlayerController>();
         cylinder = GameObject.Find("ShapeManager/CylinderPlayer");
         m_rb = GetComponent<Rigidbody>();
-        player = GameObject.FindObjectOfType<PlayerController>().transform;
+        m_playerRef = GameObject.FindObjectOfType<PlayerController>().transform;
         //bulletDir = player.position - transform.position;
         //transform.forward = bulletDir.normalized;
         m_rb.AddForce(transform.forward * m_bulletSpeed, ForceMode.Impulse);
@@ -52,7 +49,7 @@ public class BulletManager : MonoBehaviour
         {
             if(!cylinder || (cylinder && !CylinderPerk.startCylinderPerkBar && CylinderPerk.startCooldownCylinder))
             {
-                playerHealth.health -= 10f;
+                m_player.Health -= 10f;
                 Destroy(gameObject);
                 //gameObject.SetActive(false);
             }

@@ -12,7 +12,7 @@ public class CylinderPerk : MonoBehaviour
     public static bool startCooldownCylinder = false;
     public static bool startCylinderPerkBar = false;
     public Image cylinderPerkBarBG;
-    [SerializeField] GameObject cylinder;
+    [SerializeField] GameObject m_cylinder;
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class CylinderPerk : MonoBehaviour
         CylinderPerkBar();
         CooldownCylinderBar();
 
-        if (cylinder.activeInHierarchy)
+        if (m_cylinder.activeInHierarchy)
         {
             cylinderPerkBarBG.enabled = true;
             m_cylinderPerkBarFill.enabled = true;

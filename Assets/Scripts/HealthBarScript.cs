@@ -20,7 +20,7 @@ public class HealthBarScript : MonoBehaviour
 
     void Update()
     {
-        currentHealth = player.health;
+        currentHealth = player.Health;
         healthBar.fillAmount = currentHealth / maxHealth;
     }
 }

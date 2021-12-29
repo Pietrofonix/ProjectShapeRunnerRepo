@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_rayRange;
     [SerializeField] GameObject m_vCam1;
     [SerializeField] GameObject m_vCam2;
-    public LayerMask platformUp;
-    public GameObject sphere;
+    public LayerMask PlatformUp;
+    public GameObject Sphere;
     bool m_gravityChange = false;
     bool m_isOnTop = false;
     bool m_goUp = false;
@@ -27,28 +27,28 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region WallRun variables
-    public LayerMask whatIsWall;
-    public GameObject cube;
-    public float wallRunForce;
+    [SerializeField] float m_wallRunJumpMultiplier;
+    [SerializeField] float m_yWallRunVelocity;
+    public LayerMask WhatIsWall;
+    public GameObject Cube;
+    public float WallRunForce;
     bool m_isWallRight, m_isWallLeft, m_isWallRunning;
     bool m_startWallRun = false;
     bool m_jumpFromWall = false;
-    [SerializeField] float m_wallRunJumpMultiplier;
-    [SerializeField] float m_yWallRunVelocity;
     #endregion
 
     #region GroundCheck variables
-    public Transform groundCheck;
-    public float groundDistance = 0.4f;
-    public LayerMask groundMask;
+    [SerializeField] float groundDistance = 0.4f;
+    public Transform GroundCheck;
+    public LayerMask GroundMask;
     bool m_isGrounded = true;
     #endregion
 
     #region Rigidbody variables
-    public float gravity;
-    private float groundedGravity = 0.05f;
+    [SerializeField] float m_gravity;
+    float m_groundedGravity = 0.05f;
     Rigidbody m_rb;
-    Vector3 moveDir;
+    Vector3 m_moveDir;
     #endregion
 
     #region Player variables
@@ -58,17 +58,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_jumpForce;
     [SerializeField] float m_jumpForceWall;
     [SerializeField] float m_wallJumpUpForce;
+    public float Health;
+    public bool IsMovingForward = false;
+    public bool IsMoving = false;
     bool m_doubleJump;
-    public int selectedShape = 0;
-    public float health = 100f;
-    public static bool isMovingForward = false;
-    public static bool isMoving = false;
+    int selectedShape = 0;
     //[SerializeField] float m_playerRunSpeed;
     //[SerializeField] int min = 0, max = 2;
     #endregion
 
     void Start()
     {
+        //EventManager.BoostEvent += BoostSpeed;
         SelectedShape();
         m_rb = GetComponent<Rigidbody>();
         m_boostSpeedTimerSave = m_boostSpeedTimer;
@@ -94,7 +95,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Sono a terra: " + m_isGrounded);
         //Debug.Log("Doppio salto: " + m_doubleJump);
         //Debug.Log("Jumps: " + m_jumpsCount);
-        //Debug.Log("Si sta muovendo?: " + isMovingForward);
+        //Debug.Log("Si sta muovendo?: " + IsMovingForward);
         //Debug.Log("Doppio salto: " + m_doubleJump);
         #endregion
 
@@ -105,17 +106,17 @@ public class PlayerController : MonoBehaviour
 
         CheckGround();
 
-        if (cube.activeInHierarchy)
+        if (Cube.activeInHierarchy)
         {
             CheckForWall();
             JumpFromWall();
         } 
-        else if (sphere.activeInHierarchy)
+        else if (Sphere.activeInHierarchy)
         {
             CheckGravityChange();
         }
 
-        if (!sphere.activeInHierarchy)
+        if (!Sphere.activeInHierarchy)
             m_gravityChange = false;
 
         BoostSpeedTimer();
@@ -128,6 +129,9 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+
+        RaycastHit hit;
+        m_platformUphit = Physics.Raycast(transform.position, transform.up, out hit, m_rayRange, PlatformUp);
     }
 
     #region Movement
@@ -135,29 +139,29 @@ public class PlayerController : MonoBehaviour
     {
         float xMov = Input.GetAxisRaw("Horizontal");
         float zMov = Input.GetAxisRaw("Vertical");
-        moveDir = new Vector3(xMov, 0f, zMov);
-        moveDir.Normalize();
+        m_moveDir = new Vector3(xMov, 0f, zMov);
+        m_moveDir.Normalize();
 
-        if (moveDir != Vector3.zero)
+        if (m_moveDir != Vector3.zero)
         {
-            isMoving = true;
+            IsMoving = true;
             if (zMov > 0f)
-                isMovingForward = true;
+                IsMovingForward = true;
             else
-                isMovingForward = false;
+                IsMovingForward = false;
         }      
         else
-            isMoving = false;
+            IsMoving = false;
 
         if (m_isGrounded && !m_isWallRunning)
         {
             m_jumpFromWall = false;
-            moveDir.x *= m_playerSpeed;
-            moveDir.z *= m_playerSpeed;
-            moveDir.y = m_rb.velocity.y;
-            m_rb.AddForce(Vector3.down * groundedGravity, ForceMode.Acceleration);
-            m_rb.velocity = moveDir;
-            //m_rb.AddForce(moveDir, ForceMode.Force);
+            m_moveDir.x *= m_playerSpeed;
+            m_moveDir.z *= m_playerSpeed;
+            m_moveDir.y = m_rb.velocity.y;
+            m_rb.AddForce(Vector3.down * m_groundedGravity, ForceMode.Acceleration);
+            m_rb.velocity = m_moveDir;
+            //m_rb.AddForce(m_moveDir, ForceMode.Force);
             //m_rb.velocity = Vector3.ClampMagnitude(m_rb.velocity, m_playerSpeed);
         }
 
@@ -166,19 +170,19 @@ public class PlayerController : MonoBehaviour
         /*else if (m_isGrounded && !m_isWallRunning && sphere.activeInHierarchy)
         {
             m_jumpFromWall = false;
-            m_rb.AddForce(moveDir * 300 * Time.fixedDeltaTime, ForceMode.Acceleration);
-            if (moveDir.sqrMagnitude < 0.01f) 
+            m_rb.AddForce(m_moveDir * 300 * Time.fixedDeltaTime, ForceMode.Acceleration);
+            if (m_moveDir.sqrMagnitude < 0.01f) 
                 m_rb.AddForce(-m_rb.velocity * m_playerSpeed, ForceMode.Acceleration);
         }*/
         #endregion
 
         else if (!m_isGrounded && !m_isWallRunning && !m_jumpFromWall)
         {
-            moveDir.x *= m_playerAirSpeed;
-            moveDir.z *= m_playerSpeed;
-            moveDir.y = m_rb.velocity.y - gravity * Time.deltaTime;
+            m_moveDir.x *= m_playerAirSpeed;
+            m_moveDir.z *= m_playerSpeed;
+            m_moveDir.y = m_rb.velocity.y - m_gravity * Time.deltaTime;
             //m_rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
-            m_rb.velocity = moveDir;
+            m_rb.velocity = m_moveDir;
         } 
         else if (!m_isGrounded && m_jumpFromWall && !m_isWallRunning)
         {
@@ -207,9 +211,6 @@ public class PlayerController : MonoBehaviour
     #region GravityChange
     void CheckGravityChange()
     {
-        RaycastHit hit;
-        m_platformUphit = Physics.Raycast(transform.position, transform.up, out hit, m_rayRange, platformUp);
-
         if (m_platformUphit || m_isOnTop)
         {
             GravityChange();
@@ -235,7 +236,7 @@ public class PlayerController : MonoBehaviour
                 m_goUp = true;
                 m_gravityChange = true;
                 m_rb.AddForce(transform.up * m_magneticForce, ForceMode.Force);
-                gravity *= -1;
+                m_gravity *= -1;
                 Debug.Log("Vado su");
                 m_vCam1.SetActive(false);
                 m_vCam2.SetActive(true);
@@ -245,7 +246,7 @@ public class PlayerController : MonoBehaviour
                 m_goUp = false;
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
-                gravity *= -1;
+                m_gravity *= -1;
                 Debug.Log("Vado giù");
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
@@ -255,7 +256,7 @@ public class PlayerController : MonoBehaviour
                 m_goUp = false;
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
-                gravity *= -1;
+                m_gravity *= -1;
                 Debug.Log("Torno giù dopo essere andato su");
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
@@ -266,7 +267,7 @@ public class PlayerController : MonoBehaviour
     void StopGravityPlatform()
     {
         m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
-        gravity *= -1;
+        m_gravity *= -1;
         m_gravityChange = false;
         m_vCam1.SetActive(true);
         m_vCam2.SetActive(false);
@@ -275,7 +276,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckGround()
     {
-        m_isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        m_isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
 
         if(m_isGrounded)
         {
@@ -394,8 +395,8 @@ public class PlayerController : MonoBehaviour
     #region WallRun
     void CheckForWall()
     {
-        m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.5f, whatIsWall);
-        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, 1.5f, whatIsWall);
+        m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.5f, WhatIsWall);
+        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, 1.5f, WhatIsWall);
 
         //Leave wall run
         if (!m_isWallRight && !m_isWallLeft)
@@ -426,11 +427,11 @@ public class PlayerController : MonoBehaviour
             //Make sure the player sticks to the wall
             if (m_isWallRight)
             {
-                m_rb.AddForce(transform.right * wallRunForce, ForceMode.Force);
+                m_rb.AddForce(transform.right * WallRunForce, ForceMode.Force);
             }
             else if (m_isWallLeft)
             {
-                m_rb.AddForce(-transform.right * wallRunForce, ForceMode.Force);
+                m_rb.AddForce(-transform.right * WallRunForce, ForceMode.Force);
             }
         }
     }
@@ -460,7 +461,7 @@ public class PlayerController : MonoBehaviour
 
     void RestartScene()
     {
-        if (health <= 0f)
+        if (Health <= 0f)
         { 
             SceneManager.LoadScene(0);
         }
@@ -493,11 +494,17 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    /*void OnDisable()
+    {
+        EventManager.BoostEvent -= BoostSpeed;
+    }*/
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SpeedPlatform"))
         {
             BoostSpeed();
+            //EventManager.StartBoost();
         }    
     }
 

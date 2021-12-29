@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PillarScript : MonoBehaviour
 {
-    public Transform player;
+    public Transform Player;
     Animator m_anim;
 
     void Start()
@@ -22,7 +22,7 @@ public class PillarScript : MonoBehaviour
                 pillar.GetComponent<Animator>().enabled = true;
         }*/
 
-        float distance = Vector3.Distance(player.position, transform.position);
+        float distance = Vector3.Distance(Player.position, transform.position);
         //Debug.Log("La distanza vale: " + distance);
         if (distance <= 10.0f)
             m_anim.enabled = true;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -12,20 +10,21 @@ public class EnemyManager : MonoBehaviour
 
     State state = State.idle;
 
-    public Transform enemyTargetForward;
-    public Transform enemyTargetBackward;
-    public Transform player;
-    public Transform firePoint;
-    public GameObject bullet;
-    public LayerMask whatIsPlayer;
-    [SerializeField] float sightRange;
-    [SerializeField] float attackCooldownTimer;
+    public PlayerController PlayerRef;
+    public Transform EnemyTargetForward;
+    public Transform EnemyTargetBackward;
+    public Transform Player;
+    public Transform FirePoint;
+    public GameObject Bullet;
+    public LayerMask WhatIsPlayer;
+    [SerializeField] float m_sightRange;
+    [SerializeField] float m_attackCooldownTimer;
     bool waitForAttack = false;
     bool m_playerDetected = false;
 
     void Update()
     {
-        m_playerDetected = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        m_playerDetected = Physics.CheckSphere(transform.position, m_sightRange, WhatIsPlayer);
 
         switch (state)
         {
@@ -34,24 +33,24 @@ public class EnemyManager : MonoBehaviour
                 break;
 
             case State.shoot:
-                foreach (Transform child in player)
+                foreach (Transform child in Player)
                 {
                     Vector3 enemyAim;
-                    if (PlayerController.isMovingForward && PlayerController.isMoving)
+                    if (PlayerRef.IsMovingForward && PlayerRef.IsMoving)
                     {
-                        enemyAim = enemyTargetForward.position;
+                        enemyAim = EnemyTargetForward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target davanti");
                     }
-                    else if(!PlayerController.isMovingForward && PlayerController.isMoving)
+                    else if(!PlayerRef.IsMovingForward && PlayerRef.IsMoving)
                     {
-                        enemyAim = enemyTargetBackward.position;
+                        enemyAim = EnemyTargetBackward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target dietro");
                     }     
-                    else if(!PlayerController.isMoving)
+                    else if(!PlayerRef.IsMoving)
                     {
                         if (!child.CompareTag("GroundCheck") && !child.CompareTag("EnemyTarget") && child.gameObject.activeInHierarchy)
                         {
@@ -67,7 +66,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     ShootPlayer();
                     waitForAttack = true;
-                    Invoke(nameof(AttackCooldown), attackCooldownTimer);
+                    Invoke(nameof(AttackCooldown), m_attackCooldownTimer);
                 }
                 break;
         }
@@ -86,7 +85,7 @@ public class EnemyManager : MonoBehaviour
 
     void ShootPlayer()
     {
-        Instantiate(bullet, firePoint.position, transform.rotation);
+        Instantiate(Bullet, FirePoint.position, transform.rotation);
 
         #region Pool method
         /*GameObject bullet = ObjectPool.instance.GetPooledObject();
@@ -110,6 +109,6 @@ public class EnemyManager : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
+        Gizmos.DrawWireSphere(transform.position, m_sightRange);
     }
 }

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7523939313351429198}
   - component: {fileID: 7523939313351429199}
   - component: {fileID: 7523939313351429196}
-  - component: {fileID: 7523939313351429197}
   - component: {fileID: 7523939313351429193}
   - component: {fileID: 7523939313351429192}
   - component: {fileID: 7523939313351429195}
@@ -622,14 +621,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &7523939313351429197
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7523939313351429232}
-  m_Mesh: {fileID: 0}
 --- !u!114 &7523939313351429193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -642,16 +633,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c113940d5007d4b4183e0bf6a25edcb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTargetForward: {fileID: 0}
-  enemyTargetBackward: {fileID: 0}
-  player: {fileID: 0}
-  firePoint: {fileID: 7523939313639295643}
-  bullet: {fileID: 1125577700318500433, guid: 899241da8698e194b992acde40d5b467, type: 3}
-  whatIsPlayer:
+  PlayerRef: {fileID: 2261277313682659750, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+    type: 3}
+  EnemyTargetForward: {fileID: 0}
+  EnemyTargetBackward: {fileID: 0}
+  Player: {fileID: 2318135580832642447, guid: 70d4a14d6cff27949a79fb4db2bb9084, type: 3}
+  FirePoint: {fileID: 7523939313639295643}
+  Bullet: {fileID: 1125577700318500433, guid: 899241da8698e194b992acde40d5b467, type: 3}
+  WhatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
-  sightRange: 20
-  attackCooldownTimer: 0.15
+  m_sightRange: 20
+  m_attackCooldownTimer: 0.13
 --- !u!54 &7523939313351429192
 Rigidbody:
   m_ObjectHideFlags: 0

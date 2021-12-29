@@ -20,7 +20,7 @@ public class PlayerCheckpoint : MonoBehaviour
         if(transform.position.y <= -20f)
         {
             m_vCam1.enabled = false;
-            if(m_playerController.sphere.activeInHierarchy || m_playerController.cube.activeInHierarchy)
+            if(m_playerController.Sphere.activeInHierarchy || m_playerController.Cube.activeInHierarchy)
             {
                 m_spawnPoint.y += 0.5f;
             }
