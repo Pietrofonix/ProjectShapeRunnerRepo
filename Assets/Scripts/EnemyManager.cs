@@ -11,16 +11,24 @@ public class EnemyManager : MonoBehaviour
     State state = State.idle;
 
     public PlayerController PlayerRef;
-    public Transform EnemyTargetForward;
-    public Transform EnemyTargetBackward;
+    //public Transform EnemyTargetForward;
+    //public Transform EnemyTargetBackward;
     public Transform Player;
     public Transform FirePoint;
     public GameObject Bullet;
     public LayerMask WhatIsPlayer;
     [SerializeField] float m_sightRange;
     [SerializeField] float m_attackCooldownTimer;
+    Transform m_enemyTargetForward;
+    Transform m_enemyTargetBackward;
     bool waitForAttack = false;
     bool m_playerDetected = false;
+
+    void Start()
+    {
+        m_enemyTargetForward = Player.GetChild(5);
+        m_enemyTargetBackward = Player.GetChild(6);
+    }
 
     void Update()
     {
@@ -38,14 +46,16 @@ public class EnemyManager : MonoBehaviour
                     Vector3 enemyAim;
                     if (PlayerRef.IsMovingForward && PlayerRef.IsMoving)
                     {
-                        enemyAim = EnemyTargetForward.position;
+                        //enemyAim = EnemyTargetForward.position;
+                        enemyAim = m_enemyTargetForward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target davanti");
                     }
                     else if(!PlayerRef.IsMovingForward && PlayerRef.IsMoving)
                     {
-                        enemyAim = EnemyTargetBackward.position;
+                        //enemyAim = EnemyTargetBackward.position;
+                        enemyAim = m_enemyTargetBackward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target dietro");

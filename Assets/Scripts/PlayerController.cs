@@ -4,6 +4,7 @@ using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Change gravity variables")]
     #region Gravity variables
     [SerializeField] float m_magneticForce;
     [SerializeField] float m_rayRange;
@@ -16,16 +17,20 @@ public class PlayerController : MonoBehaviour
     bool m_goUp = false;
     bool m_platformUphit;
     #endregion
+    [Space(2)]
 
+    [Header("Speed carpet variables")]
     #region BoostSpeed
-    bool m_gonnaGoFast = false;
     [SerializeField] float m_boostSpeedTimer;
     [SerializeField] float m_speedMultiplier;
     [SerializeField] float m_jumpBoost;
     float m_jumpBoostSave = 0f;
     float m_boostSpeedTimerSave = 0f;
+    bool m_gonnaGoFast = false;
     #endregion
+    [Space(2)]
 
+    [Header("Wall run variables")]
     #region WallRun variables
     [SerializeField] float m_wallRunJumpMultiplier;
     [SerializeField] float m_yWallRunVelocity;
@@ -36,7 +41,9 @@ public class PlayerController : MonoBehaviour
     bool m_startWallRun = false;
     bool m_jumpFromWall = false;
     #endregion
+    [Space(2)]
 
+    [Header("Ground Check variables")]
     #region GroundCheck variables
     [SerializeField] float groundDistance = 0.4f;
     public Transform GroundCheck;
@@ -50,7 +57,9 @@ public class PlayerController : MonoBehaviour
     Rigidbody m_rb;
     Vector3 m_moveDir;
     #endregion
+    [Space(2)]
 
+    [Header("Player variables")]
     #region Player variables
     [SerializeField] float m_playerSpeed;
     [SerializeField] int m_howManyShapes;
@@ -59,8 +68,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_jumpForceWall;
     [SerializeField] float m_wallJumpUpForce;
     public float Health;
-    public bool IsMovingForward = false;
-    public bool IsMoving = false;
+    [HideInInspector] public bool IsMovingForward = false;
+    [HideInInspector] public bool IsMoving = false;
     bool m_doubleJump;
     int selectedShape = 0;
     //[SerializeField] float m_playerRunSpeed;
@@ -132,6 +141,22 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit hit;
         m_platformUphit = Physics.Raycast(transform.position, transform.up, out hit, m_rayRange, PlatformUp);
+    }
+
+    void CheckGround()
+    {
+        m_isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
+
+        if(m_isGrounded)
+        {
+            m_vCam1.SetActive(true);
+            m_vCam2.SetActive(false);
+        }
+        else if(m_isOnTop)
+        {
+            m_vCam1.SetActive(false);
+            m_vCam2.SetActive(true);
+        }
     }
 
     #region Movement
@@ -273,22 +298,6 @@ public class PlayerController : MonoBehaviour
         m_vCam2.SetActive(false);
     }
     #endregion
-
-    void CheckGround()
-    {
-        m_isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
-
-        if(m_isGrounded)
-        {
-            m_vCam1.SetActive(true);
-            m_vCam2.SetActive(false);
-        }
-        else if(m_isOnTop)
-        {
-            m_vCam1.SetActive(false);
-            m_vCam2.SetActive(true);
-        }
-    }
 
     #region ChangeShape
     void ScrollShape()
@@ -459,14 +468,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    void RestartScene()
-    {
-        if (Health <= 0f)
-        { 
-            SceneManager.LoadScene(0);
-        }
-    }
-
     #region BoostSpeed
     void BoostSpeedTimer()
     {
@@ -494,11 +495,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    /*void OnDisable()
-    {
-        EventManager.BoostEvent -= BoostSpeed;
-    }*/
-
+    #region OnTrigger/OnCollision
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SpeedPlatform"))
@@ -524,4 +521,19 @@ public class PlayerController : MonoBehaviour
             m_isOnTop = false;
         }
     }
+    #endregion
+
+    void RestartScene()
+    {
+        if (Health <= 0f)
+        { 
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    /*void OnDisable()
+    {
+        EventManager.BoostEvent -= BoostSpeed;
+    }*/
+
 }
