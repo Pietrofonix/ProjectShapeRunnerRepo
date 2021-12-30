@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_rayRange;
     [SerializeField] GameObject m_vCam1;
     [SerializeField] GameObject m_vCam2;
+    public Animator ConeAnim;
     public LayerMask PlatformUp;
     public GameObject Sphere;
+    public GameObject Cone;
     bool m_gravityChange = false;
     bool m_isOnTop = false;
     bool m_goUp = false;
@@ -27,6 +29,17 @@ public class PlayerController : MonoBehaviour
     float m_jumpBoostSave = 0f;
     float m_boostSpeedTimerSave = 0f;
     bool m_gonnaGoFast = false;
+    #endregion
+    [Space(2)]
+
+    [Header("Slow carpet variables")]
+    #region Slowspeed
+    [SerializeField] float m_decreaseSpeedTimer;
+    [SerializeField] float m_slowMultiplier;
+    [SerializeField] float m_jumpDecrease;
+    float m_jumpDecreaseSave = 0f;
+    float m_decreaseSpeedTimerSave = 0f;
+    bool m_gonnaGoSlow = false;
     #endregion
     [Space(2)]
 
@@ -82,7 +95,9 @@ public class PlayerController : MonoBehaviour
         SelectedShape();
         m_rb = GetComponent<Rigidbody>();
         m_boostSpeedTimerSave = m_boostSpeedTimer;
+        m_decreaseSpeedTimerSave = m_decreaseSpeedTimer;
         m_jumpBoostSave = m_jumpForce;
+        m_jumpDecreaseSave = m_jumpForce;
     }
 
     void Update()
@@ -116,17 +131,18 @@ public class PlayerController : MonoBehaviour
             CheckForWall();
             JumpFromWall();
         } 
-        else if (Sphere.activeInHierarchy)
+        else if (Cone.activeInHierarchy)
         {
             CheckGravityChange();
         }
 
-        if (!Sphere.activeInHierarchy)
+        if (!Cone.activeInHierarchy)
             m_gravityChange = false;
 
         CheckJump();
         CheckGround();
         BoostSpeedTimer();
+        DecreaseSpeedTimer();
         RestartScene();
 
         /*if (m_isWallRunning)
@@ -263,6 +279,7 @@ public class PlayerController : MonoBehaviour
         {
             if (!m_isOnTop && !m_gravityChange)
             {
+                ConeAnim.Play("ConeRotationUp");
                 m_goUp = true;
                 m_gravityChange = true;
                 m_rb.AddForce(transform.up * m_magneticForce, ForceMode.Force);
@@ -273,6 +290,7 @@ public class PlayerController : MonoBehaviour
             }
             else if(m_isOnTop)
             {
+                ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
@@ -283,6 +301,7 @@ public class PlayerController : MonoBehaviour
             }
             else if(m_goUp && !m_isGrounded)
             {
+                ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
@@ -501,6 +520,33 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region SlowSpeed
+    void DecreaseSpeedTimer()
+    {
+        if (m_gonnaGoSlow)
+        {
+            m_decreaseSpeedTimer -= Time.deltaTime;
+            if (m_decreaseSpeedTimer <= 0.01f)
+            {
+                m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
+                m_playerSpeed *= m_slowMultiplier;
+                m_jumpForce = m_jumpDecreaseSave;
+                m_gonnaGoSlow = false;
+            }
+        }
+    }
+
+    void DecreaseSpeed()
+    {
+        if (!m_gonnaGoSlow)
+        {
+            m_playerSpeed /= m_slowMultiplier;
+            m_jumpForce = m_jumpDecrease;
+            m_gonnaGoSlow = true;
+        }
+    }
+    #endregion
+
     #region OnTrigger/OnCollision
     void OnTriggerEnter(Collider other)
     {
@@ -508,7 +554,12 @@ public class PlayerController : MonoBehaviour
         {
             BoostSpeed();
             //EventManager.StartBoost();
-        }    
+        }
+        
+        if(other.CompareTag("SlowPlatform"))
+        {
+            DecreaseSpeed();
+        }
     }
 
     void OnCollisionEnter(Collision collision)

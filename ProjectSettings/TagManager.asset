@@ -11,6 +11,7 @@ TagManager:
   - EnemyTarget
   - GravityPlatform
   - Checkpoint
+  - SlowPlatform
   layers:
   - Default
   - TransparentFX
