@@ -4,7 +4,7 @@ using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Change gravity variables")]
+    [Header("GravityChange variables")]
     #region Gravity variables
     [SerializeField] float m_magneticForce;
     [SerializeField] float m_rayRange;
@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
     #region WallRun variables
     [SerializeField] float m_wallRunJumpMultiplier;
     [SerializeField] float m_yWallRunVelocity;
+    [SerializeField] float m_jumpForce;
+    [SerializeField] float m_jumpForceWall;
+    [SerializeField] float m_wallJumpUpForce;
     public LayerMask WhatIsWall;
     public GameObject Cube;
     public float WallRunForce;
@@ -64,13 +67,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_playerSpeed;
     [SerializeField] int m_howManyShapes;
     [SerializeField] float m_playerAirSpeed;
-    [SerializeField] float m_jumpForce;
-    [SerializeField] float m_jumpForceWall;
-    [SerializeField] float m_wallJumpUpForce;
     public float Health;
     [HideInInspector] public bool IsMovingForward = false;
     [HideInInspector] public bool IsMoving = false;
-    bool m_doubleJump;
+    [HideInInspector] public bool DoubleJumpVar;
     int selectedShape = 0;
     //[SerializeField] float m_playerRunSpeed;
     //[SerializeField] int min = 0, max = 2;
@@ -102,18 +102,14 @@ public class PlayerController : MonoBehaviour
         //Debug.Log(m_rb.velocity);
         //Debug.Log("Il salto dal muro è: " + m_jumpFromWall);
         //Debug.Log("Sono a terra: " + m_isGrounded);
-        //Debug.Log("Doppio salto: " + m_doubleJump);
+        //Debug.Log("Doppio salto: " + DoubleJumpVar);
         //Debug.Log("Jumps: " + m_jumpsCount);
         //Debug.Log("Si sta muovendo?: " + IsMovingForward);
-        //Debug.Log("Doppio salto: " + m_doubleJump);
+        //Debug.Log("Doppio salto: " + DoubleJumpVar);
         #endregion
-
-        CheckJump();
 
         if (!m_isWallRunning && !m_gravityChange)
             ScrollShape();
-
-        CheckGround();
 
         if (Cube.activeInHierarchy)
         {
@@ -128,6 +124,8 @@ public class PlayerController : MonoBehaviour
         if (!Sphere.activeInHierarchy)
             m_gravityChange = false;
 
+        CheckJump();
+        CheckGround();
         BoostSpeedTimer();
         RestartScene();
 
@@ -139,6 +137,7 @@ public class PlayerController : MonoBehaviour
     {
         Movement();
 
+        //Raycast that detects the gravity platform above the player
         RaycastHit hit;
         m_platformUphit = Physics.Raycast(transform.position, transform.up, out hit, m_rayRange, PlatformUp);
     }
@@ -178,6 +177,7 @@ public class PlayerController : MonoBehaviour
         else
             IsMoving = false;
 
+        //If the player is on the ground
         if (m_isGrounded && !m_isWallRunning)
         {
             m_jumpFromWall = false;
@@ -201,6 +201,7 @@ public class PlayerController : MonoBehaviour
         }*/
         #endregion
 
+        //If the player is in air 
         else if (!m_isGrounded && !m_isWallRunning && !m_jumpFromWall)
         {
             m_moveDir.x *= m_playerAirSpeed;
@@ -208,23 +209,27 @@ public class PlayerController : MonoBehaviour
             m_moveDir.y = m_rb.velocity.y - m_gravity * Time.deltaTime;
             //m_rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
             m_rb.velocity = m_moveDir;
-        } 
+        }
+        //If the player is jumping from the wall
         else if (!m_isGrounded && m_jumpFromWall && !m_isWallRunning)
         {
             m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, m_rb.velocity.z);
             m_rb.AddForce(Vector3.down * 9.81f, ForceMode.Acceleration);
 
         }
+        //If the player is running on the wall
         else if (!m_isGrounded && !m_jumpFromWall && m_isWallRunning)
         {
             //The player automatically goes forward while running on the wall
             m_rb.velocity = new Vector3(0f, 0f, m_playerSpeed);
 
             //Let the player go up and down while running on the wall
+            //Up
             if (Input.GetKey(KeyCode.W))
             {
                 m_rb.velocity = new Vector3(0f, m_yWallRunVelocity, m_rb.velocity.z);
             }
+            //Down
             if (Input.GetKey(KeyCode.S))
             {
                 m_rb.velocity = new Vector3(0f, -m_yWallRunVelocity, m_rb.velocity.z);
@@ -384,19 +389,20 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            m_rb.velocity = Vector3.zero;
             //m_rb.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
             m_rb.velocity = new Vector3(m_rb.velocity.x, m_jumpForce, m_rb.velocity.z);
-            m_doubleJump = true;
+            DoubleJumpVar = true;
         }
     }
     
     void DoubleJump()
     {
-        if (m_doubleJump && !m_isWallRunning && !m_jumpFromWall && Input.GetKeyDown(KeyCode.Space))
+        if (DoubleJumpVar && !m_isWallRunning && !m_jumpFromWall && Input.GetKeyDown(KeyCode.Space))
         {
             m_rb.velocity = Vector3.zero;
             m_rb.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
-            m_doubleJump = false;
+            DoubleJumpVar = false;
         }
     }
     #endregion
@@ -431,7 +437,7 @@ public class PlayerController : MonoBehaviour
             m_startWallRun = true;
             m_jumpFromWall = false;
             m_isWallRunning = true;
-            //m_doubleJump = false;
+            //DoubleJumpVar = false;
 
             //Make sure the player sticks to the wall
             if (m_isWallRight)

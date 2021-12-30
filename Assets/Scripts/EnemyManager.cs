@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
 
     State state = State.idle;
 
-    public PlayerController PlayerRef;
+    public PlayerController PlayerScript;
     //public Transform EnemyTargetForward;
     //public Transform EnemyTargetBackward;
     public Transform Player;
@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour
                 foreach (Transform child in Player)
                 {
                     Vector3 enemyAim;
-                    if (PlayerRef.IsMovingForward && PlayerRef.IsMoving)
+                    if (PlayerScript.IsMovingForward && PlayerScript.IsMoving)
                     {
                         //enemyAim = EnemyTargetForward.position;
                         enemyAim = m_enemyTargetForward.position;
@@ -52,7 +52,7 @@ public class EnemyManager : MonoBehaviour
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target davanti");
                     }
-                    else if(!PlayerRef.IsMovingForward && PlayerRef.IsMoving)
+                    else if(!PlayerScript.IsMovingForward && PlayerScript.IsMoving)
                     {
                         //enemyAim = EnemyTargetBackward.position;
                         enemyAim = m_enemyTargetBackward.position;
@@ -60,7 +60,7 @@ public class EnemyManager : MonoBehaviour
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target dietro");
                     }     
-                    else if(!PlayerRef.IsMoving)
+                    else if(!PlayerScript.IsMoving)
                     {
                         if (!child.CompareTag("GroundCheck") && !child.CompareTag("EnemyTarget") && child.gameObject.activeInHierarchy)
                         {

@@ -5,13 +5,19 @@ using UnityEngine;
 public class JumpPlatform : MonoBehaviour
 {
     [SerializeField] float m_jumpBoost;
-    public Rigidbody m_player;
+    public PlayerController PlayerScript;    
+    public Rigidbody m_playerRb;
+
+
 
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
-            m_player.AddForce(Vector3.up * m_jumpBoost, ForceMode.Impulse);
+            m_playerRb.velocity = Vector3.zero;
+            m_playerRb.AddForce(Vector3.up * m_jumpBoost, ForceMode.Impulse);
+            //m_playerRb.velocity = new Vector3(0f, m_jumpBoost, 0f);
+            PlayerScript.DoubleJumpVar = true;
         }    
     }
 }
