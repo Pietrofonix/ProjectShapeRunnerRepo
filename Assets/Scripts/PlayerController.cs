@@ -315,6 +315,7 @@ public class PlayerController : MonoBehaviour
 
     void StopGravityPlatform()
     {
+        ConeAnim.Play("ConeRotationDown");
         m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
         m_gravity *= -1;
         m_gravityChange = false;
