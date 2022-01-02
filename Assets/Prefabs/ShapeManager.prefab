@@ -278,9 +278,9 @@ MonoBehaviour:
   m_jumpDecrease: 10
   m_wallRunJumpMultiplier: 120
   m_yWallRunVelocity: 5
-  m_jumpForce: 20
-  m_jumpForceWall: 10
-  m_wallJumpUpForce: 20
+  m_jumpForceWall: 30
+  m_wallJumpUpForce: 5
+  m_gravityJumpFromWall: 5
   WhatIsWall:
     serializedVersion: 2
     m_Bits: 128
@@ -295,7 +295,9 @@ MonoBehaviour:
   m_playerSpeed: 30
   m_howManyShapes: 5
   m_playerAirSpeed: 20
+  m_jumpForce: 20
   Health: 100
+  Capsule: {fileID: 2422532919065612819}
   IsMovingForward: 0
   IsMoving: 0
   DoubleJumpVar: 0

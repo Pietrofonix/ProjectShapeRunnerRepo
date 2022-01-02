@@ -47,9 +47,9 @@ public class PlayerController : MonoBehaviour
     #region WallRun variables
     [SerializeField] float m_wallRunJumpMultiplier;
     [SerializeField] float m_yWallRunVelocity;
-    [SerializeField] float m_jumpForce;
     [SerializeField] float m_jumpForceWall;
     [SerializeField] float m_wallJumpUpForce;
+    [SerializeField] float m_gravityJumpFromWall;
     public LayerMask WhatIsWall;
     public GameObject Cube;
     public float WallRunForce;
@@ -80,7 +80,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_playerSpeed;
     [SerializeField] int m_howManyShapes;
     [SerializeField] float m_playerAirSpeed;
+    [SerializeField] float m_jumpForce;
     public float Health;
+    public GameObject Capsule;
     [HideInInspector] public bool IsMovingForward = false;
     [HideInInspector] public bool IsMoving = false;
     [HideInInspector] public bool DoubleJumpVar;
@@ -230,7 +232,7 @@ public class PlayerController : MonoBehaviour
         else if (!m_isGrounded && m_jumpFromWall && !m_isWallRunning)
         {
             m_rb.velocity = new Vector3(m_rb.velocity.x, m_rb.velocity.y, m_rb.velocity.z);
-            m_rb.AddForce(Vector3.down * 9.81f, ForceMode.Acceleration);
+            m_rb.AddForce(Vector3.down * m_gravityJumpFromWall, ForceMode.Acceleration);
 
         }
         //If the player is running on the wall
@@ -241,12 +243,12 @@ public class PlayerController : MonoBehaviour
 
             //Let the player go up and down while running on the wall
             //Up
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.E))
             {
                 m_rb.velocity = new Vector3(0f, m_yWallRunVelocity, m_rb.velocity.z);
             }
             //Down
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.Q))
             {
                 m_rb.velocity = new Vector3(0f, -m_yWallRunVelocity, m_rb.velocity.z);
             }
@@ -412,7 +414,9 @@ public class PlayerController : MonoBehaviour
             m_rb.velocity = Vector3.zero;
             //m_rb.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
             m_rb.velocity = new Vector3(m_rb.velocity.x, m_jumpForce, m_rb.velocity.z);
-            DoubleJumpVar = true;
+
+            if (Capsule.activeInHierarchy)
+                DoubleJumpVar = true;
         }
     }
     
@@ -477,18 +481,36 @@ public class PlayerController : MonoBehaviour
         {
             m_jumpFromWall = true;
             
-            if (m_isWallRight)
+            if (m_isWallRight && !Input.GetKey(KeyCode.W))
             {
-                m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * -transform.right, ForceMode.Force);
+                /*m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * -transform.right, ForceMode.Force);
+                m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);*/
+                float angle = -90f;
+                Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
+                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
+            }
+            else if (m_isWallRight && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)))
+            {
+                float angle = -15f;
+                Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
+                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
 
-            if (m_isWallLeft)
+            if (m_isWallLeft && !Input.GetKey(KeyCode.W))
             {
-                m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * transform.right, ForceMode.Force);
+                /*m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * transform.right, ForceMode.Force);
+                m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);*/
+                float angle = 90f;
+                Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
+                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse); ;
+            }
+            else if (m_isWallLeft && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D)))
+            {
+                float angle = 15f;
+                Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
+                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
 
-            m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);
-            //m_rb.AddForce(transform.forward * m_jumpForce * 15f);
             m_isWallRunning = false;
         }
     }
