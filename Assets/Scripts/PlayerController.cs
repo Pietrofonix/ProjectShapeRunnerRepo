@@ -616,7 +616,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Health <= 0f)
         { 
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

@@ -262,8 +262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_magneticForce: 1000
   m_rayUpRange: 20
-  m_vCam1: {fileID: 0}
-  m_vCam2: {fileID: 0}
+  m_vCam1: {fileID: 4188070410628194014, guid: 44e742d659e24da42a34c3b613da993b, type: 3}
+  m_vCam2: {fileID: 2053823322099331981, guid: 165ccc43cc8b2c8489400c4f5bdb8e48, type: 3}
   ConeAnim: {fileID: 2377599383856726371}
   PlatformUp:
     serializedVersion: 2
