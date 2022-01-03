@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Jump From Wall= " + m_jumpFromWall);
         //Debug.Log(m_rb.velocity);
         //Debug.Log("Il salto dal muro è: " + m_jumpFromWall);
-        //Debug.Log("Sono a terra: " + m_isGrounded);
+        Debug.Log("Sono a terra: " + m_isGrounded);
         //Debug.Log("Doppio salto: " + DoubleJumpVar);
         //Debug.Log("Jumps: " + m_jumpsCount);
         //Debug.Log("Si sta muovendo?: " + IsMovingForward);
@@ -433,7 +433,7 @@ public class PlayerController : MonoBehaviour
     
     void DoubleJump()
     {
-        if (DoubleJumpVar && !m_isWallRunning && !m_jumpFromWall && Input.GetKeyDown(KeyCode.Space))
+        if (DoubleJumpVar && Capsule.activeInHierarchy && !m_isWallRunning && !m_jumpFromWall && Input.GetKeyDown(KeyCode.Space))
         {
             m_rb.velocity = Vector3.zero;
             m_rb.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);

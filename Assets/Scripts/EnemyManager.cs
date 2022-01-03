@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour
                     if (PlayerScript.IsMovingForward && PlayerScript.IsMoving)
                     {
                         //enemyAim = EnemyTargetForward.position;
-                        enemyAim = m_enemyTargetForward.position;
+                        enemyAim = m_enemyTargetBackward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target davanti");
@@ -55,7 +55,7 @@ public class EnemyManager : MonoBehaviour
                     else if(!PlayerScript.IsMovingForward && PlayerScript.IsMoving)
                     {
                         //enemyAim = EnemyTargetBackward.position;
-                        enemyAim = m_enemyTargetBackward.position;
+                        enemyAim = m_enemyTargetForward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
                         Debug.Log("Sparo al target dietro");
