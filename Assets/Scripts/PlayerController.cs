@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour
     [Header("GravityChange variables")]
     #region Gravity variables
     [SerializeField] float m_magneticForce;
-    [SerializeField] float m_rayRange;
+    [SerializeField] float m_rayUpRange;
     [SerializeField] GameObject m_vCam1;
     [SerializeField] GameObject m_vCam2;
+    RaycastHit m_hitGravityPlatform;
     public Animator ConeAnim;
     public LayerMask PlatformUp;
     public GameObject Sphere;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     bool m_gravityChange = false;
     bool m_isOnTop = false;
     bool m_goUp = false;
-    bool m_platformUphit;
+    bool m_platformUpHit;
     #endregion
     [Space(2)]
 
@@ -61,10 +62,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Ground Check variables")]
     #region GroundCheck variables
-    [SerializeField] float groundDistance = 0.4f;
+    [SerializeField] float m_groundDistance;
+    [SerializeField] float m_rayDownRange;
+    RaycastHit m_hitGroundDistance;
     public Transform GroundCheck;
     public LayerMask GroundMask;
     bool m_isGrounded = true;
+    bool m_groundHit;
     #endregion
 
     #region Rigidbody variables
@@ -156,16 +160,19 @@ public class PlayerController : MonoBehaviour
         Movement();
 
         //Raycast that detects the gravity platform above the player
-        RaycastHit hit;
-        m_platformUphit = Physics.Raycast(transform.position, transform.up, out hit, m_rayRange, PlatformUp);
+        m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
+
+        //Raycast that detects the distance between the player and the ground under the gravity platform
+        m_groundHit = Physics.Raycast(transform.position, -transform.up, out m_hitGroundDistance, m_rayDownRange, GroundMask);
     }
 
     void CheckGround()
     {
-        m_isGrounded = Physics.CheckSphere(GroundCheck.position, groundDistance, GroundMask);
+        m_isGrounded = Physics.CheckSphere(GroundCheck.position, m_groundDistance, GroundMask);
 
         if(m_isGrounded)
         {
+            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.green);
             m_vCam1.SetActive(true);
             m_vCam2.SetActive(false);
         }
@@ -173,6 +180,11 @@ public class PlayerController : MonoBehaviour
         {
             m_vCam1.SetActive(false);
             m_vCam2.SetActive(true);
+        }
+
+        if(!m_isGrounded)
+        {
+            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.red);
         }
     }
 
@@ -225,7 +237,6 @@ public class PlayerController : MonoBehaviour
             m_moveDir.x *= m_playerAirSpeed;
             m_moveDir.z *= m_playerSpeed;
             m_moveDir.y = m_rb.velocity.y - m_gravity * Time.deltaTime;
-            //m_rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
             m_rb.velocity = m_moveDir;
         }
         //If the player is jumping from the wall
@@ -259,14 +270,14 @@ public class PlayerController : MonoBehaviour
     #region GravityChange
     void CheckGravityChange()
     {
-        if (m_platformUphit || m_isOnTop)
+        if (m_platformUpHit || m_isOnTop)
         {
             GravityChange();
-            Debug.DrawRay(transform.position, transform.up * m_rayRange, Color.green);
+            Debug.DrawRay(transform.position, transform.up * m_rayUpRange, Color.green);
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.up * m_rayRange, Color.red);
+            Debug.DrawRay(transform.position, transform.up * m_rayUpRange, Color.red);
             if (m_gravityChange)
             {
                 StopGravityPlatform();
@@ -277,7 +288,7 @@ public class PlayerController : MonoBehaviour
     void GravityChange()
     {
         Debug.Log("GravityChange: " + m_gravityChange);
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && (m_isGrounded || !m_groundHit))
         {
             if (!m_isOnTop && !m_gravityChange)
             {
@@ -498,8 +509,6 @@ public class PlayerController : MonoBehaviour
 
             if (m_isWallLeft && !Input.GetKey(KeyCode.W))
             {
-                /*m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * transform.right, ForceMode.Force);
-                m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);*/
                 float angle = 90f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse); ;
@@ -610,10 +619,4 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
-
-    /*void OnDisable()
-    {
-        EventManager.BoostEvent -= BoostSpeed;
-    }*/
-
 }
