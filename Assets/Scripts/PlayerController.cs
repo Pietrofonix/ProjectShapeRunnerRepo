@@ -164,6 +164,11 @@ public class PlayerController : MonoBehaviour
 
         //Raycast that detects the distance between the player and the ground under the gravity platform
         m_groundHit = Physics.Raycast(transform.position, -transform.up, out m_hitGroundDistance, m_rayDownRange, GroundMask);
+
+        if(m_groundHit)
+            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.green);
+        else
+            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.red);
     }
 
     void CheckGround()
@@ -172,7 +177,6 @@ public class PlayerController : MonoBehaviour
 
         if(m_isGrounded)
         {
-            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.green);
             m_vCam1.SetActive(true);
             m_vCam2.SetActive(false);
         }
@@ -180,11 +184,6 @@ public class PlayerController : MonoBehaviour
         {
             m_vCam1.SetActive(false);
             m_vCam2.SetActive(true);
-        }
-
-        if(!m_isGrounded)
-        {
-            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.red);
         }
     }
 
