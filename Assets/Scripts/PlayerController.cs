@@ -511,7 +511,7 @@ public class PlayerController : MonoBehaviour
             {
                 float angle = 90f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
-                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse); ;
+                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse); 
             }
             else if (m_isWallLeft && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D)))
             {
@@ -520,6 +520,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
 
+            m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);
             m_isWallRunning = false;
         }
     }
