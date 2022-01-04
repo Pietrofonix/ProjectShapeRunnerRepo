@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using TMPro;
 
 public class PlayerCheckpoint : MonoBehaviour
 {
     Vector3 m_spawnPoint;
     [SerializeField] CinemachineVirtualCamera m_vCam1;
     PlayerController m_playerController;
+    [SerializeField] TextMeshProUGUI m_checkpointText;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class PlayerCheckpoint : MonoBehaviour
         if(transform.position.y <= -20f)
         {
             m_vCam1.enabled = false;
-            if(m_playerController.Sphere.activeInHierarchy || m_playerController.Cube.activeInHierarchy)
+            if(m_playerController.Sphere.activeInHierarchy || m_playerController.Cube.activeInHierarchy || m_playerController.Cone.activeInHierarchy)
             {
                 m_spawnPoint.y += 0.5f;
             }
@@ -32,6 +32,11 @@ public class PlayerCheckpoint : MonoBehaviour
     void VCamManager()
     {
         m_vCam1.enabled = true;
+    }
+
+    void DisplayText()
+    {
+        m_checkpointText.enabled = true;
     }
 
     void OnTriggerEnter(Collider other)
