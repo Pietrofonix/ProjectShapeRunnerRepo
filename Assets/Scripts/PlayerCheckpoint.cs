@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using Cinemachine;
 using TMPro;
@@ -34,9 +35,12 @@ public class PlayerCheckpoint : MonoBehaviour
         m_vCam1.enabled = true;
     }
 
-    void DisplayText()
+    IEnumerator DisplayText()
     {
         m_checkpointText.enabled = true;
+        yield return new WaitForSeconds(1f);
+        m_checkpointText.enabled = false;
+        yield return null;
     }
 
     void OnTriggerEnter(Collider other)
@@ -44,6 +48,8 @@ public class PlayerCheckpoint : MonoBehaviour
         if(other.CompareTag("Checkpoint"))
         {
             m_spawnPoint = other.transform.position;
+            other.gameObject.SetActive(false);
+            StartCoroutine(nameof(DisplayText));
         }    
     }
 }

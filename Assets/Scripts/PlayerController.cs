@@ -424,9 +424,7 @@ public class PlayerController : MonoBehaviour
             m_rb.velocity = Vector3.zero;
             //m_rb.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
             m_rb.velocity = new Vector3(m_rb.velocity.x, m_jumpForce, m_rb.velocity.z);
-
-            if (Capsule.activeInHierarchy)
-                DoubleJumpVar = true;
+            DoubleJumpVar = true;
         }
     }
     
@@ -491,7 +489,7 @@ public class PlayerController : MonoBehaviour
         {
             m_jumpFromWall = true;
             
-            if (m_isWallRight && !Input.GetKey(KeyCode.W))
+            if ((m_isWallRight && !Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)))
             {
                 /*m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * -transform.right, ForceMode.Force);
                 m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);*/
@@ -499,20 +497,20 @@ public class PlayerController : MonoBehaviour
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
-            else if (m_isWallRight && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A)))
+            else if (m_isWallRight && (Input.GetKey(KeyCode.W)/* || Input.GetKey(KeyCode.A)*/))
             {
                 float angle = -15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
 
-            if (m_isWallLeft && !Input.GetKey(KeyCode.W))
+            if ((m_isWallLeft && !Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)))
             {
                 float angle = 90f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse); 
             }
-            else if (m_isWallLeft && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D)))
+            else if (m_isWallLeft && (Input.GetKey(KeyCode.W)/* || Input.GetKey(KeyCode.D)*/))
             {
                 float angle = 15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;

@@ -18,9 +18,7 @@ public class JumpPlatform : MonoBehaviour
             m_playerRb.velocity = Vector3.zero;
             m_playerRb.AddForce(Vector3.up * m_jumpBoost, ForceMode.Impulse);
             //m_playerRb.velocity = new Vector3(0f, m_jumpBoost, 0f);
-            
-            if (Capsule.activeInHierarchy)
-                PlayerScript.DoubleJumpVar = true;
+            PlayerScript.DoubleJumpVar = true;
         }    
     }
 }
