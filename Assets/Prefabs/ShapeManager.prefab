@@ -225,7 +225,7 @@ MonoBehaviour:
   Cube: {fileID: 5865701376933462081}
   WallRunForce: 3000
   m_groundDistance: 0.4
-  m_rayDownRange: 3
+  m_rayDownRange: 5
   GroundCheck: {fileID: 5865701376986827091}
   GroundMask:
     serializedVersion: 2
@@ -235,6 +235,12 @@ MonoBehaviour:
   m_howManyShapes: 5
   m_playerAirSpeed: 20
   m_jumpForce: 20
+  m_trailRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   Health: 100
   Capsule: {fileID: 5865701377782978001}
   IsMovingForward: 0

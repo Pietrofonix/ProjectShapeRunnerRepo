@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int m_howManyShapes;
     [SerializeField] float m_playerAirSpeed;
     [SerializeField] float m_jumpForce;
+    [SerializeField] TrailRenderer[] m_trailRenderers;
     public float Health;
     public GameObject Capsule;
     [HideInInspector] public bool IsMovingForward = false;
@@ -143,7 +144,10 @@ public class PlayerController : MonoBehaviour
         }
 
         if (!Cone.activeInHierarchy)
+        {
             m_gravityChange = false;
+            Cone.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
 
         CheckJump();
         CheckGround();
@@ -528,9 +532,17 @@ public class PlayerController : MonoBehaviour
     {
         if (m_gonnaGoFast)
         {
+            foreach(TrailRenderer trail in m_trailRenderers)
+            {
+                trail.enabled = true;
+            }
             m_boostSpeedTimer -= Time.deltaTime;
             if (m_boostSpeedTimer <= 0.01f)
             {
+                foreach (TrailRenderer trail in m_trailRenderers)
+                {
+                    trail.enabled = false;
+                }
                 m_boostSpeedTimer = m_boostSpeedTimerSave;
                 m_playerSpeed /= m_speedMultiplier;
                 m_jumpForce = m_jumpBoostSave;

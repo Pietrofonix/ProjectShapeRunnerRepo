@@ -4,7 +4,7 @@ public class BulletManager : MonoBehaviour
 {
     Rigidbody m_rb;
     Transform m_playerRef;
-    PlayerController m_player;
+    PlayerController m_playerController;
     [SerializeField] float m_bulletSpeed;
     [SerializeField] float m_bulletUpForce;
     private GameObject cylinder;
@@ -26,7 +26,7 @@ public class BulletManager : MonoBehaviour
         //m_rb.velocity = (player.position - transform.position) * m_bulletSpeed; 
         #endregion
 
-        m_player = FindObjectOfType<PlayerController>();
+        m_playerController = FindObjectOfType<PlayerController>();
         cylinder = GameObject.Find("ShapeManager/CylinderPlayer");
         m_rb = GetComponent<Rigidbody>();
         m_playerRef = GameObject.FindObjectOfType<PlayerController>().transform;
@@ -49,7 +49,7 @@ public class BulletManager : MonoBehaviour
         {
             if(!cylinder || (cylinder && !CylinderPerk.startCylinderPerkBar && CylinderPerk.startCooldownCylinder))
             {
-                m_player.Health -= 10f;
+                m_playerController.Health -= 10f;
                 Destroy(gameObject);
                 //gameObject.SetActive(false);
             }

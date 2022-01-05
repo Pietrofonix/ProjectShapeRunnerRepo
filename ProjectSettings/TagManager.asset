@@ -12,6 +12,7 @@ TagManager:
   - GravityPlatform
   - Checkpoint
   - SlowPlatform
+  - HealthSphere
   layers:
   - Default
   - TransparentFX
