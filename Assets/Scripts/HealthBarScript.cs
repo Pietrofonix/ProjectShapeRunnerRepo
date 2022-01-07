@@ -6,21 +6,22 @@ using UnityEngine.UI;
 public class HealthBarScript : MonoBehaviour
 {
     private Image healthBar;
-    public float currentHealth;
-    private float maxHealth = 100f;
-    PlayerController player;
+    private float m_currentHealth;
+    private float m_maxHealth = 100f;
+    //PlayerController player;
     //private GameObject cylinder;
 
     void Start()
     {
         //cylinder = GameObject.Find("ShapeManager/Cylinder");
+        //player = FindObjectOfType<PlayerController>();
         healthBar = GetComponent<Image>();
-        player = FindObjectOfType<PlayerController>();
     }
 
     void Update()
     {
-        currentHealth = player.Health;
-        healthBar.fillAmount = currentHealth / maxHealth;
+        //currentHealth = player.Health;
+        m_currentHealth = GameManager.Instance.PlayerHealth;
+        healthBar.fillAmount = m_currentHealth / m_maxHealth;
     }
 }

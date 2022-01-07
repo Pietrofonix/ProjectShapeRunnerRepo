@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     public GameObject Cube;
     public float WallRunForce;
     bool m_isWallRight, m_isWallLeft, m_isWallRunning;
+    bool m_yWallUp = false; 
+    bool m_yWallDown = false;
     bool m_startWallRun = false;
     bool m_jumpFromWall = false;
     #endregion
@@ -86,11 +88,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_playerAirSpeed;
     [SerializeField] float m_jumpForce;
     [SerializeField] TrailRenderer[] m_trailRenderers;
-    public float Health;
+    //public float Health;
     public GameObject Capsule;
     [HideInInspector] public bool IsMovingForward = false;
     [HideInInspector] public bool IsMoving = false;
     [HideInInspector] public bool DoubleJumpVar;
+    float m_playerSpeedSave = 0f;
     int selectedShape = 0;
     //[SerializeField] float m_playerRunSpeed;
     //[SerializeField] int min = 0, max = 2;
@@ -105,6 +108,10 @@ public class PlayerController : MonoBehaviour
         m_decreaseSpeedTimerSave = m_decreaseSpeedTimer;
         m_jumpBoostSave = m_jumpForce;
         m_jumpDecreaseSave = m_jumpForce;
+        m_playerSpeedSave = m_playerSpeed;
+        m_yWallUp = true;
+        m_yWallDown = true;
+        GameManager.Instance.PlayerHealth = 100f;
     }
 
     void Update()
@@ -119,15 +126,15 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("m_isOnTop: " + m_isOnTop);
         //Debug.Log("StartWallRun: " + m_startWallRun);
         //Debug.Log("Wall Run= " + m_isWallRunning);
-        //Debug.Log("Ground= " + m_isGrounded);
-        //Debug.Log("Jump From Wall= " + m_jumpFromWall);
         //Debug.Log(m_rb.velocity);
         //Debug.Log("Il salto dal muro è: " + m_jumpFromWall);
-        Debug.Log("Sono a terra: " + m_isGrounded);
+        //Debug.Log("Sono a terra: " + m_isGrounded);
         //Debug.Log("Doppio salto: " + DoubleJumpVar);
         //Debug.Log("Jumps: " + m_jumpsCount);
         //Debug.Log("Si sta muovendo?: " + IsMovingForward);
         //Debug.Log("Doppio salto: " + DoubleJumpVar);
+        //Debug.Log("Sto andando veloce: " + m_gonnaGoFast);
+        //Debug.Log("Sto andando piano: " + m_gonnaGoSlow);
         #endregion
 
         if (!m_isWallRunning && !m_gravityChange)
@@ -153,8 +160,11 @@ public class PlayerController : MonoBehaviour
         CheckGround();
         BoostSpeedTimer();
         DecreaseSpeedTimer();
-        RestartScene();
 
+        if(GameManager.Instance.PlayerHealth <= 0f)
+        {
+            GameManager.Instance.RestartScene();
+        }
         /*if (m_isWallRunning)
             m_rb.AddForce(Vector3.down * m_downForce, ForceMode.Force);*/
     }
@@ -162,6 +172,10 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+
+        //Raycasts that detect the walls on the right/left side
+        m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.5f, WhatIsWall);
+        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, 1.5f, WhatIsWall);
 
         //Raycast that detects the gravity platform above the player
         m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
@@ -261,6 +275,7 @@ public class PlayerController : MonoBehaviour
             {
                 m_rb.velocity = new Vector3(0f, m_yWallRunVelocity, m_rb.velocity.z);
             }
+            
             //Down
             if (Input.GetKey(KeyCode.Q))
             {
@@ -446,9 +461,6 @@ public class PlayerController : MonoBehaviour
     #region WallRun
     void CheckForWall()
     {
-        m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.5f, WhatIsWall);
-        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, 1.5f, WhatIsWall);
-
         //Leave wall run
         if (!m_isWallRight && !m_isWallLeft)
         {
@@ -536,7 +548,9 @@ public class PlayerController : MonoBehaviour
             {
                 trail.enabled = true;
             }
+
             m_boostSpeedTimer -= Time.deltaTime;
+
             if (m_boostSpeedTimer <= 0.01f)
             {
                 foreach (TrailRenderer trail in m_trailRenderers)
@@ -589,18 +603,70 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    void NormalSpeed()
+    {
+        foreach (TrailRenderer trail in m_trailRenderers)
+        {
+            trail.enabled = false;
+        }
+
+        m_playerSpeed = m_playerSpeedSave;
+        m_jumpForce = m_jumpBoostSave;
+        m_boostSpeedTimer = m_boostSpeedTimerSave;
+        m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
+        m_gonnaGoSlow = false;
+        m_gonnaGoFast = false;
+    }
+
     #region OnTrigger/OnCollision
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SpeedPlatform"))
         {
-            BoostSpeed();
+            if (!m_gonnaGoSlow)
+            {
+                BoostSpeed();
+            }
+            else
+            {
+                NormalSpeed();
+            }
             //EventManager.StartBoost();
         }
         
         if(other.CompareTag("SlowPlatform"))
         {
-            DecreaseSpeed();
+            if (!m_gonnaGoFast)
+            {
+                DecreaseSpeed();
+            }
+            else
+            {
+                NormalSpeed();
+            }
+        }
+
+        if (other.CompareTag("TopEdge"))
+        {
+            m_yWallUp = false;
+        }
+
+        if (other.CompareTag("BottomEdge"))
+        {
+            m_yWallDown = false;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("TopEdge"))
+        {
+            m_yWallUp = true;
+        }
+
+        if (other.CompareTag("BottomEdge"))
+        {
+            m_yWallDown = true;
         }
     }
 
@@ -621,12 +687,4 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
-
-    void RestartScene()
-    {
-        if (Health <= 0f)
-        { 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
 }

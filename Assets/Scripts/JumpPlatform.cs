@@ -9,8 +9,6 @@ public class JumpPlatform : MonoBehaviour
     public GameObject Capsule;
     public Rigidbody m_playerRb;
 
-
-
     void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))

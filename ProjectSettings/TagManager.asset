@@ -13,6 +13,8 @@ TagManager:
   - Checkpoint
   - SlowPlatform
   - HealthSphere
+  - TopEdge
+  - BottomEdge
   layers:
   - Default
   - TransparentFX
