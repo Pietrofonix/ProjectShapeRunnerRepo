@@ -3,7 +3,7 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
     Rigidbody m_rb;
-    Transform m_playerRef;
+    //Transform m_playerRef;
     //PlayerController m_playerController;
     [SerializeField] float m_bulletSpeed;
     [SerializeField] float m_bulletUpForce;
@@ -24,7 +24,7 @@ public class BulletManager : MonoBehaviour
         //m_playerController = FindObjectOfType<PlayerController>();
         cylinder = GameObject.Find("ShapeManager/CylinderPlayer");
         m_rb = GetComponent<Rigidbody>();
-        m_playerRef = GameObject.FindObjectOfType<PlayerController>().transform;
+        //m_playerRef = GameObject.FindObjectOfType<PlayerController>().transform;
         //bulletDir = player.position - transform.position;
         //transform.forward = bulletDir.normalized;
         m_rb.AddForce(transform.forward * m_bulletSpeed, ForceMode.Impulse);

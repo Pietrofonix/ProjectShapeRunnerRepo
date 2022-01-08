@@ -116,11 +116,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-
         #region Debug
         //Debug.Log("m_gravityChange: " + m_gravityChange);
         //Debug.Log("m_isOnTop: " + m_isOnTop);
@@ -135,20 +130,11 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Doppio salto: " + DoubleJumpVar);
         //Debug.Log("Sto andando veloce: " + m_gonnaGoFast);
         //Debug.Log("Sto andando piano: " + m_gonnaGoSlow);
+        Debug.Log("Muro a sinistra: " + m_isWallLeft);
         #endregion
 
         if (!m_isWallRunning && !m_gravityChange)
             ScrollShape();
-
-        if (Cube.activeInHierarchy)
-        {
-            CheckForWall();
-            JumpFromWall();
-        } 
-        else if (Cone.activeInHierarchy)
-        {
-            CheckGravityChange();
-        }
 
         if (!Cone.activeInHierarchy)
         {
@@ -172,6 +158,16 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
+
+        if (Cube.activeInHierarchy)
+        {
+            CheckForWall();
+            JumpFromWall();
+        }
+        else if (Cone.activeInHierarchy)
+        {
+            CheckGravityChange();
+        }
 
         //Raycasts that detect the walls on the right/left side
         m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.5f, WhatIsWall);
@@ -654,6 +650,29 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("BottomEdge"))
         {
             m_yWallDown = false;
+        }
+
+        if (other.CompareTag("EndOfWall"))
+        {
+            Debug.Log("Sono alla fine del muro");
+
+            if (m_isWallLeft)
+            {
+                float angle = 15f;
+                Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
+                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
+            }
+
+            if (m_isWallRight)
+            {
+                float angle = -15f;
+                Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
+                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
+            }
+
+            m_rb.AddForce(m_jumpForceWall * m_wallJumpUpForce * transform.up);
+            m_isWallRunning = false;
+            m_jumpFromWall = true;
         }
     }
 

@@ -24,4 +24,5 @@ public class HealthBarScript : MonoBehaviour
         m_currentHealth = GameManager.Instance.PlayerHealth;
         healthBar.fillAmount = m_currentHealth / m_maxHealth;
     }
+
 }

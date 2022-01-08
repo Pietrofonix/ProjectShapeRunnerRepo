@@ -14,14 +14,6 @@ public class PillarScript : MonoBehaviour
 
     void Update()
     {
-        /*foreach (Transform pillar in transform)
-        {
-            float distance = Vector3.Distance(player.position, pillar.position);
-            //Debug.Log("La distanza vale: " + distance);
-            if (distance <= 10.0f)
-                pillar.GetComponent<Animator>().enabled = true;
-        }*/
-
         float distance = Vector3.Distance(Player.position, transform.position);
         //Debug.Log("La distanza vale: " + distance);
         if (distance <= 10.0f)

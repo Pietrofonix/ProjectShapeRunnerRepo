@@ -22,6 +22,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+    }
+
     public void RestartScene()
     {
         if (PlayerHealth <= 0f)
