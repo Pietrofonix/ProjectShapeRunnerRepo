@@ -39,12 +39,11 @@ public class PlayerCheckpoint : MonoBehaviour
 
             ResetPillars();
             ResetHealthSphere();
+            m_playerController.NormalSpeed();
 
             Invoke(nameof(VCamManager), 0.1f);
         }
     }
-
-
 
     void ResetPillars()
     {

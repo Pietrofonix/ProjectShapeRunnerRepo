@@ -55,8 +55,8 @@ public class PlayerController : MonoBehaviour
     public GameObject Cube;
     public float WallRunForce;
     bool m_isWallRight, m_isWallLeft, m_isWallRunning;
-    bool m_yWallUp = false; 
-    bool m_yWallDown = false;
+    //bool m_yWallUp = false; 
+    //bool m_yWallDown = false;
     bool m_startWallRun = false;
     bool m_jumpFromWall = false;
     #endregion
@@ -109,8 +109,8 @@ public class PlayerController : MonoBehaviour
         m_jumpBoostSave = m_jumpForce;
         m_jumpDecreaseSave = m_jumpForce;
         m_playerSpeedSave = m_playerSpeed;
-        m_yWallUp = true;
-        m_yWallDown = true;
+        //m_yWallUp = true;
+        //m_yWallDown = true;
         GameManager.Instance.PlayerHealth = 100f;
     }
 
@@ -142,6 +142,11 @@ public class PlayerController : MonoBehaviour
             Cone.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
+        if (Cube.activeInHierarchy)
+        {
+            JumpFromWall();
+        }
+
         CheckJump();
         CheckGround();
         BoostSpeedTimer();
@@ -151,6 +156,8 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.RestartScene();
         }
+
+        transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, m_hitGroundDistance.normal));
         /*if (m_isWallRunning)
             m_rb.AddForce(Vector3.down * m_downForce, ForceMode.Force);*/
     }
@@ -162,7 +169,6 @@ public class PlayerController : MonoBehaviour
         if (Cube.activeInHierarchy)
         {
             CheckForWall();
-            JumpFromWall();
         }
         else if (Cone.activeInHierarchy)
         {
@@ -599,7 +605,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    void NormalSpeed()
+    public void NormalSpeed()
     {
         foreach (TrailRenderer trail in m_trailRenderers)
         {
@@ -642,7 +648,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("TopEdge"))
+        /*if (other.CompareTag("TopEdge"))
         {
             m_yWallUp = false;
         }
@@ -650,7 +656,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("BottomEdge"))
         {
             m_yWallDown = false;
-        }
+        }*/
 
         if (other.CompareTag("EndOfWall"))
         {
@@ -678,7 +684,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("TopEdge"))
+        /*if (other.CompareTag("TopEdge"))
         {
             m_yWallUp = true;
         }
@@ -686,7 +692,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("BottomEdge"))
         {
             m_yWallDown = true;
-        }
+        }*/
     }
 
     void OnCollisionEnter(Collision collision)
