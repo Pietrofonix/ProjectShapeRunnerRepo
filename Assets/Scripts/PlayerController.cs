@@ -176,8 +176,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //Raycasts that detect the walls on the right/left side
-        m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.5f, WhatIsWall);
-        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, 1.5f, WhatIsWall);
+        m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.0f, WhatIsWall);
+        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, 1.0f, WhatIsWall);
 
         //Raycast that detects the gravity platform above the player
         m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
