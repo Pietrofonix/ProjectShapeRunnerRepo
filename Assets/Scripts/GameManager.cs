@@ -32,9 +32,6 @@ public class GameManager : MonoBehaviour
 
     public void RestartScene()
     {
-        if (PlayerHealth <= 0f)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

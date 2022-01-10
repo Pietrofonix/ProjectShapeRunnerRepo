@@ -32,13 +32,20 @@ public class BulletManager : MonoBehaviour
         //m_rb.velocity = bulletDir.normalized * m_bulletSpeed;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void Update()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        Destroy(gameObject, 3f);   
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.collider.name);
+        Destroy(gameObject);
+        /*if (collision.gameObject.CompareTag("Ground"))
         {
             Destroy(gameObject);
             //gameObject.SetActive(false);
-        }
+        }*/
 
         if (collision.gameObject.CompareTag("Player"))
         {

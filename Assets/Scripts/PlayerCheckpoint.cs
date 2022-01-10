@@ -27,7 +27,7 @@ public class PlayerCheckpoint : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y <= -20f)
+        if (transform.position.y <= -20f || GameManager.Instance.PlayerHealth <= 0f)
         {
             m_vCam1.enabled = false;
             if (m_playerController.Sphere.activeInHierarchy || m_playerController.Cube.activeInHierarchy || m_playerController.Cone.activeInHierarchy)

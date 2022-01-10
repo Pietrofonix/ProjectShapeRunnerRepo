@@ -15,7 +15,10 @@ public class PlayerController : MonoBehaviour
     public LayerMask PlatformUp;
     public GameObject Sphere;
     public GameObject Cone;
+    float m_pressTime = 0.5f;
+    float m_pressTimer;
     bool m_gravityChange = false;
+    bool m_startGravityChange = false;
     bool m_isOnTop = false;
     bool m_goUp = false;
     bool m_platformUpHit;
@@ -55,8 +58,6 @@ public class PlayerController : MonoBehaviour
     public GameObject Cube;
     public float WallRunForce;
     bool m_isWallRight, m_isWallLeft, m_isWallRunning;
-    //bool m_yWallUp = false; 
-    //bool m_yWallDown = false;
     bool m_startWallRun = false;
     bool m_jumpFromWall = false;
     #endregion
@@ -109,9 +110,8 @@ public class PlayerController : MonoBehaviour
         m_jumpBoostSave = m_jumpForce;
         m_jumpDecreaseSave = m_jumpForce;
         m_playerSpeedSave = m_playerSpeed;
-        //m_yWallUp = true;
-        //m_yWallDown = true;
-        GameManager.Instance.PlayerHealth = 100f;
+        //GameManager.Instance.PlayerHealth = 100f;
+        m_pressTimer = m_pressTime;
     }
 
     void Update()
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Doppio salto: " + DoubleJumpVar);
         //Debug.Log("Sto andando veloce: " + m_gonnaGoFast);
         //Debug.Log("Sto andando piano: " + m_gonnaGoSlow);
-        Debug.Log("Muro a sinistra: " + m_isWallLeft);
+        //Debug.Log("Muro a sinistra: " + m_isWallLeft);
         #endregion
 
         if (!m_isWallRunning && !m_gravityChange)
@@ -140,6 +140,10 @@ public class PlayerController : MonoBehaviour
         {
             m_gravityChange = false;
             Cone.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else
+        {
+            CheckGravityChange();
         }
 
         if (Cube.activeInHierarchy)
@@ -158,8 +162,6 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, m_hitGroundDistance.normal));
-        /*if (m_isWallRunning)
-            m_rb.AddForce(Vector3.down * m_downForce, ForceMode.Force);*/
     }
 
     void FixedUpdate()
@@ -172,7 +174,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (Cone.activeInHierarchy)
         {
-            CheckGravityChange();
+            GravityChange();
         }
 
         //Raycasts that detect the walls on the right/left side
@@ -255,7 +257,7 @@ public class PlayerController : MonoBehaviour
         {
             m_moveDir.x *= m_playerAirSpeed;
             m_moveDir.z *= m_playerSpeed;
-            m_moveDir.y = m_rb.velocity.y - m_gravity * Time.deltaTime;
+            m_moveDir.y = m_rb.velocity.y - m_gravity * Time.fixedDeltaTime;
             m_rb.velocity = m_moveDir;
         }
         //If the player is jumping from the wall
@@ -290,10 +292,18 @@ public class PlayerController : MonoBehaviour
     #region GravityChange
     void CheckGravityChange()
     {
-        if (m_platformUpHit || m_isOnTop)
+        if ((m_platformUpHit || m_isOnTop))
         {
-            GravityChange();
+            //GravityChange();
             Debug.DrawRay(transform.position, transform.up * m_rayUpRange, Color.green);
+            m_pressTimer -= Time.deltaTime;
+
+            if(Input.GetKeyDown(KeyCode.E) && m_pressTimer <= 0.01f)
+            {
+                //GravityChange();
+                m_startGravityChange = true;
+                m_pressTimer = m_pressTime;
+            }
         }
         else
         {
@@ -308,14 +318,15 @@ public class PlayerController : MonoBehaviour
     void GravityChange()
     {
         Debug.Log("GravityChange: " + m_gravityChange);
-        if (Input.GetKeyDown(KeyCode.E) && (m_isGrounded || !m_groundHit))
+        if (/*Input.GetKeyDown(KeyCode.E)*/ m_startGravityChange /*&& (m_isGrounded || !m_groundHit)*/)
         {
+            m_startGravityChange = false;
             if (!m_isOnTop && !m_gravityChange)
             {
                 ConeAnim.Play("ConeRotationUp");
                 m_goUp = true;
                 m_gravityChange = true;
-                m_rb.AddForce(transform.up * m_magneticForce, ForceMode.Force);
+                m_rb.AddForce(transform.up * m_magneticForce, ForceMode.Acceleration);
                 m_gravity *= -1;
                 Debug.Log("Vado su");
                 m_vCam1.SetActive(false);
@@ -326,7 +337,7 @@ public class PlayerController : MonoBehaviour
                 ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
                 m_gravityChange = false;
-                m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
+                m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
                 m_gravity *= -1;
                 Debug.Log("Vado giù");
                 m_vCam1.SetActive(true);
@@ -337,7 +348,7 @@ public class PlayerController : MonoBehaviour
                 ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
                 m_gravityChange = false;
-                m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
+                m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
                 m_gravity *= -1;
                 Debug.Log("Torno giù dopo essere andato su");
                 m_vCam1.SetActive(true);
@@ -349,7 +360,7 @@ public class PlayerController : MonoBehaviour
     void StopGravityPlatform()
     {
         ConeAnim.Play("ConeRotationDown");
-        m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Force);
+        m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
         m_gravity *= -1;
         m_gravityChange = false;
         m_vCam1.SetActive(true);
@@ -633,7 +644,6 @@ public class PlayerController : MonoBehaviour
             {
                 NormalSpeed();
             }
-            //EventManager.StartBoost();
         }
         
         if(other.CompareTag("SlowPlatform"))
@@ -647,16 +657,6 @@ public class PlayerController : MonoBehaviour
                 NormalSpeed();
             }
         }
-
-        /*if (other.CompareTag("TopEdge"))
-        {
-            m_yWallUp = false;
-        }
-
-        if (other.CompareTag("BottomEdge"))
-        {
-            m_yWallDown = false;
-        }*/
 
         if (other.CompareTag("EndOfWall"))
         {
@@ -684,15 +684,10 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        /*if (other.CompareTag("TopEdge"))
+        if (!Cube.activeInHierarchy && (other.gameObject.CompareTag("TopEdge") || other.gameObject.CompareTag("BottomEdge")))
         {
-            m_yWallUp = true;
+            other.isTrigger = false;
         }
-
-        if (other.CompareTag("BottomEdge"))
-        {
-            m_yWallDown = true;
-        }*/
     }
 
     void OnCollisionEnter(Collision collision)
@@ -701,6 +696,11 @@ public class PlayerController : MonoBehaviour
         {
             m_isOnTop = true;
             Debug.Log("Ho toccato: " + m_isOnTop);
+        }
+
+        if(!Cube.activeInHierarchy && (collision.gameObject.CompareTag("TopEdge") || collision.gameObject.CompareTag("BottomEdge")))
+        {
+            collision.collider.isTrigger = true;
         }
     }
 
