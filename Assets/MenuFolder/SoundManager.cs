@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    //Slider compare solo se si usa la libreria: UnityEngine.UI
     [SerializeField] Slider m_volumeSlider; 
 
     void Start()
@@ -24,6 +21,7 @@ public class SoundManager : MonoBehaviour
     public void ChangeVolume()
     {
         AudioListener.volume = m_volumeSlider.value;
+        Save();
     }
 
     private void Load()
@@ -31,7 +29,7 @@ public class SoundManager : MonoBehaviour
         m_volumeSlider.value = PlayerPrefs.GetFloat("musicVolume");
     }
 
-    private void Safe()
+    private void Save()
     {
         PlayerPrefs.SetFloat("musicVolume", m_volumeSlider.value);
     }

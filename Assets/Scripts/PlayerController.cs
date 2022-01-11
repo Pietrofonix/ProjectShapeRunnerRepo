@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -75,7 +73,6 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Rigidbody variables
-    [SerializeField] float m_gravity;
     float m_groundedGravity = 0.05f;
     Rigidbody m_rb;
     Vector3 m_moveDir;
@@ -84,7 +81,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Player variables")]
     #region Player variables
-    [SerializeField] float m_playerSpeed;
+    [SerializeField] float m_gravity;
+    [SerializeField] float m_zPlayerSpeed;
+    [SerializeField] float m_xPlayerSpeed;
     [SerializeField] int m_howManyShapes;
     [SerializeField] float m_playerAirSpeed;
     [SerializeField] float m_jumpForce;
@@ -102,16 +101,15 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        //EventManager.BoostEvent += BoostSpeed;
         SelectedShape();
         m_rb = GetComponent<Rigidbody>();
         m_boostSpeedTimerSave = m_boostSpeedTimer;
         m_decreaseSpeedTimerSave = m_decreaseSpeedTimer;
         m_jumpBoostSave = m_jumpForce;
         m_jumpDecreaseSave = m_jumpForce;
-        m_playerSpeedSave = m_playerSpeed;
+        m_playerSpeedSave = m_zPlayerSpeed;
         //GameManager.Instance.PlayerHealth = 100f;
-        m_pressTimer = m_pressTime;
+        m_pressTimer = 0f;
     }
 
     void Update()
@@ -184,7 +182,7 @@ public class PlayerController : MonoBehaviour
         //Raycast that detects the gravity platform above the player
         m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
 
-        //Raycast that detects the distance between the player and the ground under the gravity platform
+        //Raycast that detects the ground
         m_groundHit = Physics.Raycast(transform.position, -transform.up, out m_hitGroundDistance, m_rayDownRange, GroundMask);
 
         if(m_groundHit)
@@ -232,8 +230,8 @@ public class PlayerController : MonoBehaviour
         if (m_isGrounded && !m_isWallRunning)
         {
             m_jumpFromWall = false;
-            m_moveDir.x *= m_playerSpeed;
-            m_moveDir.z *= m_playerSpeed;
+            m_moveDir.x *= m_xPlayerSpeed;
+            m_moveDir.z *= m_zPlayerSpeed;
             m_moveDir.y = m_rb.velocity.y;
             m_rb.AddForce(Vector3.down * m_groundedGravity, ForceMode.Acceleration);
             m_rb.velocity = m_moveDir;
@@ -256,7 +254,7 @@ public class PlayerController : MonoBehaviour
         else if (!m_isGrounded && !m_isWallRunning && !m_jumpFromWall)
         {
             m_moveDir.x *= m_playerAirSpeed;
-            m_moveDir.z *= m_playerSpeed;
+            m_moveDir.z *= m_zPlayerSpeed;
             m_moveDir.y = m_rb.velocity.y - m_gravity * Time.fixedDeltaTime;
             m_rb.velocity = m_moveDir;
         }
@@ -271,7 +269,7 @@ public class PlayerController : MonoBehaviour
         else if (!m_isGrounded && !m_jumpFromWall && m_isWallRunning)
         {
             //The player automatically goes forward while running on the wall
-            m_rb.velocity = new Vector3(0f, 0f, m_playerSpeed);
+            m_rb.velocity = new Vector3(0f, 0f, m_zPlayerSpeed);
 
             //Let the player go up and down while running on the wall
             //Up
@@ -298,7 +296,12 @@ public class PlayerController : MonoBehaviour
             Debug.DrawRay(transform.position, transform.up * m_rayUpRange, Color.green);
             m_pressTimer -= Time.deltaTime;
 
-            if(Input.GetKeyDown(KeyCode.E) && m_pressTimer <= 0.01f)
+            if (m_pressTimer <= 0f)
+            {
+                m_pressTimer = 0f;
+            }
+
+            if (Input.GetKeyDown(KeyCode.E) && m_pressTimer <= 0.01f)
             {
                 //GravityChange();
                 m_startGravityChange = true;
@@ -362,6 +365,7 @@ public class PlayerController : MonoBehaviour
         ConeAnim.Play("ConeRotationDown");
         m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
         m_gravity *= -1;
+        m_goUp = false;
         m_gravityChange = false;
         m_vCam1.SetActive(true);
         m_vCam2.SetActive(false);
@@ -447,6 +451,15 @@ public class PlayerController : MonoBehaviour
         {
             DoubleJump();
         }
+
+        if (m_isOnTop)
+        {
+            ReverseJump();
+        }
+        else if (!m_isOnTop && m_gravityChange)
+        {
+            ReverseDoubleJump();
+        }
     }
 
     void Jump()
@@ -465,7 +478,29 @@ public class PlayerController : MonoBehaviour
         if (DoubleJumpVar && Capsule.activeInHierarchy && !m_isWallRunning && !m_jumpFromWall && Input.GetKeyDown(KeyCode.Space))
         {
             m_rb.velocity = Vector3.zero;
-            m_rb.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            //m_rb.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+            m_rb.velocity = new Vector3(m_rb.velocity.x, m_jumpForce, m_rb.velocity.z);
+            DoubleJumpVar = false;
+        }
+    }
+
+    void ReverseJump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            m_rb.velocity = Vector3.zero;
+            m_rb.velocity = new Vector3(m_rb.velocity.x, -m_jumpForce, m_rb.velocity.z);
+            DoubleJumpVar = true;
+        }
+    }
+
+    void ReverseDoubleJump()
+    {
+        if (DoubleJumpVar && Cone.activeInHierarchy && !m_isWallRunning && !m_jumpFromWall && Input.GetKeyDown(KeyCode.Space))
+        {
+            m_rb.velocity = Vector3.zero;
+            //m_rb.AddForce(Vector3.down * m_jumpForce, ForceMode.Impulse);
+            m_rb.velocity = new Vector3(m_rb.velocity.x, -m_jumpForce, m_rb.velocity.z);
             DoubleJumpVar = false;
         }
     }
@@ -571,7 +606,7 @@ public class PlayerController : MonoBehaviour
                     trail.enabled = false;
                 }
                 m_boostSpeedTimer = m_boostSpeedTimerSave;
-                m_playerSpeed /= m_speedMultiplier;
+                m_zPlayerSpeed /= m_speedMultiplier;
                 m_jumpForce = m_jumpBoostSave;
                 m_gonnaGoFast = false;
             }
@@ -582,7 +617,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!m_gonnaGoFast)
         {
-            m_playerSpeed *= m_speedMultiplier;
+            m_zPlayerSpeed *= m_speedMultiplier;
             m_jumpForce = m_jumpBoost;
             m_gonnaGoFast = true;
         }
@@ -598,7 +633,7 @@ public class PlayerController : MonoBehaviour
             if (m_decreaseSpeedTimer <= 0.01f)
             {
                 m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
-                m_playerSpeed *= m_slowMultiplier;
+                m_zPlayerSpeed *= m_slowMultiplier;
                 m_jumpForce = m_jumpDecreaseSave;
                 m_gonnaGoSlow = false;
             }
@@ -609,7 +644,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!m_gonnaGoSlow)
         {
-            m_playerSpeed /= m_slowMultiplier;
+            m_zPlayerSpeed /= m_slowMultiplier;
             m_jumpForce = m_jumpDecrease;
             m_gonnaGoSlow = true;
         }
@@ -623,7 +658,7 @@ public class PlayerController : MonoBehaviour
             trail.enabled = false;
         }
 
-        m_playerSpeed = m_playerSpeedSave;
+        m_zPlayerSpeed = m_playerSpeedSave;
         m_jumpForce = m_jumpBoostSave;
         m_boostSpeedTimer = m_boostSpeedTimerSave;
         m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
