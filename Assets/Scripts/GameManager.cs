@@ -32,12 +32,11 @@ public class GameManager : MonoBehaviour
         RestartScene();
     }
 
-    public void RestartScene()
+    void RestartScene()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            PlayerHealth = 100f;
         }
     }
 }

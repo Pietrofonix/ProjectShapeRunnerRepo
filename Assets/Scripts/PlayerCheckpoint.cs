@@ -23,6 +23,7 @@ public class PlayerCheckpoint : MonoBehaviour
         //m_healthSpheres = FindObjectsOfType<HealthSphere>();
         m_pillars = GameObject.FindGameObjectsWithTag("Pillar");
         m_healthSpheres = GameObject.FindGameObjectsWithTag("HealthSphere");
+        m_currentPlayerHealth = GameManager.Instance.PlayerHealth;
     }
 
     void Update()

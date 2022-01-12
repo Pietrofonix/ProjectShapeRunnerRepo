@@ -154,10 +154,10 @@ public class PlayerController : MonoBehaviour
         BoostSpeedTimer();
         DecreaseSpeedTimer();
 
-        if(GameManager.Instance.PlayerHealth <= 0f)
+        /*if(GameManager.Instance.PlayerHealth <= 0f)
         {
             GameManager.Instance.RestartScene();
-        }
+        }*/
 
         transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, m_hitGroundDistance.normal));
     }
