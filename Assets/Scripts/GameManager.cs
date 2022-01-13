@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
             //UnityEditor.EditorApplication.isPlaying = false;
         }
 
-        RestartScene();
+        //RestartScene();
     }
 
     void RestartScene()

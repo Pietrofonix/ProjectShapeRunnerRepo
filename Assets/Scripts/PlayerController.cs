@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask WhatIsWall;
     public GameObject Cube;
     public float WallRunForce;
+    RaycastHit m_wallRunDetection;
     bool m_isWallRight, m_isWallLeft, m_isWallRunning;
     bool m_startWallRun = false;
     bool m_jumpFromWall = false;
@@ -129,6 +130,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Sto andando veloce: " + m_gonnaGoFast);
         //Debug.Log("Sto andando piano: " + m_gonnaGoSlow);
         //Debug.Log("Muro a sinistra: " + m_isWallLeft);
+        //Debug.Log("SpeedTimer: " + m_boostSpeedTimer);
         #endregion
 
         if (!m_isWallRunning && !m_gravityChange)
@@ -154,11 +156,6 @@ public class PlayerController : MonoBehaviour
         BoostSpeedTimer();
         DecreaseSpeedTimer();
 
-        /*if(GameManager.Instance.PlayerHealth <= 0f)
-        {
-            GameManager.Instance.RestartScene();
-        }*/
-
         transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, m_hitGroundDistance.normal));
     }
 
@@ -176,8 +173,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //Raycasts that detect the walls on the right/left side
-        m_isWallRight = Physics.Raycast(transform.position, transform.right, 1.0f, WhatIsWall);
-        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, 1.0f, WhatIsWall);
+        m_isWallRight = Physics.Raycast(transform.position, transform.right, out m_wallRunDetection, 1.0f, WhatIsWall);
+        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, out m_wallRunDetection, 1.0f, WhatIsWall);
 
         //Raycast that detects the gravity platform above the player
         m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
@@ -185,10 +182,20 @@ public class PlayerController : MonoBehaviour
         //Raycast that detects the ground
         m_groundHit = Physics.Raycast(transform.position, -transform.up, out m_hitGroundDistance, m_rayDownRange, GroundMask);
 
-        if(m_groundHit)
+        if (m_groundHit)
             Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.green);
         else
             Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.red);
+
+        if (m_isWallRight) 
+            Debug.DrawRay(transform.position, transform.right * 1.0f, Color.yellow);
+        else
+            Debug.DrawRay(transform.position, transform.right * 1.0f, Color.red);
+
+        if (m_isWallLeft)
+            Debug.DrawRay(transform.position, -transform.right * 1.0f, Color.blue);
+        else
+            Debug.DrawRay(transform.position, -transform.right * 1.0f, Color.red);
     }
 
     void CheckGround()
@@ -581,7 +588,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
 
-            m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);
+            m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             m_isWallRunning = false;
         }
     }
@@ -679,6 +686,11 @@ public class PlayerController : MonoBehaviour
             {
                 NormalSpeed();
             }
+
+            if (m_gonnaGoFast)
+            {
+                m_boostSpeedTimer = m_boostSpeedTimerSave;
+            }
         }
         
         if(other.CompareTag("SlowPlatform"))
@@ -690,6 +702,11 @@ public class PlayerController : MonoBehaviour
             else
             {
                 NormalSpeed();
+            }
+
+            if (m_gonnaGoSlow)
+            {
+                m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
             }
         }
 
@@ -711,7 +728,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
 
-            m_rb.AddForce(m_jumpForceWall * m_wallJumpUpForce * transform.up);
+            m_rb.AddForce(m_wallJumpUpForce * transform.up, ForceMode.Impulse);
             m_isWallRunning = false;
             m_jumpFromWall = true;
         }
@@ -733,7 +750,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Ho toccato: " + m_isOnTop);
         }
 
-        if(!Cube.activeInHierarchy && (collision.gameObject.CompareTag("TopEdge") || collision.gameObject.CompareTag("BottomEdge")))
+        if (!Cube.activeInHierarchy && (collision.gameObject.CompareTag("TopEdge") || collision.gameObject.CompareTag("BottomEdge")))
         {
             collision.collider.isTrigger = true;
         }

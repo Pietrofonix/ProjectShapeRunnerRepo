@@ -42,7 +42,7 @@ public class EnemyManager : MonoBehaviour
         m_raycastDir = (Player.position - transform.position);
         m_obstacle = Physics.Raycast(transform.position, m_raycastDir, out m_enemySight, m_sightRange);
 
-        if(m_enemySight.collider != null)
+        if (m_enemySight.collider != null)
         {
             Debug.Log(m_enemySight.collider.name);
         }
