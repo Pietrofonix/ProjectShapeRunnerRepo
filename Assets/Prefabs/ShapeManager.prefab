@@ -348,7 +348,7 @@ MonoBehaviour:
   GroundMask:
     serializedVersion: 2
     m_Bits: 64
-  m_gravity: 70
+  m_gravity: 50
   m_zPlayerSpeed: 30
   m_xPlayerSpeed: 20
   m_howManyShapes: 5
