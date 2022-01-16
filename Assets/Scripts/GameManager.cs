@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this);
-            PlayerHealth = 100f;
+            //PlayerHealth = 100f;
         }
         else
         {

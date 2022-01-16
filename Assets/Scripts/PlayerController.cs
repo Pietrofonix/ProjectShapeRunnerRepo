@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Wall run variables")]
     #region WallRun variables
-    [SerializeField] float m_wallRunJumpMultiplier;
+    //[SerializeField] float m_wallRunJumpMultiplier;
     [SerializeField] float m_yWallRunVelocity;
     [SerializeField] float m_jumpForceWall;
     [SerializeField] float m_wallJumpUpForce;
@@ -110,7 +110,6 @@ public class PlayerController : MonoBehaviour
         m_jumpDecreaseSave = m_jumpForce;
         m_playerSpeedSave = m_zPlayerSpeed;
         //GameManager.Instance.PlayerHealth = 100f;
-        m_pressTimer = 0f;
     }
 
     void Update()
