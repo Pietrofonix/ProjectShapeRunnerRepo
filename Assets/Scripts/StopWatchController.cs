@@ -9,7 +9,6 @@ public class StopWatchController : MonoBehaviour
 
     void Update()
     {
-
         //"CultureInfo.InvariantCulture" with using System.Globalization to use the . instead of , for fractions of second;
         t += Time.deltaTime;
         TimeSpan timeSpan = TimeSpan.FromSeconds(t);
