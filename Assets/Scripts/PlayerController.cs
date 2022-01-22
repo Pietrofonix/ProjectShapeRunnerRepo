@@ -132,8 +132,8 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("SpeedTimer: " + m_boostSpeedTimer);
         #endregion
 
-        if (!m_isWallRunning && !m_gravityChange)
-            ScrollShape();
+        //if (!m_isWallRunning && !m_gravityChange)
+            //ScrollShape();
 
         if (!Cone.activeInHierarchy)
         {
@@ -559,7 +559,7 @@ public class PlayerController : MonoBehaviour
         {
             m_jumpFromWall = true;
             
-            if ((m_isWallRight && !Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)))
+            if ((m_isWallRight && !Input.GetKey(KeyCode.W)) || (m_isWallRight &&  Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)))
             {
                 /*m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * -transform.right, ForceMode.Force);
                 m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);*/
@@ -574,7 +574,7 @@ public class PlayerController : MonoBehaviour
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
 
-            if ((m_isWallLeft && !Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)))
+            if ((m_isWallLeft && !Input.GetKey(KeyCode.W)) || (m_isWallLeft && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)))
             {
                 float angle = 90f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
@@ -709,15 +709,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("EndOfWall"))
+        if (other.CompareTag("EndOfWall") && !m_jumpFromWall)
         {
             Debug.Log("Sono alla fine del muro");
+            //Debug.Log(m_rb.velocity);
 
             if (m_isWallLeft)
             {
                 float angle = 15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
+                m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             }
 
             if (m_isWallRight)
@@ -725,9 +727,10 @@ public class PlayerController : MonoBehaviour
                 float angle = -15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
+                m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             }
 
-            m_rb.AddForce(m_wallJumpUpForce * transform.up, ForceMode.Impulse);
+            //m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             m_isWallRunning = false;
             m_jumpFromWall = true;
         }
@@ -753,6 +756,12 @@ public class PlayerController : MonoBehaviour
         {
             collision.collider.isTrigger = true;
         }
+
+        /*if (Cone.activeInHierarchy && !m_gravityChange && !m_isGrounded)
+        {
+            Cone.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }*/
+
     }
 
     void OnCollisionExit(Collision collision)

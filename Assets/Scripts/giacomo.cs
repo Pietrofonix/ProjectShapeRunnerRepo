@@ -28,7 +28,7 @@ public class giacomo : MonoBehaviour
                 transform.position = new Vector3(xPos, transform.position.y, transform.position.z);
             }*/
 
-            Vector3 target = new Vector3(m_player.position.x, transform.position.y, transform.position.z);
+            Vector3 target = new(m_player.position.x, transform.position.y, transform.position.z);
 
             transform.position = Vector3.MoveTowards(transform.position, target, 15f * Time.deltaTime);
 

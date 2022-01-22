@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour
 
         if (m_enemySight.collider != null)
         {
-            Debug.Log(m_enemySight.collider.name);
+            //Debug.Log(m_enemySight.collider.name);
         }
 
         switch (state)

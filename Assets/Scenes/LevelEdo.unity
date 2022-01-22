@@ -19542,6 +19542,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5098091968929564287, guid: c741088978971314ba6ae3bc744f5b06,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 793886202}
     - target: {fileID: 5993860299569986503, guid: c741088978971314ba6ae3bc744f5b06,
         type: 3}
       propertyPath: m_Pivot.x
@@ -19657,6 +19662,16 @@ PrefabInstance:
       propertyPath: m_cylinder
       value: 
       objectReference: {fileID: 2145917971}
+    - target: {fileID: 6921726928656292942, guid: c741088978971314ba6ae3bc744f5b06,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 793886202}
+    - target: {fileID: 6921726928656292942, guid: c741088978971314ba6ae3bc744f5b06,
+        type: 3}
+      propertyPath: ShapeWheel
+      value: 
+      objectReference: {fileID: 2137294825}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c741088978971314ba6ae3bc744f5b06, type: 3}
 --- !u!1 &603999571
@@ -26119,11 +26134,6 @@ PrefabInstance:
       propertyPath: m_vCam1
       value: 
       objectReference: {fileID: 122967418}
-    - target: {fileID: 1996600929037485166, guid: 70d4a14d6cff27949a79fb4db2bb9084,
-        type: 3}
-      propertyPath: m_checkpointText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5865701377138927640, guid: 70d4a14d6cff27949a79fb4db2bb9084,
         type: 3}
       propertyPath: m_Name
@@ -26196,17 +26206,7 @@ PrefabInstance:
       objectReference: {fileID: 1223835504}
     - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
         type: 3}
-      propertyPath: m_jumpBoost
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
-        type: 3}
-      propertyPath: m_howManyShapes
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
-        type: 3}
-      propertyPath: m_playerAirSpeed
+      propertyPath: m_jumpForceWall
       value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -69848,6 +69848,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &2137294825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7205667729114862104, guid: c741088978971314ba6ae3bc744f5b06,
+    type: 3}
+  m_PrefabInstance: {fileID: 602724263}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2137750810
 GameObject:
   m_ObjectHideFlags: 3

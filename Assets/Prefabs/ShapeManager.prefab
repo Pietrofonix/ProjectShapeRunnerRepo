@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1559523001}
   m_Layer: 8
   m_Name: CubePlayer
-  m_TagString: Player
+  m_TagString: CubePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 5865701377138927642}
   - component: {fileID: 7939054392390435890}
   - component: {fileID: 1996600929037485166}
+  - component: {fileID: 2651107384750321745}
   m_Layer: 8
   m_Name: ShapeManager
   m_TagString: Player
@@ -328,11 +329,10 @@ MonoBehaviour:
   Cone: {fileID: 6096819850562027490}
   m_boostSpeedTimer: 3
   m_speedMultiplier: 1.5
-  m_jumpBoost: 30
+  m_jumpBoost: 22
   m_decreaseSpeedTimer: 3
   m_slowMultiplier: 1.5
   m_jumpDecrease: 10
-  m_wallRunJumpMultiplier: 120
   m_yWallRunVelocity: 5
   m_jumpForceWall: 30
   m_wallJumpUpForce: 5
@@ -351,8 +351,8 @@ MonoBehaviour:
   m_gravity: 50
   m_zPlayerSpeed: 30
   m_xPlayerSpeed: 20
-  m_howManyShapes: 5
-  m_playerAirSpeed: 20
+  m_howManyShapes: 6
+  m_playerAirSpeed: 15
   m_jumpForce: 20
   m_trailRenderers:
   - {fileID: 1073205163}
@@ -378,6 +378,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_vCam1: {fileID: 0}
   m_checkpointText: {fileID: 0}
+--- !u!65 &2651107384750321745
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5865701377138927640}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5280972, z: 1}
+  m_Center: {x: 0, y: -0.26404858, z: 0}
 --- !u!1 &5865701377782978001
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +406,7 @@ GameObject:
   - component: {fileID: 1073205163}
   m_Layer: 8
   m_Name: CapsulePlayer
-  m_TagString: Player
+  m_TagString: CapsulePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -609,7 +622,7 @@ GameObject:
   - component: {fileID: 1086693957}
   m_Layer: 8
   m_Name: CylinderPlayer
-  m_TagString: Player
+  m_TagString: CylinderPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -825,7 +838,7 @@ GameObject:
   - component: {fileID: 816602986}
   m_Layer: 8
   m_Name: SpherePlayer
-  m_TagString: Player
+  m_TagString: SpherePlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1172,7 +1185,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 281ded54597d6eb4db91bc48bb3a3642,
         type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: ConePlayer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 281ded54597d6eb4db91bc48bb3a3642, type: 3}
