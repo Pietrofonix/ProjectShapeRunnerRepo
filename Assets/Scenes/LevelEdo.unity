@@ -26139,6 +26139,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShapeManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5865701377138927642, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5865701377138927643, guid: 70d4a14d6cff27949a79fb4db2bb9084,
         type: 3}
       propertyPath: m_RootOrder

@@ -1405,6 +1405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShapeWheel: {fileID: 7205667729114862104}
   Player: {fileID: 0}
+  m_slowMotionTime: 0.1
 --- !u!1 &5993860299589256767
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,19 +9,22 @@ public class ShapesWheelController : MonoBehaviour
     //public Image SelectedShape;
     public static int ShapeID;
     public Transform Player;
+    [SerializeField] float m_slowMotionTime;
 
     void Update()
     {
         if (Input.GetKey(KeyCode.Tab))
         {
             //m_shapeWheelSelected = !m_shapeWheelSelected;
-            Time.timeScale = 0.3f;
+            Time.timeScale = m_slowMotionTime;
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
             m_shapeWheelSelected = true;
         }
         else if (Input.GetKeyUp(KeyCode.Tab))
         {
             m_shapeWheelSelected = false;
             Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.02f;
         }
 
         ShapeWheel.SetActive(m_shapeWheelSelected);
