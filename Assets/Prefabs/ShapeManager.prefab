@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88da18b6ad295e45b770c803198820a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magneticForce: 1000
+  m_magneticForce: 1500
   m_rayUpRange: 20
   m_vCam1: {fileID: 0}
   m_vCam2: {fileID: 0}
@@ -333,10 +333,10 @@ MonoBehaviour:
   m_decreaseSpeedTimer: 3
   m_slowMultiplier: 1.5
   m_jumpDecrease: 10
-  m_yWallRunVelocity: 5
-  m_jumpForceWall: 30
+  m_yWallRunVelocity: 10
+  m_jumpForceWall: 15
   m_wallJumpUpForce: 5
-  m_gravityJumpFromWall: 15
+  m_gravityJumpFromWall: 10
   WhatIsWall:
     serializedVersion: 2
     m_Bits: 128
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_gravity: 50
   m_zPlayerSpeed: 30
   m_xPlayerSpeed: 20
-  m_howManyShapes: 6
+  m_howManyShapes: 5
   m_playerAirSpeed: 15
   m_jumpForce: 20
   m_trailRenderers:
