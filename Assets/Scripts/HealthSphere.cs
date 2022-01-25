@@ -18,10 +18,16 @@ public class HealthSphere : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            if (/*m_playerController.Health*/ GameManager.Instance.PlayerHealth <= (100 - m_healthUpAmount))
+            if (/*m_playerController.Health*/ GameManager.Instance.PlayerHealth <= (100f - m_healthUpAmount))
             {
                 //m_playerController.Health += m_healthUpAmount;
                 GameManager.Instance.PlayerHealth += m_healthUpAmount;
+                m_coll.enabled = false;
+                m_mr.enabled = false;
+            }
+            else if (GameManager.Instance.PlayerHealth < 100f)
+            {
+                GameManager.Instance.PlayerHealth = 100f;
                 m_coll.enabled = false;
                 m_mr.enabled = false;
             }

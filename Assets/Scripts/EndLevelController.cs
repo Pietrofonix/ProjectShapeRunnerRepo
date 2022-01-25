@@ -17,7 +17,7 @@ public class EndLevelController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             m_levelLoad++;
-
+            GameManager.Instance.PlayerHealth = 100f;
             SceneManager.LoadScene(m_levelLoad);
         }
     }

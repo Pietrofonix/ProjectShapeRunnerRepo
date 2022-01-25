@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
         m_jumpBoostSave = m_jumpForce;
         m_jumpDecreaseSave = m_jumpForce;
         m_playerSpeedSave = m_zPlayerSpeed;
+        m_pressTimer = 0f;
         //GameManager.Instance.PlayerHealth = 100f;
     }
 
@@ -130,6 +131,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Sto andando piano: " + m_gonnaGoSlow);
         //Debug.Log("Muro a sinistra: " + m_isWallLeft);
         //Debug.Log("SpeedTimer: " + m_boostSpeedTimer);
+        //Debug.Log(m_pressTimer);
         #endregion
 
         //if (!m_isWallRunning && !m_gravityChange)
@@ -172,8 +174,8 @@ public class PlayerController : MonoBehaviour
         }
 
         //Raycasts that detect the walls on the right/left side
-        m_isWallRight = Physics.Raycast(transform.position, transform.right, out m_wallRunDetection, 1.0f, WhatIsWall);
-        m_isWallLeft = Physics.Raycast(transform.position, -transform.right, out m_wallRunDetection, 1.0f, WhatIsWall);
+        m_isWallRight = Physics.Raycast(transform.position + transform.up * -0.5f, transform.right, out m_wallRunDetection, 1.5f, WhatIsWall);
+        m_isWallLeft = Physics.Raycast(transform.position + transform.up * -0.5f, -transform.right, out m_wallRunDetection, 1.5f, WhatIsWall);
 
         //Raycast that detects the gravity platform above the player
         m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
@@ -181,20 +183,22 @@ public class PlayerController : MonoBehaviour
         //Raycast that detects the ground
         m_groundHit = Physics.Raycast(transform.position, -transform.up, out m_hitGroundDistance, m_rayDownRange, GroundMask);
 
+        #region Raycast debug
         if (m_groundHit)
             Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.green);
         else
             Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.red);
 
         if (m_isWallRight) 
-            Debug.DrawRay(transform.position, transform.right * 1.0f, Color.yellow);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 1.5f, Color.yellow);
         else
-            Debug.DrawRay(transform.position, transform.right * 1.0f, Color.red);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 1.5f, Color.red);
 
         if (m_isWallLeft)
-            Debug.DrawRay(transform.position, -transform.right * 1.0f, Color.blue);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 1.5f, Color.blue);
         else
-            Debug.DrawRay(transform.position, -transform.right * 1.0f, Color.red);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 1.5f, Color.red);
+        #endregion
     }
 
     void CheckGround()
@@ -559,7 +563,7 @@ public class PlayerController : MonoBehaviour
         {
             m_jumpFromWall = true;
             
-            if ((m_isWallRight && !Input.GetKey(KeyCode.W)) || (m_isWallRight &&  Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A)))
+            if (m_isWallRight /*&& !Input.GetKey(KeyCode.W)) || (m_isWallRight &&  Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))*/)
             {
                 /*m_rb.AddForce(m_wallRunJumpMultiplier * m_jumpForceWall * -transform.right, ForceMode.Force);
                 m_rb.AddForce(transform.up * m_jumpForceWall * m_wallJumpUpForce);*/
@@ -567,25 +571,25 @@ public class PlayerController : MonoBehaviour
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
             }
-            else if (m_isWallRight && (Input.GetKey(KeyCode.W)/* || Input.GetKey(KeyCode.A)*/))
+            /*else if (m_isWallRight && (Input.GetKey(KeyCode.W)*//* || Input.GetKey(KeyCode.A)*//*))
             {
                 float angle = -15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
-            }
+            }*/
 
-            if ((m_isWallLeft && !Input.GetKey(KeyCode.W)) || (m_isWallLeft && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D)))
+            if (m_isWallLeft/* && !Input.GetKey(KeyCode.W)) || (m_isWallLeft && Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))*/)
             {
                 float angle = 90f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse); 
             }
-            else if (m_isWallLeft && (Input.GetKey(KeyCode.W)/* || Input.GetKey(KeyCode.D)*/))
+            /*else if (m_isWallLeft && (Input.GetKey(KeyCode.W)*//* || Input.GetKey(KeyCode.D)*//*))
             {
                 float angle = 15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
-            }
+            }*/
 
             m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             m_isWallRunning = false;
