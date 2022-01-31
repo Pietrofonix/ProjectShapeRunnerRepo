@@ -1403,9 +1403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d7112fcdc32384786cacea7d4b53dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShapeWheel: {fileID: 7205667729114862104}
-  Player: {fileID: 0}
-  m_slowMotionTime: 0.1
+  m_shapesWheel: {fileID: 7205667729114862104}
+  m_player: {fileID: 0}
+  m_slowMotionTime: 0.2
 --- !u!1 &5993860299589256767
 GameObject:
   m_ObjectHideFlags: 0

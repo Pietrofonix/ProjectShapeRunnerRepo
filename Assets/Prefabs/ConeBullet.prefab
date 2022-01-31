@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7778039748598829710}
   m_Layer: 0
   m_Name: ConeBullet
-  m_TagString: Untagged
+  m_TagString: BulletCone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -617,6 +617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_bulletSpeed: 50
   m_bulletUpForce: 3
+  m_enemyManager: {fileID: 6328271197670577027, guid: a9dba508d6d0abd47925caee9b21c75b,
+    type: 3}
 --- !u!135 &7778039748598829710
 SphereCollider:
   m_ObjectHideFlags: 0

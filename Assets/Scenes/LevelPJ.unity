@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.15100522, g: 0.085174374, b: 0.55015063, a: 1}
+  m_IndirectSpecularColor: {r: 0.1283738, g: 0.028832832, b: 0.46461412, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1027,7 +1027,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-200282
+  m_Name: pb_Mesh-264236
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2258,10 +2258,25 @@ PrefabInstance:
       propertyPath: m_checkpointText
       value: 
       objectReference: {fileID: 2026328177}
+    - target: {fileID: 5312396739425140970, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5865701377138927640, guid: 70d4a14d6cff27949a79fb4db2bb9084,
         type: 3}
       propertyPath: m_Name
       value: ShapeManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865701377138927642, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5865701377138927642, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5865701377138927643, guid: 70d4a14d6cff27949a79fb4db2bb9084,
         type: 3}
@@ -2281,7 +2296,7 @@ PrefabInstance:
     - target: {fileID: 5865701377138927643, guid: 70d4a14d6cff27949a79fb4db2bb9084,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 34.2
       objectReference: {fileID: 0}
     - target: {fileID: 5865701377138927643, guid: 70d4a14d6cff27949a79fb4db2bb9084,
         type: 3}
@@ -2328,6 +2343,31 @@ PrefabInstance:
       propertyPath: m_vCam2
       value: 
       objectReference: {fileID: 843693796}
+    - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_shapesWheel
+      value: 
+      objectReference: {fileID: 1519466801}
+    - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_wallRunForce
+      value: 90000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_forwardJumpForceWall
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_shapesWheelController
+      value: 
+      objectReference: {fileID: 2076943860}
+    - target: {fileID: 7939054392390435890, guid: 70d4a14d6cff27949a79fb4db2bb9084,
+        type: 3}
+      propertyPath: m_gravityForwardJumpFromWall
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70d4a14d6cff27949a79fb4db2bb9084, type: 3}
 --- !u!1001 &235867732
@@ -3536,7 +3576,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-200846
+  m_Name: pb_Mesh-64182
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4435,6 +4475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594200159968320141, guid: af2d18be3ea969e49975b8a519c53d40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1594200159968320177, guid: af2d18be3ea969e49975b8a519c53d40,
         type: 3}
@@ -6608,6 +6653,11 @@ PrefabInstance:
       objectReference: {fileID: 657423185}
     - target: {fileID: 6355219936071232482, guid: 1bcf9164da0f1c544b8ccc5af65ab4e3,
         type: 3}
+      propertyPath: m_shapesWheel
+      value: 
+      objectReference: {fileID: 1519466801}
+    - target: {fileID: 6355219936071232482, guid: 1bcf9164da0f1c544b8ccc5af65ab4e3,
+        type: 3}
       propertyPath: m_playerController
       value: 
       objectReference: {fileID: 938874372}
@@ -7113,6 +7163,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 1594200159968320141, guid: af2d18be3ea969e49975b8a519c53d40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1594200159968320177, guid: af2d18be3ea969e49975b8a519c53d40,
         type: 3}
       propertyPath: m_Mesh
@@ -7507,7 +7562,7 @@ PrefabInstance:
     - target: {fileID: 4188070410628194012, guid: 44e742d659e24da42a34c3b613da993b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6
+      value: 28.2
       objectReference: {fileID: 0}
     - target: {fileID: 4188070410628194012, guid: 44e742d659e24da42a34c3b613da993b,
         type: 3}
@@ -8714,7 +8769,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-199874
+  m_Name: pb_Mesh-63210
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10673,7 +10728,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 961739749}
   m_LocalRotation: {x: 0.16018225, y: -0, z: -0, w: 0.9870875}
-  m_LocalPosition: {x: -12, y: -1, z: -76}
+  m_LocalPosition: {x: -12, y: -1, z: -41.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13669,7 +13724,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-199618
+  m_Name: pb_Mesh-62954
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -14605,7 +14660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1268981873
 Transform:
   m_ObjectHideFlags: 0
@@ -16742,7 +16797,7 @@ PrefabInstance:
     - target: {fileID: 6328271197670577081, guid: a9dba508d6d0abd47925caee9b21c75b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6328271197670577081, guid: a9dba508d6d0abd47925caee9b21c75b,
         type: 3}
@@ -21308,7 +21363,7 @@ PrefabInstance:
     - target: {fileID: 6328271197670577081, guid: a9dba508d6d0abd47925caee9b21c75b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6328271197670577081, guid: a9dba508d6d0abd47925caee9b21c75b,
         type: 3}
@@ -21369,7 +21424,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-200528
+  m_Name: pb_Mesh-264482
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23054,7 +23109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2005181730
 Transform:
   m_ObjectHideFlags: 0
@@ -23833,6 +23888,21 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 108405820}
+    - target: {fileID: 5098091968929564287, guid: c741088978971314ba6ae3bc744f5b06,
+        type: 3}
+      propertyPath: m_player
+      value: 
+      objectReference: {fileID: 108405820}
+    - target: {fileID: 5098091968929564287, guid: c741088978971314ba6ae3bc744f5b06,
+        type: 3}
+      propertyPath: ActivateWheel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5098091968929564287, guid: c741088978971314ba6ae3bc744f5b06,
+        type: 3}
+      propertyPath: m_playerController
+      value: 
+      objectReference: {fileID: 938874372}
     - target: {fileID: 5993860299569986503, guid: c741088978971314ba6ae3bc744f5b06,
         type: 3}
       propertyPath: m_Pivot.x
@@ -24576,6 +24646,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594200159968320141, guid: af2d18be3ea969e49975b8a519c53d40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1594200159968320177, guid: af2d18be3ea969e49975b8a519c53d40,
         type: 3}

@@ -6,6 +6,7 @@ public class PauseManager : MonoBehaviour
     public GameObject PnlPause;
     [SerializeField] PlayerController m_playerController;
     [SerializeField] ShapesWheelController m_shapesWheelController;
+    [SerializeField] GameObject m_shapesWheel;
     bool m_isPaused;
 
     void Start()
@@ -15,7 +16,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
         {
             ChangeStatusMenuPause();
         }
@@ -31,12 +32,13 @@ public class PauseManager : MonoBehaviour
 
     void UpdateGamePause()
     {
-        if(m_isPaused)
+        if (m_isPaused)
         {
             // Time.timeScale si usa per velocizzare, rallentare o fermare il tempo
             Time.timeScale = 0;
             m_playerController.enabled = false;
             m_shapesWheelController.enabled = false;
+            m_shapesWheel.SetActive(false);
         }
         else
         {

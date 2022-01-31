@@ -3,11 +3,13 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
     Rigidbody m_rb;
+    GameObject cylinder;
+    GameObject m_playerController;
     //Transform m_playerRef;
     //PlayerController m_playerController;
     [SerializeField] float m_bulletSpeed;
     [SerializeField] float m_bulletUpForce;
-    private GameObject cylinder;
+    [SerializeField] EnemyManager m_enemyManager;
     //public Image cylinderPerkBar;
     //Vector3 bulletDir;
 
@@ -24,6 +26,7 @@ public class BulletManager : MonoBehaviour
         //m_playerController = FindObjectOfType<PlayerController>();
         cylinder = GameObject.Find("ShapeManager/CylinderPlayer");
         m_rb = GetComponent<Rigidbody>();
+        m_playerController = GameObject.FindGameObjectWithTag("Player");
         //m_playerRef = GameObject.FindObjectOfType<PlayerController>().transform;
         //bulletDir = player.position - transform.position;
         //transform.forward = bulletDir.normalized;
@@ -34,20 +37,19 @@ public class BulletManager : MonoBehaviour
 
     void Update()
     {
-        Destroy(gameObject, 3f);   
+        Destroy(gameObject, 2f);
+
+        if (m_playerController.transform.position.y <= -20f || GameManager.Instance.PlayerHealth <= 0f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.collider.name);
         Destroy(gameObject);
-        /*if (collision.gameObject.CompareTag("Ground"))
-        {
-            Destroy(gameObject);
-            //gameObject.SetActive(false);
-        }*/
 
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player"))
         {
             if(!cylinder || (cylinder && !CylinderPerk.startCylinderPerkBar && CylinderPerk.startCooldownCylinder))
             {

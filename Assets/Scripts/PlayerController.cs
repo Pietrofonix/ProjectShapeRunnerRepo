@@ -48,15 +48,20 @@ public class PlayerController : MonoBehaviour
     [Header("Wall run variables")]
     #region WallRun variables
     //[SerializeField] float m_wallRunJumpMultiplier;
+    //[SerializeField] float m_gravityForwardJumpFromWall;
     [SerializeField] float m_yWallRunVelocity;
     [SerializeField] float m_jumpForceWall;
+    [SerializeField] float m_forwardJumpForceWall;
     [SerializeField] float m_wallJumpUpForce;
     [SerializeField] float m_gravityJumpFromWall;
+    [SerializeField] float m_wallRunForce;
+    [SerializeField] ShapesWheelController m_shapesWheelController;
     public LayerMask WhatIsWall;
     public GameObject Cube;
-    public float WallRunForce;
     RaycastHit m_wallRunDetection;
-    bool m_isWallRight, m_isWallLeft, m_isWallRunning;
+    bool m_isWallRight;
+    bool m_isWallLeft;
+    bool m_isWallRunning;
     bool m_startWallRun = false;
     bool m_jumpFromWall = false;
     #endregion
@@ -94,6 +99,7 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool IsMovingForward = false;
     [HideInInspector] public bool IsMoving = false;
     [HideInInspector] public bool DoubleJumpVar;
+    Collider m_collider;
     float m_playerSpeedSave = 0f;
     int selectedShape = 0;
     //[SerializeField] float m_playerRunSpeed;
@@ -104,6 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         SelectedShape();
         m_rb = GetComponent<Rigidbody>();
+        m_collider = GetComponent<Collider>();
         m_boostSpeedTimerSave = m_boostSpeedTimer;
         m_decreaseSpeedTimerSave = m_decreaseSpeedTimer;
         m_jumpBoostSave = m_jumpForce;
@@ -132,6 +139,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Muro a sinistra: " + m_isWallLeft);
         //Debug.Log("SpeedTimer: " + m_boostSpeedTimer);
         //Debug.Log(m_pressTimer);
+        //Debug.Log("Ruota: " + m_shapesWheelController.ActivateWheel);
         #endregion
 
         //if (!m_isWallRunning && !m_gravityChange)
@@ -234,7 +242,9 @@ public class PlayerController : MonoBehaviour
                 IsMovingForward = false;
         }      
         else
+        {
             IsMoving = false;
+        }
 
         //If the player is on the ground
         if (m_isGrounded && !m_isWallRunning)
@@ -300,9 +310,8 @@ public class PlayerController : MonoBehaviour
     #region GravityChange
     void CheckGravityChange()
     {
-        if ((m_platformUpHit || m_isOnTop))
+        if (m_platformUpHit || m_isOnTop)
         {
-            //GravityChange();
             Debug.DrawRay(transform.position, transform.up * m_rayUpRange, Color.green);
             m_pressTimer -= Time.deltaTime;
 
@@ -311,9 +320,13 @@ public class PlayerController : MonoBehaviour
                 m_pressTimer = 0f;
             }
 
+            if (m_isOnTop)
+            {
+                m_shapesWheelController.ActivateWheel = false;
+            }
+
             if (Input.GetKeyDown(KeyCode.E) && m_pressTimer <= 0.01f)
             {
-                //GravityChange();
                 m_startGravityChange = true;
                 m_pressTimer = m_pressTime;
             }
@@ -330,7 +343,7 @@ public class PlayerController : MonoBehaviour
 
     void GravityChange()
     {
-        Debug.Log("GravityChange: " + m_gravityChange);
+        //Debug.Log("GravityChange: " + m_gravityChange);
         if (/*Input.GetKeyDown(KeyCode.E)*/ m_startGravityChange /*&& (m_isGrounded || !m_groundHit)*/)
         {
             m_startGravityChange = false;
@@ -341,7 +354,7 @@ public class PlayerController : MonoBehaviour
                 m_gravityChange = true;
                 m_rb.AddForce(transform.up * m_magneticForce, ForceMode.Acceleration);
                 m_gravity *= -1;
-                Debug.Log("Vado su");
+                //Debug.Log("Vado su");
                 m_vCam1.SetActive(false);
                 m_vCam2.SetActive(true);
             }
@@ -352,7 +365,7 @@ public class PlayerController : MonoBehaviour
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
                 m_gravity *= -1;
-                Debug.Log("Vado giù");
+                //Debug.Log("Vado giù");
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
             }
@@ -363,10 +376,19 @@ public class PlayerController : MonoBehaviour
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
                 m_gravity *= -1;
-                Debug.Log("Torno giù dopo essere andato su");
+                //Debug.Log("Torno giù dopo essere andato su");
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
             }
+        }
+
+        if (!m_gravityChange)
+        {
+            m_shapesWheelController.ActivateWheel = true;
+        }
+        else if (m_goUp)
+        {
+            m_shapesWheelController.ActivateWheel = false;
         }
     }
 
@@ -390,21 +412,31 @@ public class PlayerController : MonoBehaviour
         if (/*Input.GetAxis("Mouse ScrollWheel") > 0f*/ Input.GetMouseButtonDown(0)) // forward
         {
             if (selectedShape >= transform.childCount - (m_howManyShapes - 1))
+            {
                 selectedShape = 0;
+            }
             else
+            {
                 selectedShape++;
+            }
         }
 
         if (/*Input.GetAxis("Mouse ScrollWheel") < 0f*/ Input.GetMouseButtonDown(1)) // backwards
         {
             if (selectedShape <= 0)
+            {
                 selectedShape = transform.childCount - (m_howManyShapes - 1);
+            }
             else
+            {
                 selectedShape--;
+            }
         }
 
         if (previousSelectedShape != selectedShape)
+        {
             SelectedShape();
+        }
     }
 
     void SelectedShape()
@@ -420,7 +452,9 @@ public class PlayerController : MonoBehaviour
             else
             {
                 if(!shape.CompareTag("GroundCheck") && !shape.CompareTag("EnemyTarget"))
+                {
                     shape.gameObject.SetActive(false);
+                }
             }
             
             i++;
@@ -522,11 +556,15 @@ public class PlayerController : MonoBehaviour
         //Leave wall run
         if (!m_isWallRight && !m_isWallLeft)
         {
+            m_shapesWheelController.ActivateWheel = true;
             StopWallRun();
             m_startWallRun = false;
         }
         else
+        {
+            m_shapesWheelController.ActivateWheel = false;
             StartWallRun();
+        }
     }
 
     void StopWallRun()
@@ -548,11 +586,11 @@ public class PlayerController : MonoBehaviour
             //Make sure the player sticks to the wall
             if (m_isWallRight)
             {
-                m_rb.AddForce(transform.right * WallRunForce, ForceMode.Force);
+                m_rb.AddForce(transform.right * m_wallRunForce, ForceMode.Force);
             }
             else if (m_isWallLeft)
             {
-                m_rb.AddForce(-transform.right * WallRunForce, ForceMode.Force);
+                m_rb.AddForce(-transform.right * m_wallRunForce, ForceMode.Force);
             }
         }
     }
@@ -674,6 +712,7 @@ public class PlayerController : MonoBehaviour
         m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
         m_gonnaGoSlow = false;
         m_gonnaGoFast = false;
+        Debug.Log("Sto andando normale, velocità attuale: " + m_zPlayerSpeed);
     }
 
     #region OnTrigger/OnCollision
@@ -722,7 +761,7 @@ public class PlayerController : MonoBehaviour
             {
                 float angle = 15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
-                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
+                m_rb.AddForce(diagonalDir * m_forwardJumpForceWall, ForceMode.Impulse);
                 m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             }
 
@@ -730,7 +769,7 @@ public class PlayerController : MonoBehaviour
             {
                 float angle = -15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
-                m_rb.AddForce(diagonalDir * m_jumpForceWall, ForceMode.Impulse);
+                m_rb.AddForce(diagonalDir * m_forwardJumpForceWall, ForceMode.Impulse);
                 m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             }
 

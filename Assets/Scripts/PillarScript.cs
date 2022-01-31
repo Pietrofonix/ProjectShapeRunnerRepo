@@ -17,6 +17,4 @@ public class PillarScript : MonoBehaviour
         if (distance <= 10.0f)
             m_anim.enabled = true;
     }
-
-
 }

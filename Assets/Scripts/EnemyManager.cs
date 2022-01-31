@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour
     public Transform FirePoint;
     public GameObject Bullet;
     public LayerMask WhatIsPlayer;
+    [SerializeField] Rigidbody m_playerRb;
     [SerializeField] float m_sightRange;
     [SerializeField] float m_attackCooldownTimer;
     Transform m_enemyTargetForward;
@@ -42,15 +43,21 @@ public class EnemyManager : MonoBehaviour
         m_raycastDir = (Player.position - transform.position);
         m_obstacle = Physics.Raycast(transform.position, m_raycastDir, out m_enemySight, m_sightRange);
 
-        if (m_enemySight.collider != null)
+        /*if (m_enemySight.collider != null)
         {
             //Debug.Log(m_enemySight.collider.name);
-        }
+        }*/
 
         switch (state)
         {
             case State.idle:
                 DetectPlayer();
+
+                if(transform.rotation.eulerAngles != Vector3.zero && !m_playerInRange)
+                {
+                    Quaternion targetRot = Quaternion.Euler(0f, 0f, 0f);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, 2f * Time.deltaTime); 
+                }
                 break;
 
             case State.shoot:
@@ -67,7 +74,7 @@ public class EnemyManager : MonoBehaviour
                         //Debug.Log("Sparo al target davanti");
                     }
                     //If the player is moving forward, the enemy shoots in front of the player
-                    else if(!PlayerScript.IsMovingForward && PlayerScript.IsMoving)
+                    else if (!PlayerScript.IsMovingForward && PlayerScript.IsMoving)
                     {
                         //enemyAim = EnemyTargetBackward.position;
                         enemyAim = m_enemyTargetForward.position;
@@ -76,7 +83,7 @@ public class EnemyManager : MonoBehaviour
                         //Debug.Log("Sparo al target dietro");
                     }     
                     //If the player is not moving, the enemy shoots directly at the player 
-                    else if(!PlayerScript.IsMoving)
+                    else if (!PlayerScript.IsMoving)
                     {
                         if (!child.CompareTag("GroundCheck") && !child.CompareTag("EnemyTarget") && child.gameObject.activeInHierarchy)
                         {
@@ -105,17 +112,18 @@ public class EnemyManager : MonoBehaviour
 
     void DetectPlayer()
     {
-        if (m_playerInRange)
+        if (m_playerInRange && m_enemySight.collider != null)
         {   
             if (m_obstacle && !m_enemySight.collider.CompareTag("Player"))
             {
                 Debug.DrawRay(transform.position, m_raycastDir, Color.red);
-                Debug.Log("Non vedo il giocatore");
+                //Debug.Log("Non vedo il giocatore");
             } 
             else if (m_obstacle && m_enemySight.collider.CompareTag("Player"))
             {
+                m_playerRb.WakeUp();
                 state = State.shoot;
-                Debug.Log("Vedo il giocatore");
+                //Debug.Log("Vedo il giocatore");
             }
         }
     }
@@ -142,7 +150,7 @@ public class EnemyManager : MonoBehaviour
         if (!m_playerInRange || (m_obstacle && !m_enemySight.collider.CompareTag("Player")))
         {
             state = State.idle;
-            Debug.Log("Non vedo il giocatore");
+            //Debug.Log("Non vedo il giocatore");
         }
     }
 

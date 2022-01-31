@@ -5,12 +5,12 @@ using TMPro;
 
 public class PlayerCheckpoint : MonoBehaviour
 {
-    Vector3 m_spawnPoint;
-    [SerializeField] CinemachineVirtualCamera m_vCam1;
-    PlayerController m_playerController;
-    [SerializeField] TextMeshProUGUI m_checkpointText;
     //PillarScript[] m_pillars;
     //HealthSphere[] m_healthSpheres;
+    Vector3 m_spawnPoint;
+    [SerializeField] CinemachineVirtualCamera m_vCam1;
+    [SerializeField] TextMeshProUGUI m_checkpointText;
+    PlayerController m_playerController;
     GameObject[] m_pillars;
     GameObject[] m_healthSpheres;
     float m_currentPlayerHealth;
@@ -31,19 +31,24 @@ public class PlayerCheckpoint : MonoBehaviour
         if (transform.position.y <= -20f || GameManager.Instance.PlayerHealth <= 0f)
         {
             m_vCam1.enabled = false;
-            if (m_playerController.Sphere.activeInHierarchy || m_playerController.Cube.activeInHierarchy || m_playerController.Cone.activeInHierarchy)
+            /*if (m_playerController.Sphere.activeInHierarchy || m_playerController.Cube.activeInHierarchy || m_playerController.Cone.activeInHierarchy)
             {
-                m_spawnPoint.y += 0.5f;
-            }
+                //m_spawnPoint.y += 0.5f;
+            }*/
             transform.position = m_spawnPoint;
-            GameManager.Instance.PlayerHealth = m_currentPlayerHealth;
 
             ResetPillars();
             ResetHealthSphere();
             m_playerController.NormalSpeed();
 
-            Invoke(nameof(VCamManager), 0.1f);
-        }
+            Invoke(nameof(VCamManager), 0.3f);
+            Invoke(nameof(ResetPlayerHealth), 0.3f);
+        } 
+    }
+
+    void ResetPlayerHealth()
+    {
+        GameManager.Instance.PlayerHealth = m_currentPlayerHealth;
     }
 
     void ResetPillars()
