@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public bool IsMovingForward = false;
     [HideInInspector] public bool IsMoving = false;
     [HideInInspector] public bool DoubleJumpVar;
-    Collider m_collider;
     float m_playerSpeedSave = 0f;
     int selectedShape = 0;
     //[SerializeField] float m_playerRunSpeed;
@@ -110,14 +109,12 @@ public class PlayerController : MonoBehaviour
     {
         SelectedShape();
         m_rb = GetComponent<Rigidbody>();
-        m_collider = GetComponent<Collider>();
         m_boostSpeedTimerSave = m_boostSpeedTimer;
         m_decreaseSpeedTimerSave = m_decreaseSpeedTimer;
         m_jumpBoostSave = m_jumpForce;
         m_jumpDecreaseSave = m_jumpForce;
         m_playerSpeedSave = m_zPlayerSpeed;
         m_pressTimer = 0f;
-        //GameManager.Instance.PlayerHealth = 100f;
     }
 
     void Update()
@@ -138,7 +135,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Sto andando piano: " + m_gonnaGoSlow);
         //Debug.Log("Muro a sinistra: " + m_isWallLeft);
         //Debug.Log("SpeedTimer: " + m_boostSpeedTimer);
-        //Debug.Log(m_pressTimer);
+        Debug.Log(m_pressTimer);
         //Debug.Log("Ruota: " + m_shapesWheelController.ActivateWheel);
         #endregion
 
@@ -712,7 +709,6 @@ public class PlayerController : MonoBehaviour
         m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
         m_gonnaGoSlow = false;
         m_gonnaGoFast = false;
-        Debug.Log("Sto andando normale, velocità attuale: " + m_zPlayerSpeed);
     }
 
     #region OnTrigger/OnCollision
@@ -754,9 +750,6 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("EndOfWall") && !m_jumpFromWall)
         {
-            Debug.Log("Sono alla fine del muro");
-            //Debug.Log(m_rb.velocity);
-
             if (m_isWallLeft)
             {
                 float angle = 15f;

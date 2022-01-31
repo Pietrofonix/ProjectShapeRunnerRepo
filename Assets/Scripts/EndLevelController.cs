@@ -1,8 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class EndLevelController : MonoBehaviour
 {
+    [SerializeField] GameObject m_endMenu;
+    [SerializeField] GameObject m_stopWatch;
+    [SerializeField] StopWatchController m_stopWatchController;
+    [SerializeField] TextMeshProUGUI m_timerScore;
+    [SerializeField] PauseManager m_pauseMenu;
+    [SerializeField] PlayerController m_player;
+    [SerializeField] Rigidbody m_playerRB;
     int m_levelLoad;
 
     void Start()
@@ -10,16 +18,25 @@ public class EndLevelController : MonoBehaviour
         m_levelLoad = SceneManager.GetActiveScene().buildIndex;
     }
 
-    //OnTriggerEnter serve per controllare se un oggetto con un "tag"
-    //entra in contatto col collider
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            m_levelLoad++;
-            GameManager.Instance.PlayerHealth = 100f;
-            SceneManager.LoadScene(m_levelLoad);
+            m_endMenu.SetActive(true);
+            m_stopWatch.SetActive(false);
+            m_player.enabled = false;
+            m_pauseMenu.enabled = false;
+            m_stopWatchController.enabled = false;
+            m_playerRB.velocity = Vector3.zero;
+            m_timerScore.text = m_stopWatchController.UIText.text;
         }
+    }
+
+    public void NextLevel()
+    {
+        m_levelLoad++;
+
+        SceneManager.LoadScene(m_levelLoad);
     }
 }
 
