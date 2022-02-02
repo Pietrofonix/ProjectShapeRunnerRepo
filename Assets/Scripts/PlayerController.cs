@@ -391,6 +391,7 @@ public class PlayerController : MonoBehaviour
 
     void StopGravityPlatform()
     {
+        m_pressTimer = 0f;
         ConeAnim.Play("ConeRotationDown");
         m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
         m_gravity *= -1;
