@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Sto andando piano: " + m_gonnaGoSlow);
         //Debug.Log("Muro a sinistra: " + m_isWallLeft);
         //Debug.Log("SpeedTimer: " + m_boostSpeedTimer);
-        Debug.Log(m_pressTimer);
+        //Debug.Log(m_pressTimer);
         //Debug.Log("Ruota: " + m_shapesWheelController.ActivateWheel);
         #endregion
 

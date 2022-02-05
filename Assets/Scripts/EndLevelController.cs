@@ -13,11 +13,15 @@ public class EndLevelController : MonoBehaviour
     [SerializeField] PlayerController m_player;
     [SerializeField] Rigidbody m_playerRb;
     [SerializeField] ShapesWheelController m_shapesWheelController;
+    float m_minTimeScore = float.MaxValue;
+    float m_tempTimeScore;
     int m_levelLoad;
 
     void Start()
     {
         m_levelLoad = SceneManager.GetActiveScene().buildIndex;
+        /*PlayerPrefs.DeleteKey("MinTime");
+        PlayerPrefs.DeleteKey("BestTime");*/
     }
 
     void OnTriggerEnter(Collider other)
@@ -30,9 +34,26 @@ public class EndLevelController : MonoBehaviour
             m_pauseMenu.enabled = false;
             m_stopWatchController.enabled = false;
             m_playerRb.velocity = Vector3.zero;
-            m_timerScore.text = m_stopWatchController.UIText.text;
-            m_bestScore.text = PlayerPrefs.GetFloat("BestScore").ToString();
+            m_timerScore.text = "Current time: " + m_stopWatchController.TimeScore.text;
             m_shapesWheelController.enabled = false;
+
+            if (!PlayerPrefs.HasKey(SceneManager.GetActiveScene().name + "MinTime"))
+            {
+                PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "MinTime", m_stopWatchController.TimeScoreToFloat);
+                m_bestScore.text = "Best time: " + m_stopWatchController.TimeScore.text;
+                PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BestTime", m_bestScore.text);
+            }
+
+            if (PlayerPrefs.GetFloat(SceneManager.GetActiveScene().name + "MinTime") > m_stopWatchController.TimeScoreToFloat)
+            {
+                PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "MinTime", m_stopWatchController.TimeScoreToFloat);
+                PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BestTime", m_stopWatchController.TimeScore.text);
+                BestTime();
+            }
+            else
+            {
+                BestTime();
+            }
         }
     }
 
@@ -40,6 +61,16 @@ public class EndLevelController : MonoBehaviour
     {
         m_levelLoad++;
         SceneManager.LoadScene(m_levelLoad);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void BestTime()
+    {
+        m_bestScore.text = "Best time: " + PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BestTime");
     }
 }
 
