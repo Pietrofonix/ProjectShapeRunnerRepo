@@ -243,6 +243,7 @@ public class PlayerController : MonoBehaviour
             m_vCam2.SetActive(true);
         }
     }
+
     public void NormalSpeed()
     {
         foreach (TrailRenderer trail in m_trailRenderers)
@@ -824,6 +825,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
+            m_rb.velocity = new Vector3(0f, 0f, m_zPlayerSpeed);
             m_isWallRunning = false;
             m_jumpFromWall = true;
         }
