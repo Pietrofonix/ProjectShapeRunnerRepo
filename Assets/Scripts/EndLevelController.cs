@@ -63,6 +63,7 @@ public class EndLevelController : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.PlayerHealth = 100f;
     }
 
     void BestTime()

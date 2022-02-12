@@ -325,7 +325,7 @@ MonoBehaviour:
   m_rayUpRange: 20
   m_vCam1: {fileID: 0}
   m_vCam2: {fileID: 0}
-  m_pressTime: 0
+  m_pressTime: 0.5
   ConeAnim: {fileID: 5867155959000574234}
   PlatformUp:
     serializedVersion: 2
