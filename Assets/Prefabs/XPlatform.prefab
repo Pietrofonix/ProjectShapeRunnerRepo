@@ -110,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed5d7cf81a2cc434b86ac019db93c6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_platformSpeed: 0
-  m_platformDistance: 0
+  m_platformSpeed: 5
+  m_platformDistance: 10
