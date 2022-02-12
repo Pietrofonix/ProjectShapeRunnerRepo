@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Sphere variables")]
+    [SerializeField] GameObject[] m_ghostPlatform;
+    [SerializeField] GameObject[] m_normalPlatform;
+    public GameObject Sphere;
+    [Space(2)]
+
     [Header("GravityChange variables")]
     #region Gravity variables
     [SerializeField] float m_magneticForce;
@@ -12,7 +18,6 @@ public class PlayerController : MonoBehaviour
     RaycastHit m_hitGravityPlatform;
     public Animator ConeAnim;
     public LayerMask PlatformUp;
-    public GameObject Sphere;
     public GameObject Cone;
     float m_pressTimer;
     bool m_gravityChange = false;
@@ -107,6 +112,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        foreach (GameObject ghostPlatform in m_ghostPlatform)
+        {
+            ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
+            ghostPlatform.GetComponent<BoxCollider>().enabled = false;
+        }
+
         SelectedShape();
         m_rb = GetComponent<Rigidbody>();
         m_boostSpeedTimerSave = m_boostSpeedTimer;
@@ -157,6 +168,15 @@ public class PlayerController : MonoBehaviour
         if (Cube.activeInHierarchy)
         {
             JumpFromWall();
+        }
+
+        if (Sphere.activeInHierarchy)
+        {
+            GhostPlatformOn();
+        }
+        else
+        {
+            GhostPlatformOff();
         }
 
         CheckJump();
@@ -648,6 +668,38 @@ public class PlayerController : MonoBehaviour
 
             m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
             m_isWallRunning = false;
+        }
+    }
+    #endregion
+
+    #region PlatformOnOff
+    void GhostPlatformOn()
+    {
+        foreach (GameObject normalPlatform in m_normalPlatform)
+        {
+            normalPlatform.GetComponent<MeshRenderer>().enabled = false;
+            normalPlatform.GetComponent<BoxCollider>().enabled = false;
+        }
+
+        foreach (GameObject ghostPlatform in m_ghostPlatform)
+        {
+            ghostPlatform.GetComponent<MeshRenderer>().enabled = true;
+            ghostPlatform.GetComponent<BoxCollider>().enabled = true;
+        }
+    }
+
+    void GhostPlatformOff()
+    {
+        foreach (GameObject normalPlatform in m_normalPlatform)
+        {
+            normalPlatform.GetComponent<MeshRenderer>().enabled = true;
+            normalPlatform.GetComponent<BoxCollider>().enabled = true;
+        }
+
+        foreach (GameObject ghostPlatform in m_ghostPlatform)
+        {
+            ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
+            ghostPlatform.GetComponent<BoxCollider>().enabled = false;
         }
     }
     #endregion
