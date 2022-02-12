@@ -110,5 +110,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389a29d32c0aa9e449c9cb96f60dc26d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_elevatorSpeed: 0
-  m_elevatorDistance: 0
+  m_elevatorSpeed: 5
+  m_elevatorDistance: 10

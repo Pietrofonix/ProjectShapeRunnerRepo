@@ -16,8 +16,8 @@ public class SmashWallController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 smashWallPositiveTarget = new(transform.position.x, transform.position.y + 1, transform.position.z);
-        Vector3 smashWallNegativeTarget = new(transform.position.x, transform.position.y - 1, transform.position.z);
+        Vector3 smashWallPositiveTarget = new(transform.position.x, m_smashWallYPosSave + m_smashWallDistance, transform.position.z);
+        Vector3 smashWallNegativeTarget = new(transform.position.x, m_smashWallYPosSave, transform.position.z);
 
         if (!m_smashWall)
         {
@@ -32,7 +32,7 @@ public class SmashWallController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, smashWallNegativeTarget, m_smashWallSpeedDown * Time.fixedDeltaTime);
 
-            if (transform.position.y <= m_smashWallYPosSave - m_smashWallDistance)
+            if (transform.position.y <= m_smashWallYPosSave)
             {
                 m_smashWall = false;
             }

@@ -17,7 +17,7 @@ public class WallWalkerController : MonoBehaviour
     {
         Vector3 target = new Vector3(transform.position.x, transform.position.y, m_player.position.z);
 
-        if (Vector3.Distance(transform.position, target) < 20 && Vector3.Distance(transform.position, target) > 10)
+        if (Vector3.Distance(transform.position, target) <= 20 && Vector3.Distance(transform.position, target) >= 10)
         {
             m_velocity = true;
 
@@ -43,6 +43,5 @@ public class WallWalkerController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, target, m_speed2 * Time.fixedDeltaTime);
         }
-        //"MoveTowards" ossia "Muovi Verso" Utilizza 3 cordinate per muoversi nello spazio
     }
 }

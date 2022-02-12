@@ -15,8 +15,11 @@ public class ElevatorController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 elevatorPositiveTarget = new(transform.position.x, transform.position.y + 1, transform.position.z);
-        Vector3 elevatorNegativeTarget = new(transform.position.x, transform.position.y - 1, transform.position.z);
+        Debug.Log(m_elevator);
+        Debug.Log(m_elevatorYPosSave);
+
+        Vector3 elevatorPositiveTarget = new(transform.position.x, m_elevatorYPosSave + m_elevatorDistance, transform.position.z);
+        Vector3 elevatorNegativeTarget = new(transform.position.x, m_elevatorYPosSave, transform.position.z);
 
         if (!m_elevator)
         {
@@ -31,7 +34,7 @@ public class ElevatorController : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, elevatorNegativeTarget, m_elevatorSpeed * Time.fixedDeltaTime);
 
-            if (transform.position.y <= m_elevatorYPosSave - m_elevatorDistance)
+            if (transform.position.y <= m_elevatorYPosSave)
             {
                 m_elevator = false;
             }

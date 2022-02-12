@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7941312585379342912}
   - component: {fileID: 7941312585379342913}
   - component: {fileID: 7941312585379342915}
+  - component: {fileID: 33442027}
   m_Layer: 0
   m_Name: SpeedPlatform
   m_TagString: SpeedPlatform
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7941312585379342972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.5, y: -0.25, z: 179}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.49, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -270,7 +271,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 470
+  m_VersionIndex: 473
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -295,7 +296,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 25a9fb42d361f46ad89221f6d301e96e, type: 2}
+  - {fileID: 2100000, guid: ab5a2e9fa9608a043baf2b325e79e48c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -330,3 +331,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 20, y: 0.5, z: 1}
   m_Center: {x: 0, y: 0.25, z: 0.5}
+--- !u!33 &33442027
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941312585379342972}
+  m_Mesh: {fileID: 0}

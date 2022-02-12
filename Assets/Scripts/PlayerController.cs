@@ -8,12 +8,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_rayUpRange;
     [SerializeField] GameObject m_vCam1;
     [SerializeField] GameObject m_vCam2;
+    [SerializeField] float m_pressTime;
     RaycastHit m_hitGravityPlatform;
     public Animator ConeAnim;
     public LayerMask PlatformUp;
     public GameObject Sphere;
     public GameObject Cone;
-    float m_pressTime = 0.5f;
     float m_pressTimer;
     bool m_gravityChange = false;
     bool m_startGravityChange = false;
@@ -139,8 +139,10 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Ruota: " + m_shapesWheelController.ActivateWheel);
         #endregion
 
-        //if (!m_isWallRunning && !m_gravityChange)
-            //ScrollShape();
+        /*if (!m_isWallRunning && !m_gravityChange)
+        {
+            ScrollShape();
+        }*/
 
         if (!Cone.activeInHierarchy)
         {
@@ -189,7 +191,7 @@ public class PlayerController : MonoBehaviour
         m_groundHit = Physics.Raycast(transform.position, -transform.up, out m_hitGroundDistance, m_rayDownRange, GroundMask);
 
         #region Raycast debug
-        if (m_groundHit)
+        /*if (m_groundHit)
             Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.green);
         else
             Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.red);
@@ -202,7 +204,7 @@ public class PlayerController : MonoBehaviour
         if (m_isWallLeft)
             Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 1.5f, Color.blue);
         else
-            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 1.5f, Color.red);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 1.5f, Color.red);*/
         #endregion
     }
 
@@ -221,6 +223,20 @@ public class PlayerController : MonoBehaviour
             m_vCam2.SetActive(true);
         }
     }
+    public void NormalSpeed()
+    {
+        foreach (TrailRenderer trail in m_trailRenderers)
+        {
+            trail.enabled = false;
+        }
+
+        m_zPlayerSpeed = m_playerSpeedSave;
+        m_jumpForce = m_jumpBoostSave;
+        m_boostSpeedTimer = m_boostSpeedTimerSave;
+        m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
+        m_gonnaGoSlow = false;
+        m_gonnaGoFast = false;
+    }
 
     #region Movement
     void Movement()
@@ -234,9 +250,13 @@ public class PlayerController : MonoBehaviour
         {
             IsMoving = true;
             if (zMov > 0f)
+            {
                 IsMovingForward = true;
+            }
             else
+            {
                 IsMovingForward = false;
+            }
         }      
         else
         {
@@ -319,7 +339,7 @@ public class PlayerController : MonoBehaviour
 
             if (m_isOnTop)
             {
-                m_shapesWheelController.ActivateWheel = false;
+                m_shapesWheelController.ShapesWheelIsActive = false;
             }
 
             if (Input.GetKeyDown(KeyCode.E) && m_pressTimer <= 0.01f)
@@ -340,7 +360,6 @@ public class PlayerController : MonoBehaviour
 
     void GravityChange()
     {
-        //Debug.Log("GravityChange: " + m_gravityChange);
         if (/*Input.GetKeyDown(KeyCode.E)*/ m_startGravityChange /*&& (m_isGrounded || !m_groundHit)*/)
         {
             m_startGravityChange = false;
@@ -381,11 +400,11 @@ public class PlayerController : MonoBehaviour
 
         if (!m_gravityChange)
         {
-            m_shapesWheelController.ActivateWheel = true;
+            m_shapesWheelController.ShapesWheelIsActive = true;
         }
         else if (m_goUp)
         {
-            m_shapesWheelController.ActivateWheel = false;
+            m_shapesWheelController.ShapesWheelIsActive = false;
         }
     }
 
@@ -402,7 +421,7 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    #region ChangeShape
+    #region OldChangeShape
     void ScrollShape()
     {
         int previousSelectedShape = selectedShape;
@@ -431,10 +450,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (previousSelectedShape != selectedShape)
+        /*if (previousSelectedShape != selectedShape)
         {
             SelectedShape();
-        }
+        }*/
     }
 
     void SelectedShape()
@@ -554,13 +573,13 @@ public class PlayerController : MonoBehaviour
         //Leave wall run
         if (!m_isWallRight && !m_isWallLeft)
         {
-            m_shapesWheelController.ActivateWheel = true;
+            m_shapesWheelController.ShapesWheelIsActive = true;
             StopWallRun();
             m_startWallRun = false;
         }
         else
         {
-            m_shapesWheelController.ActivateWheel = false;
+            m_shapesWheelController.ShapesWheelIsActive = false;
             StartWallRun();
         }
     }
@@ -573,7 +592,7 @@ public class PlayerController : MonoBehaviour
 
     void StartWallRun()
     {
-        if(!m_startWallRun)
+        if(!m_startWallRun && !m_isGrounded)
         {
             //m_rb.useGravity = false;
             m_startWallRun = true;
@@ -697,21 +716,6 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
-    public void NormalSpeed()
-    {
-        foreach (TrailRenderer trail in m_trailRenderers)
-        {
-            trail.enabled = false;
-        }
-
-        m_zPlayerSpeed = m_playerSpeedSave;
-        m_jumpForce = m_jumpBoostSave;
-        m_boostSpeedTimer = m_boostSpeedTimerSave;
-        m_decreaseSpeedTimer = m_decreaseSpeedTimerSave;
-        m_gonnaGoSlow = false;
-        m_gonnaGoFast = false;
-    }
-
     #region OnTrigger/OnCollision
     void OnTriggerEnter(Collider other)
     {
@@ -786,7 +790,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("GravityPlatform"))
         {
             m_isOnTop = true;
-            Debug.Log("Ho toccato: " + m_isOnTop);
+            //Debug.Log("Ho toccato: " + m_isOnTop);
         }
 
         if (!Cube.activeInHierarchy && (collision.gameObject.CompareTag("TopEdge") || collision.gameObject.CompareTag("BottomEdge")))
@@ -794,10 +798,10 @@ public class PlayerController : MonoBehaviour
             collision.collider.isTrigger = true;
         }
 
-        /*if (Cone.activeInHierarchy && !m_gravityChange && !m_isGrounded)
+        if (collision.gameObject.CompareTag("Ground") && Cone.activeInHierarchy && m_gravityChange)
         {
-            Cone.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        }*/
+            StopGravityPlatform();
+        }
 
     }
 

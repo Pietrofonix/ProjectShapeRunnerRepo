@@ -28,13 +28,13 @@ public class ShapesWheelButtonController : MonoBehaviour
     public void Selected()
     {
         m_selected = true;
-        ShapesWheelController.ShapeID = ID;
+        //ShapesWheelController.ShapeID = ID;
     }
 
     public void Deselected()
     {
         m_selected=false;
-        ShapesWheelController.ShapeID = 0;
+        //ShapesWheelController.ShapeID = 0;
     }
 
     public void HoverEnter()
