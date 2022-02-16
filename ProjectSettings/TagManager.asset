@@ -22,6 +22,13 @@ TagManager:
   - ConePlayer
   - CylinderPlayer
   - SpherePlayer
+  - WASDColl
+  - JumpColl
+  - PlatColl1
+  - PlatColl2
+  - WheelColl
+  - CylinderColl
+  - HPColl
   layers:
   - Default
   - TransparentFX

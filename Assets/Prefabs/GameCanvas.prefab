@@ -139,7 +139,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -120, y: -40}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 250, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &71872231474075150
 CanvasRenderer:
@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_shapeManager: {fileID: 0}
+  m_shapesWheelController: {fileID: 0}
   m_countDownText: {fileID: 0}
   BestScore: {fileID: 0}
   TimeScoreToFloat: 0

@@ -318,7 +318,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ghostPlatform:
   - {fileID: 0}
+  - {fileID: 0}
   m_normalPlatform:
+  - {fileID: 0}
   - {fileID: 0}
   Sphere: {fileID: 5865701378330444043}
   m_magneticForce: 1500
@@ -326,6 +328,7 @@ MonoBehaviour:
   m_vCam1: {fileID: 0}
   m_vCam2: {fileID: 0}
   m_pressTime: 0.5
+  m_pressTimer: 0
   ConeAnim: {fileID: 5867155959000574234}
   PlatformUp:
     serializedVersion: 2
@@ -340,6 +343,7 @@ MonoBehaviour:
   m_yWallRunVelocity: 15
   m_jumpForceWall: 25
   m_forwardJumpForceWall: 7
+  m_forwardJumpUpForceWall: 7
   m_wallJumpUpForce: 13
   m_gravityJumpFromWall: 15
   m_wallRunForce: 90000

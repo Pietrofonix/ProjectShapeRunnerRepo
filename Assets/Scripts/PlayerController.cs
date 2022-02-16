@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject[] m_ghostPlatform;
     [SerializeField] GameObject[] m_normalPlatform;
     public GameObject Sphere;
+    bool m_sphereButton;
     [Space(2)]
 
     [Header("GravityChange variables")]
@@ -15,11 +16,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject m_vCam1;
     [SerializeField] GameObject m_vCam2;
     [SerializeField] float m_pressTime;
+    [SerializeField] float m_pressTimer;
     RaycastHit m_hitGravityPlatform;
     public Animator ConeAnim;
     public LayerMask PlatformUp;
     public GameObject Cone;
-    float m_pressTimer;
     bool m_gravityChange = false;
     bool m_startGravityChange = false;
     bool m_isOnTop = false;
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_yWallRunVelocity;
     [SerializeField] float m_jumpForceWall;
     [SerializeField] float m_forwardJumpForceWall;
+    [SerializeField] float m_forwardJumpUpForceWall;
     [SerializeField] float m_wallJumpUpForce;
     [SerializeField] float m_gravityJumpFromWall;
     [SerializeField] float m_wallRunForce;
@@ -114,11 +116,15 @@ public class PlayerController : MonoBehaviour
     {
         foreach (GameObject ghostPlatform in m_ghostPlatform)
         {
-            ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
+            Color trasparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
+            trasparentColor.a = 0.3f;
+            ghostPlatform.GetComponent<MeshRenderer>().material.color = trasparentColor;
+            //ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
             ghostPlatform.GetComponent<BoxCollider>().enabled = false;
         }
 
-        SelectedShape();
+        //SelectedShape();
+        m_sphereButton = false;
         m_rb = GetComponent<Rigidbody>();
         m_boostSpeedTimerSave = m_boostSpeedTimer;
         m_decreaseSpeedTimerSave = m_decreaseSpeedTimer;
@@ -170,13 +176,15 @@ public class PlayerController : MonoBehaviour
             JumpFromWall();
         }
 
-        if (Sphere.activeInHierarchy)
+        if (Sphere.activeInHierarchy && Input.GetMouseButtonDown(0) && !m_sphereButton)
         {
             GhostPlatformOn();
+            m_sphereButton = true;
         }
-        else
+        else if (Sphere.activeInHierarchy && Input.GetMouseButtonDown(0) && m_sphereButton)
         {
             GhostPlatformOff();
+            m_sphereButton = false;
         }
 
         CheckJump();
@@ -395,7 +403,7 @@ public class PlayerController : MonoBehaviour
                 m_vCam1.SetActive(false);
                 m_vCam2.SetActive(true);
             }
-            else if(m_isOnTop)
+            else if (m_isOnTop)
             {
                 ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
@@ -406,7 +414,7 @@ public class PlayerController : MonoBehaviour
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
             }
-            else if(m_goUp && !m_isGrounded)
+            /*else if(m_goUp && !m_isGrounded)
             {
                 ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
@@ -416,8 +424,13 @@ public class PlayerController : MonoBehaviour
                 //Debug.Log("Torno giù dopo essere andato su");
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
-            }
+            }*/
         }
+
+        /*if (m_isGrounded && m_gravityChange && m_gravity != -m_gravity)
+        {
+            StopGravityPlatform();
+        }*/
 
         if (!m_gravityChange)
         {
@@ -678,13 +691,19 @@ public class PlayerController : MonoBehaviour
     {
         foreach (GameObject normalPlatform in m_normalPlatform)
         {
-            normalPlatform.GetComponent<MeshRenderer>().enabled = false;
+            Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
+            transparentColor.a = 0.3f;
+            normalPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+            //normalPlatform.GetComponent<MeshRenderer>().enabled = false;
             normalPlatform.GetComponent<BoxCollider>().enabled = false;
         }
 
         foreach (GameObject ghostPlatform in m_ghostPlatform)
         {
-            ghostPlatform.GetComponent<MeshRenderer>().enabled = true;
+            Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
+            transparentColor.a = 1f;
+            ghostPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+            //ghostPlatform.GetComponent<MeshRenderer>().enabled = true;
             ghostPlatform.GetComponent<BoxCollider>().enabled = true;
         }
     }
@@ -693,13 +712,19 @@ public class PlayerController : MonoBehaviour
     {
         foreach (GameObject normalPlatform in m_normalPlatform)
         {
-            normalPlatform.GetComponent<MeshRenderer>().enabled = true;
+            Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
+            transparentColor.a = 1f;
+            normalPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+            //normalPlatform.GetComponent<MeshRenderer>().enabled = true;
             normalPlatform.GetComponent<BoxCollider>().enabled = true;
         }
 
         foreach (GameObject ghostPlatform in m_ghostPlatform)
         {
-            ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
+            Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
+            transparentColor.a = 0.3f;
+            ghostPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+            //ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
             ghostPlatform.GetComponent<BoxCollider>().enabled = false;
         }
     }
@@ -813,7 +838,7 @@ public class PlayerController : MonoBehaviour
                 float angle = 15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_forwardJumpForceWall, ForceMode.Impulse);
-                m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
+                m_rb.AddForce(transform.up * m_forwardJumpUpForceWall, ForceMode.Impulse);
             }
 
             if (m_isWallRight)
@@ -821,7 +846,7 @@ public class PlayerController : MonoBehaviour
                 float angle = -15f;
                 Vector3 diagonalDir = Quaternion.Euler(angle * Vector3.up) * transform.forward;
                 m_rb.AddForce(diagonalDir * m_forwardJumpForceWall, ForceMode.Impulse);
-                m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);
+                m_rb.AddForce(transform.up * m_forwardJumpUpForceWall, ForceMode.Impulse);
             }
 
             //m_rb.AddForce(transform.up * m_wallJumpUpForce, ForceMode.Impulse);

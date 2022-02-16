@@ -1,28 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-    public GameObject playController;
+    /*public GameObject playController;
     public GameObject exitController;
     public GameObject optionController;
     public GameObject backController;
-    public GameObject sliderController;
+    public GameObject sliderController;*/
 
-    private void Start()
+    /*private void Start()
     {
-        backController.SetActive(false);
-        sliderController.SetActive(false);
-    }
+        //backController.SetActive(false);
+        //sliderController.SetActive(false);
+    }*/
 
     public void Play()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void Option()
+    /*public void Option()
     {
         //active.Self controlla lo stato di questo oggetto
         if (playController.activeSelf && exitController.activeSelf) 
@@ -33,9 +31,9 @@ public class MenuScript : MonoBehaviour
             backController.SetActive(true);
             sliderController.SetActive(true);
         }
-    }
+    }*/
 
-    public void Back()
+    /*public void Back()
     {
         if(!playController.activeSelf && !exitController.activeSelf && !optionController.activeSelf)
         {
@@ -45,11 +43,6 @@ public class MenuScript : MonoBehaviour
             sliderController.SetActive(false);
             backController.SetActive(false);
         }
-    }
-
-    /*public void Slide()
-    {
-
     }*/
 
     public void Exit()
@@ -57,5 +50,10 @@ public class MenuScript : MonoBehaviour
         Application.Quit();
 
         //UnityEditor.EditorApplication.isPlaying = false; (per verificare che, in fase di test, funzioni)
+    }
+
+    public void LoadLevel(int levelSelection)
+    {
+        SceneManager.LoadScene(levelSelection);
     }
 }
