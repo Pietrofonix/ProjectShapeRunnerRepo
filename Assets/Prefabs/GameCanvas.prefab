@@ -59,7 +59,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -138,8 +138,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -120, y: -40}
-  m_SizeDelta: {x: 250, y: 50}
+  m_AnchoredPosition: {x: -167.0507, y: -91.86}
+  m_SizeDelta: {x: 277.8267, y: 73.721}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &71872231474075150
 CanvasRenderer:
@@ -171,8 +171,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Checkpoint '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a889dece7975fc84fa492f449eb628b0, type: 2}
+  m_sharedMaterial: {fileID: -38135598255587916, guid: a889dece7975fc84fa492f449eb628b0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -410,8 +411,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 180, y: -60}
-  m_SizeDelta: {x: 336.5322, y: 88.8459}
+  m_AnchoredPosition: {x: 300, y: -100}
+  m_SizeDelta: {x: 425, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1162902219193271586
 CanvasRenderer:
@@ -443,8 +444,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 00:00.000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a889dece7975fc84fa492f449eb628b0, type: 2}
+  m_sharedMaterial: {fileID: -38135598255587916, guid: a889dece7975fc84fa492f449eb628b0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -475,7 +477,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -524,7 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_shapeManager: {fileID: 0}
   m_shapesWheelController: {fileID: 0}
-  m_countDownText: {fileID: 0}
+  m_countDownText: {fileID: 279616291333758671}
   BestScore: {fileID: 0}
   TimeScoreToFloat: 0
-  TimeScore: {fileID: 0}
+  TimeScore: {fileID: 8120649049951052595}

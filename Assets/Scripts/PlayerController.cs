@@ -154,6 +154,7 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("SpeedTimer: " + m_boostSpeedTimer);
         //Debug.Log(m_pressTimer);
         //Debug.Log("Ruota: " + m_shapesWheelController.ActivateWheel);
+        Debug.Log("Gravità: " + m_gravity);
         #endregion
 
         /*if (!m_isWallRunning && !m_gravityChange)
@@ -176,12 +177,12 @@ public class PlayerController : MonoBehaviour
             JumpFromWall();
         }
 
-        if (Sphere.activeInHierarchy && Input.GetMouseButtonDown(0) && !m_sphereButton)
+        if (Sphere.activeInHierarchy && Input.GetKeyDown(KeyCode.E) && !m_sphereButton)
         {
             GhostPlatformOn();
             m_sphereButton = true;
         }
-        else if (Sphere.activeInHierarchy && Input.GetMouseButtonDown(0) && m_sphereButton)
+        else if (Sphere.activeInHierarchy && Input.GetKeyDown(KeyCode.E) && m_sphereButton)
         {
             GhostPlatformOff();
             m_sphereButton = false;
@@ -206,6 +207,16 @@ public class PlayerController : MonoBehaviour
         else if (Cone.activeInHierarchy)
         {
             GravityChange();
+        }
+
+        if (!Cone.activeInHierarchy && m_gravity < 0f)
+        {
+            m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
+            m_gravity = -m_gravity;
+            m_goUp = false;
+            m_gravityChange = false;
+            m_vCam1.SetActive(true);
+            m_vCam2.SetActive(false);
         }
 
         //Raycasts that detect the walls on the right/left side
@@ -389,7 +400,7 @@ public class PlayerController : MonoBehaviour
 
     void GravityChange()
     {
-        if (/*Input.GetKeyDown(KeyCode.E)*/ m_startGravityChange /*&& (m_isGrounded || !m_groundHit)*/)
+        if (m_startGravityChange)
         {
             m_startGravityChange = false;
             if (!m_isOnTop && !m_gravityChange)
@@ -398,18 +409,18 @@ public class PlayerController : MonoBehaviour
                 m_goUp = true;
                 m_gravityChange = true;
                 m_rb.AddForce(transform.up * m_magneticForce, ForceMode.Acceleration);
-                m_gravity *= -1;
+                m_gravity = -m_gravity;
                 //Debug.Log("Vado su");
                 m_vCam1.SetActive(false);
                 m_vCam2.SetActive(true);
             }
-            else if (m_isOnTop)
+            else if (m_isOnTop || (!m_isOnTop && m_gravityChange))
             {
                 ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
-                m_gravity *= -1;
+                m_gravity = -m_gravity;
                 //Debug.Log("Vado giù");
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
@@ -420,17 +431,12 @@ public class PlayerController : MonoBehaviour
                 m_goUp = false;
                 m_gravityChange = false;
                 m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
-                m_gravity *= -1;
+                m_gravity = -m_gravity;
                 //Debug.Log("Torno giù dopo essere andato su");
                 m_vCam1.SetActive(true);
                 m_vCam2.SetActive(false);
             }*/
         }
-
-        /*if (m_isGrounded && m_gravityChange && m_gravity != -m_gravity)
-        {
-            StopGravityPlatform();
-        }*/
 
         if (!m_gravityChange)
         {
@@ -447,7 +453,7 @@ public class PlayerController : MonoBehaviour
         m_pressTimer = 0f;
         ConeAnim.Play("ConeRotationDown");
         m_rb.AddForce(-transform.up * m_magneticForce, ForceMode.Acceleration);
-        m_gravity *= -1;
+        m_gravity = -m_gravity;
         m_goUp = false;
         m_gravityChange = false;
         m_vCam1.SetActive(true);

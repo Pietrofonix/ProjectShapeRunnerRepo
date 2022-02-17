@@ -1306,7 +1306,7 @@ GameObject:
   - component: {fileID: 8159892573705789420}
   - component: {fileID: 8222958431638769130}
   m_Layer: 5
-  m_Name: ShapesWheelMenu
+  m_Name: ShapesWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2723,7 +2723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 289, y: 105}
+  m_AnchoredPosition: {x: 315, y: 110}
   m_SizeDelta: {x: 450, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5993860300491415481
@@ -2800,7 +2800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 160}
+  m_AnchoredPosition: {x: -110, y: 215}
   m_SizeDelta: {x: 50, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5993860300989374746
@@ -3286,7 +3286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7507816847805983919}
   m_Layer: 5
-  m_Name: ShapesWheel
+  m_Name: OldShapesWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

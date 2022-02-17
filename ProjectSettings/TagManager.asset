@@ -29,6 +29,15 @@ TagManager:
   - WheelColl
   - CylinderColl
   - HPColl
+  - WallRunColl1
+  - WallRunColl2
+  - ConeColl1
+  - ConeColl2
+  - JumpPlatColl
+  - SphereColl
+  - ObstacleColl
+  - EndTutorialColl
+  - CheckpointColl
   layers:
   - Default
   - TransparentFX

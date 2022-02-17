@@ -45,7 +45,8 @@ public class EndLevelController : MonoBehaviour
             {
                 PlayerPrefs.SetFloat(SceneManager.GetActiveScene().name + "MinTime", m_stopWatchController.TimeScoreToFloat);
                 PlayerPrefs.SetString(SceneManager.GetActiveScene().name + "BestTime", m_stopWatchController.TimeScore.text);
-                BestTime();
+                //BestTime();
+                m_bestScore.text = "New Best Time: " + PlayerPrefs.GetString(SceneManager.GetActiveScene().name + "BestTime");
             }
             else
             {
@@ -56,6 +57,7 @@ public class EndLevelController : MonoBehaviour
 
     public void NextLevel()
     {
+        GameManager.Instance.PlayerHealth = 100f;
         m_levelLoad++;
         SceneManager.LoadScene(m_levelLoad);
     }
@@ -63,6 +65,12 @@ public class EndLevelController : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.Instance.PlayerHealth = 100f;
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene("Menu");
         GameManager.Instance.PlayerHealth = 100f;
     }
 
