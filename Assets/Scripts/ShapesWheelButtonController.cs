@@ -6,7 +6,6 @@ public class ShapesWheelButtonController : MonoBehaviour
     public int ID;
     public string ShapeName;
     public TextMeshProUGUI ShapeText;
-    //public Image SelectedShape;
     public Sprite Icon;
     Animator m_anim;
     bool m_selected = false;

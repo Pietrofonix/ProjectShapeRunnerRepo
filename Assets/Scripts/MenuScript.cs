@@ -49,7 +49,7 @@ public class MenuScript : MonoBehaviour
     {
         Application.Quit();
 
-        //UnityEditor.EditorApplication.isPlaying = false; (per verificare che, in fase di test, funzioni)
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 
     public void LoadLevel(int levelSelection)

@@ -5,7 +5,6 @@ public class WallWalkerController : MonoBehaviour
     [SerializeField] Transform m_player;
     [SerializeField] float m_speed1;
     [SerializeField] float m_speed2;
-
     bool m_velocity;
 
     private void Start()

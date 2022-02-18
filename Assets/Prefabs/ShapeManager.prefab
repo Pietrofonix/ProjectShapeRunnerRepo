@@ -319,7 +319,18 @@ MonoBehaviour:
   m_ghostPlatform:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_normalPlatform:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   Sphere: {fileID: 5865701378330444043}
@@ -328,7 +339,6 @@ MonoBehaviour:
   m_vCam1: {fileID: 0}
   m_vCam2: {fileID: 0}
   m_pressTime: 0.5
-  m_pressTimer: 0
   ConeAnim: {fileID: 5867155959000574234}
   PlatformUp:
     serializedVersion: 2
@@ -373,7 +383,7 @@ MonoBehaviour:
   Capsule: {fileID: 5865701377782978001}
   IsMovingForward: 0
   IsMoving: 0
-  DoubleJumpVar: 0
+  DoubleJumpVar: 1
 --- !u!114 &1996600929037485166
 MonoBehaviour:
   m_ObjectHideFlags: 0

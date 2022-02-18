@@ -20,8 +20,6 @@ public class PauseManager : MonoBehaviour
         {
             ChangeStatusMenuPause();
         }
-
-        //Debug.Log(m_isPaused);
     }
 
     void ChangeStatusMenuPause()
@@ -34,7 +32,6 @@ public class PauseManager : MonoBehaviour
     {
         if (m_isPaused)
         {
-            // Time.timeScale si usa per velocizzare, rallentare o fermare il tempo
             Time.timeScale = 0;
             m_playerController.enabled = false;
             m_shapesWheelController.enabled = false;
@@ -48,6 +45,11 @@ public class PauseManager : MonoBehaviour
         }
 
         PnlPause.SetActive(m_isPaused);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void BackToMenu()

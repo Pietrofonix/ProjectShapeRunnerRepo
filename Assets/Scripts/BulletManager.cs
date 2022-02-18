@@ -5,13 +5,9 @@ public class BulletManager : MonoBehaviour
     Rigidbody m_rb;
     GameObject cylinder;
     GameObject m_playerController;
-    //Transform m_playerRef;
-    //PlayerController m_playerController;
     [SerializeField] float m_bulletSpeed;
     [SerializeField] float m_bulletUpForce;
     [SerializeField] EnemyManager m_enemyManager;
-    //public Image cylinderPerkBar;
-    //Vector3 bulletDir;
 
     void Start()
     {
@@ -53,16 +49,12 @@ public class BulletManager : MonoBehaviour
         {
             if(!cylinder || (cylinder && !CylinderPerk.startCylinderPerkBar && CylinderPerk.startCooldownCylinder))
             {
-                //m_playerController.Health -= 10f;
                 GameManager.Instance.PlayerHealth -= 10f;
                 Destroy(gameObject);
-                //gameObject.SetActive(false);
             }
             else if(cylinder && CylinderPerk.startCylinderPerkBar)
             {
                 Destroy(gameObject);
-                //gameObject.SetActive(false);
-                //cylinderPerkBar.enabled = true;
             }
             else if(cylinder && !CylinderPerk.startCylinderPerkBar && !CylinderPerk.startCooldownCylinder)
             {
@@ -74,6 +66,5 @@ public class BulletManager : MonoBehaviour
     void OnBecameInvisible()
     {
         Destroy(gameObject);
-        //gameObject.SetActive(false);
     }
 }

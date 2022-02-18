@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 66853870}
   - component: {fileID: 66853871}
   m_Layer: 5
-  m_Name: QuitText
+  m_Name: QuitBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -558,7 +558,7 @@ GameObject:
   - component: {fileID: 155628021}
   - component: {fileID: 155628020}
   m_Layer: 5
-  m_Name: BackLevelsText
+  m_Name: BackLevelsBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1735,7 +1735,7 @@ GameObject:
   - component: {fileID: 420353670}
   - component: {fileID: 420353671}
   m_Layer: 5
-  m_Name: OptionText
+  m_Name: OptionBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2727,7 +2727,7 @@ GameObject:
   - component: {fileID: 1004722326}
   - component: {fileID: 1004722331}
   m_Layer: 5
-  m_Name: BackOptionText
+  m_Name: BackOptionBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3296,11 +3296,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 6e7bc9a4b65b9174a88f6c7a1947e971, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4138,7 +4138,7 @@ GameObject:
   - component: {fileID: 1674229031}
   - component: {fileID: 1674229032}
   m_Layer: 5
-  m_Name: PlayText
+  m_Name: PlayBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

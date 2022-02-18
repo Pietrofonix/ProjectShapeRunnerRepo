@@ -58,7 +58,7 @@ public class TutorialManager : MonoBehaviour
                 break;
 
             case "ConeColl1":
-                m_tutorialText.text = "CONE CAN INVERT GRAVITY \n\nPRESS E WHILE UNDER A GRAVITY PLATFORM \n\n TRY DOUBLE JUMPING";
+                m_tutorialText.text = "CONE CAN INVERT GRAVITY \n\nPRESS E WHILE UNDER A GRAVITY PLATFORM \n\nTRY JUMPING WITH INVERTED GRAVITY";
                 break;
 
             case "SphereColl":

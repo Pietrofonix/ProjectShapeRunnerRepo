@@ -10,16 +10,14 @@ public class EnemyManager : MonoBehaviour
 
     State state = State.idle;
 
-    //public Transform EnemyTargetForward;
-    //public Transform EnemyTargetBackward;
-    public PlayerController PlayerScript;
-    public Transform Player;
-    public Transform FirePoint;
-    public GameObject Bullet;
-    public LayerMask WhatIsPlayer;
+    [SerializeField] GameObject m_bullet;
+    [SerializeField] Transform m_player;
+    [SerializeField] LayerMask m_whatIsPlayer;
+    [SerializeField] PlayerController m_playerScript;
     [SerializeField] Rigidbody m_playerRb;
     [SerializeField] float m_sightRange;
     [SerializeField] float m_attackCooldownTimer;
+    public Transform FirePoint;
     Transform m_enemyTargetForward;
     Transform m_enemyTargetBackward;
     RaycastHit m_enemySight;
@@ -30,23 +28,18 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        m_enemyTargetForward = Player.GetChild(5);
-        m_enemyTargetBackward = Player.GetChild(6);
+        m_enemyTargetForward = m_player.GetChild(5);
+        m_enemyTargetBackward = m_player.GetChild(6);
     }
 
     void Update()
     {
         //Check if player is in range (inside the sphere)
-        m_playerInRange = Physics.CheckSphere(transform.position, m_sightRange, WhatIsPlayer);
+        m_playerInRange = Physics.CheckSphere(transform.position, m_sightRange, m_whatIsPlayer);
 
         //Check if player is visible
-        m_raycastDir = (Player.position - transform.position);
+        m_raycastDir = (m_player.position - transform.position);
         m_obstacle = Physics.Raycast(transform.position, m_raycastDir, out m_enemySight, m_sightRange);
-
-        /*if (m_enemySight.collider != null)
-        {
-            //Debug.Log(m_enemySight.collider.name);
-        }*/
 
         switch (state)
         {
@@ -61,36 +54,31 @@ public class EnemyManager : MonoBehaviour
                 break;
 
             case State.shoot:
-                foreach (Transform child in Player)
+                foreach (Transform child in m_player)
                 {
                     Vector3 enemyAim;
                     //If the player is moving forward, the enemy shoots behind of the player
-                    if (PlayerScript.IsMovingForward && PlayerScript.IsMoving)
+                    if (m_playerScript.IsMovingForward && m_playerScript.IsMoving)
                     {
-                        //enemyAim = EnemyTargetForward.position;
                         enemyAim = m_enemyTargetBackward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
-                        //Debug.Log("Sparo al target davanti");
                     }
                     //If the player is moving forward, the enemy shoots in front of the player
-                    else if (!PlayerScript.IsMovingForward && PlayerScript.IsMoving)
+                    else if (!m_playerScript.IsMovingForward && m_playerScript.IsMoving)
                     {
-                        //enemyAim = EnemyTargetBackward.position;
                         enemyAim = m_enemyTargetForward.position;
                         enemyAim.y -= 0.5f;
                         transform.LookAt(enemyAim);
-                        //Debug.Log("Sparo al target dietro");
                     }     
                     //If the player is not moving, the enemy shoots directly at the player 
-                    else if (!PlayerScript.IsMoving)
+                    else if (!m_playerScript.IsMoving)
                     {
                         if (!child.CompareTag("GroundCheck") && !child.CompareTag("EnemyTarget") && child.gameObject.activeInHierarchy)
                         {
                             enemyAim = child.position;
                             enemyAim.y -= 0.5f;
                             transform.LookAt(enemyAim);
-                            //Debug.Log("Sparo al player");
                         }
                     }
                 }
@@ -117,20 +105,18 @@ public class EnemyManager : MonoBehaviour
             if (m_obstacle && !m_enemySight.collider.CompareTag("Player"))
             {
                 Debug.DrawRay(transform.position, m_raycastDir, Color.red);
-                //Debug.Log("Non vedo il giocatore");
             } 
             else if (m_obstacle && m_enemySight.collider.CompareTag("Player"))
             {
                 m_playerRb.WakeUp();
                 state = State.shoot;
-                //Debug.Log("Vedo il giocatore");
             }
         }
     }
 
     void ShootPlayer()
     {
-        Instantiate(Bullet, FirePoint.position, transform.rotation);
+        Instantiate(m_bullet, FirePoint.position, transform.rotation);
 
         #region Pool method
         /*GameObject bullet = ObjectPool.instance.GetPooledObject();
@@ -150,7 +136,6 @@ public class EnemyManager : MonoBehaviour
         if (!m_playerInRange || (m_obstacle && !m_enemySight.collider.CompareTag("Player")))
         {
             state = State.idle;
-            //Debug.Log("Non vedo il giocatore");
         }
     }
 

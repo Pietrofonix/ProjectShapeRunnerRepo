@@ -113,8 +113,13 @@ public class ShapesWheelController : MonoBehaviour
     [SerializeField] Transform m_player;
     [SerializeField] GameObject m_shapesWheel;
     [SerializeField] float m_slowMotionTime;
-    public bool ShapesWheelIsActive;
-    bool m_shapeWheelSelected = false;
+    [HideInInspector] public bool ShapesWheelIsActive;
+    public static bool m_shapeWheelSelected = false;
+
+    void Start()
+    {
+        ShapesWheelIsActive = true;    
+    }
 
     void Update()
     {

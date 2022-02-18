@@ -35,7 +35,6 @@ public class StopWatchController : MonoBehaviour
             TimeSpan timeSpan = TimeSpan.FromSeconds(m_stopwatch);
             TimeScore.text = timeSpan.ToString(@"mm\:ss\:fff");
             TimeScoreToFloat = (float) timeSpan.TotalSeconds;
-            //Debug.Log(TimeScoreToFloat);
         }
     }
 }
