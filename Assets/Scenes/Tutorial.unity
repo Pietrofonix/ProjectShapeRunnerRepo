@@ -201,6 +201,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedPlatform Variant (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
 --- !u!1001 &52827300
@@ -341,7 +346,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &82990876
 Transform:
@@ -819,6 +824,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
 --- !u!4 &137178393 stripped
@@ -1043,7 +1053,7 @@ GameObject:
   m_TagString: ConeColl1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &211377744
 Transform:
@@ -1376,7 +1386,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &243840011
 Transform:
@@ -1936,7 +1946,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &346052042
 Transform:
@@ -2112,7 +2122,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &350098579
 Transform:
@@ -2498,7 +2508,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &471039526
 Transform:
@@ -2967,7 +2977,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &512901063
 Transform:
@@ -3118,6 +3128,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform Variant (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
@@ -3280,7 +3295,7 @@ GameObject:
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &589270599
 Transform:
@@ -3382,6 +3397,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!4 &615582476 stripped
@@ -3409,6 +3429,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 669952000}
     m_Modifications:
+    - target: {fileID: 3126349245712106915, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3882146591489985888, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3483,6 +3508,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WallRun (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882146591489985893, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192156531153290174, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6238972894757745201, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194ea9ad849ed1e48a32adb552a3a0d6, type: 3}
@@ -3647,7 +3687,7 @@ GameObject:
   m_TagString: WASDColl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &672916244
 BoxCollider:
@@ -3748,6 +3788,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpeedPlatform Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
@@ -4035,7 +4080,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &690206155
 Transform:
@@ -4370,6 +4415,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 669952000}
     m_Modifications:
+    - target: {fileID: 3126349245712106915, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3882146591489985888, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4445,6 +4495,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallRun (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 3882146591489985893, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192156531153290174, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6238972894757745201, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194ea9ad849ed1e48a32adb552a3a0d6, type: 3}
 --- !u!4 &706181992 stripped
@@ -4470,7 +4535,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &709863993
 Transform:
@@ -4567,7 +4632,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &728005630
 Transform:
@@ -4728,6 +4793,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
@@ -4916,7 +4986,7 @@ GameObject:
   m_TagString: PlatColl1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &798672074
 Transform:
@@ -5080,6 +5150,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 669952000}
     m_Modifications:
+    - target: {fileID: 3126349245712106915, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3882146591489985888, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5155,6 +5230,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallRun (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3882146591489985893, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192156531153290174, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6238972894757745201, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194ea9ad849ed1e48a32adb552a3a0d6, type: 3}
 --- !u!4 &813189477 stripped
@@ -5178,7 +5268,7 @@ GameObject:
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &820132124
 Transform:
@@ -5293,7 +5383,7 @@ GameObject:
   m_TagString: HPColl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &850173082
 Transform:
@@ -5340,7 +5430,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &860496409
 Transform:
@@ -5435,7 +5525,7 @@ GameObject:
   m_TagString: WheelColl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &884997844
 Transform:
@@ -5622,6 +5712,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!1 &907783439
@@ -5673,7 +5768,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &910925101
 Transform:
@@ -5878,6 +5973,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform Variant (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
@@ -6289,7 +6389,7 @@ GameObject:
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &979505951
 Transform:
@@ -6605,6 +6705,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
@@ -6989,7 +7094,7 @@ GameObject:
   m_TagString: JumpColl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1052942003
 Transform:
@@ -7034,7 +7139,7 @@ GameObject:
   m_TagString: SphereColl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1053380368
 Transform:
@@ -7347,6 +7452,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
 --- !u!1001 &1166816220
@@ -7420,6 +7530,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpeedPlatform Variant (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
@@ -7598,7 +7713,7 @@ GameObject:
   m_TagString: EndTutorialColl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1180992609
 Transform:
@@ -7643,7 +7758,7 @@ GameObject:
   m_TagString: WallRunColl1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1182275844
 Transform:
@@ -7787,7 +7902,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1189262894
 Transform:
@@ -7980,6 +8095,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
@@ -8382,6 +8502,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
 --- !u!4 &1288469991 stripped
@@ -8635,6 +8760,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
@@ -8927,6 +9057,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpPlatform (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1188431885478905091, guid: baf87ced7074b6a468169e3281b149a7,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1188431885478905096, guid: baf87ced7074b6a468169e3281b149a7,
         type: 3}
       propertyPath: m_RootOrder
@@ -9036,7 +9171,7 @@ GameObject:
   m_TagString: PlatColl2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1382560898
 Transform:
@@ -9254,6 +9389,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform Variant (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
@@ -9634,6 +9774,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 669952000}
     m_Modifications:
+    - target: {fileID: 3126349245712106915, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3882146591489985888, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9708,6 +9853,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WallRun (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882146591489985893, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192156531153290174, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6238972894757745201, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194ea9ad849ed1e48a32adb552a3a0d6, type: 3}
@@ -9918,6 +10078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!1001 &1478123971
@@ -10071,6 +10236,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!4 &1480493104 stripped
@@ -10160,6 +10330,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
@@ -10333,6 +10508,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wall (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
@@ -10572,7 +10752,7 @@ GameObject:
   m_TagString: WallRunColl2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1566050302
 Transform:
@@ -10617,7 +10797,7 @@ GameObject:
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1568369215
 Transform:
@@ -10756,6 +10936,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform Variant (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
@@ -11252,6 +11437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!4 &1688274857 stripped
@@ -11338,6 +11528,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedPlatform Variant (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
 --- !u!4 &1701083307 stripped
@@ -11423,6 +11618,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpeedPlatform Variant (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
@@ -11644,6 +11844,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!4 &1773837219 stripped
@@ -11744,7 +11949,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &1817404954
 Transform:
@@ -11896,6 +12101,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!4 &1827283056 stripped
@@ -11993,6 +12203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform Variant (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
@@ -12158,6 +12373,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedPlatform Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
 --- !u!1 &1892122589
@@ -12263,6 +12483,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform Variant (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
@@ -12618,6 +12843,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
 --- !u!1001 &2002911633
@@ -12702,6 +12932,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4543319462816113929, guid: cb14c42291f4c874e860946ff53df9fb,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb14c42291f4c874e860946ff53df9fb, type: 3}
 --- !u!1 &2007443330
@@ -12751,7 +12986,7 @@ GameObject:
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2007726189
 Transform:
@@ -12853,6 +13088,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedPlatform Variant (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
 --- !u!4 &2007975723 stripped
@@ -12868,6 +13108,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 669952000}
     m_Modifications:
+    - target: {fileID: 3126349245712106915, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 3882146591489985888, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12947,6 +13192,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882146591489985893, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5192156531153290174, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6238972894757745201, guid: 194ea9ad849ed1e48a32adb552a3a0d6,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 194ea9ad849ed1e48a32adb552a3a0d6, type: 3}
@@ -13168,6 +13428,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!4 &2088226508 stripped
@@ -13253,6 +13518,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlowPlatform Variant (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
 --- !u!4 &2095857630 stripped
@@ -13278,7 +13548,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2106520760
 Transform:
@@ -13436,6 +13706,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedPlatform Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2919418416777113900, guid: e3d64d91da6f8c2428000b84bd0c9cbc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3d64d91da6f8c2428000b84bd0c9cbc, type: 3}
 --- !u!4 &2114165147 stripped
@@ -13455,6 +13730,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GravityPlatform (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584653978417509608, guid: 90777debeebff9b4ab69bedd92fa7226,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3703529919637935336, guid: 90777debeebff9b4ab69bedd92fa7226,
         type: 3}
@@ -13765,6 +14045,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlowPlatform Variant (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4758186117477652749, guid: 9575cd89c4891a54a955e25597ec5635,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9575cd89c4891a54a955e25597ec5635, type: 3}
