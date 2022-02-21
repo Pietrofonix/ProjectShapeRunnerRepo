@@ -186,7 +186,7 @@ public class PlayerController : MonoBehaviour
         BoostSpeedTimer();
         DecreaseSpeedTimer();
 
-        //Make the shape rotated correctly based on the 
+        //Make the shape rotated correctly based on the surface is moving on
         transform.rotation = Quaternion.LookRotation(Vector3.Cross(transform.right, m_hitGroundDistance.normal));
     }
 
@@ -359,7 +359,7 @@ public class PlayerController : MonoBehaviour
     #region GravityChange
     void CheckGravityChange()
     {
-        if (m_platformUpHit || m_isOnTop)
+        if (m_platformUpHit || (m_isOnTop && m_gravityChange))
         {
             Debug.DrawRay(transform.position, transform.up * m_rayUpRange, Color.green);
             m_pressTimer -= Time.deltaTime;
@@ -369,7 +369,7 @@ public class PlayerController : MonoBehaviour
                 m_pressTimer = 0f;
             }
 
-            if (m_isOnTop)
+            if (m_isOnTop && m_gravityChange)
             {
                 m_shapesWheelController.ShapesWheelIsActive = false;
             }
@@ -417,11 +417,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (!m_gravityChange)
-        {
-            m_shapesWheelController.ShapesWheelIsActive = true;
-        }
-        else if (m_goUp)
+        if (m_goUp)
         {
             m_shapesWheelController.ShapesWheelIsActive = false;
         }

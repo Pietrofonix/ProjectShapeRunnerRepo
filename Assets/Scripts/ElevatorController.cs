@@ -15,9 +15,6 @@ public class ElevatorController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(m_elevator);
-        Debug.Log(m_elevatorYPosSave);
-
         Vector3 elevatorPositiveTarget = new(transform.position.x, m_elevatorYPosSave + m_elevatorDistance, transform.position.z);
         Vector3 elevatorNegativeTarget = new(transform.position.x, m_elevatorYPosSave, transform.position.z);
 
