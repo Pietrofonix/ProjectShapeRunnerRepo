@@ -215,27 +215,22 @@ public class PlayerController : MonoBehaviour
         }
 
         //Raycasts that detect the walls on the right/left side
-        m_isWallRight = Physics.Raycast(transform.position + transform.up * -0.5f, transform.right, out m_wallRunDetection, 1.5f, WhatIsWall);
-        m_isWallLeft = Physics.Raycast(transform.position + transform.up * -0.5f, -transform.right, out m_wallRunDetection, 1.5f, WhatIsWall);
+        m_isWallRight = Physics.Raycast(transform.position + transform.up * -0.5f, transform.right, out m_wallRunDetection, 0.7f, WhatIsWall);
+        m_isWallLeft = Physics.Raycast(transform.position + transform.up * -0.5f, -transform.right, out m_wallRunDetection, 0.7f, WhatIsWall);
 
         //Raycast that detects the gravity platform above the player
         m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
 
         #region Raycast debug
-        /*if (m_groundHit)
-            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.green);
-        else
-            Debug.DrawRay(transform.position, -transform.up * m_rayDownRange, Color.red);
-
         if (m_isWallRight) 
-            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 1.5f, Color.yellow);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 0.7f, Color.yellow);
         else
-            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 1.5f, Color.red);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 0.7f, Color.red);
 
         if (m_isWallLeft)
-            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 1.5f, Color.blue);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 0.7f, Color.blue);
         else
-            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 1.5f, Color.red);*/
+            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 0.7f, Color.red);
         #endregion
     }
 
@@ -374,7 +369,7 @@ public class PlayerController : MonoBehaviour
                 m_shapesWheelController.ShapesWheelIsActive = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && m_pressTimer <= 0.01f && !ShapesWheelController.m_shapeWheelSelected)
+            if (Input.GetKeyDown(KeyCode.E) && m_pressTimer <= 0.01f)
             {
                 m_startGravityChange = true;
                 m_pressTimer = m_pressTime;
@@ -392,7 +387,7 @@ public class PlayerController : MonoBehaviour
 
     void GravityChange()
     {
-        if (m_startGravityChange)
+        if (m_startGravityChange && Cone.activeInHierarchy)
         {
             m_startGravityChange = false;
             if (!m_isOnTop && !m_gravityChange)
@@ -405,7 +400,7 @@ public class PlayerController : MonoBehaviour
                 m_vCam1.SetActive(false);
                 m_vCam2.SetActive(true);
             }
-            else if (m_isOnTop || (!m_isOnTop && m_gravityChange))
+            else if ((m_isOnTop || !m_isOnTop) && m_gravityChange)
             {
                 ConeAnim.Play("ConeRotationDown");
                 m_goUp = false;
@@ -417,10 +412,10 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (m_goUp)
+        /*if (m_goUp)
         {
             m_shapesWheelController.ShapesWheelIsActive = false;
-        }
+        }*/
     }
 
     void StopGravityPlatform()
@@ -615,11 +610,11 @@ public class PlayerController : MonoBehaviour
             //Make sure the player sticks to the wall
             if (m_isWallRight)
             {
-                m_rb.AddForce(transform.right * m_wallRunForce, ForceMode.Force);
+                m_rb.AddForce(transform.right * m_wallRunForce, ForceMode.Acceleration);
             }
             else if (m_isWallLeft)
             {
-                m_rb.AddForce(-transform.right * m_wallRunForce, ForceMode.Force);
+                m_rb.AddForce(-transform.right * m_wallRunForce, ForceMode.Acceleration);
             }
         }
     }

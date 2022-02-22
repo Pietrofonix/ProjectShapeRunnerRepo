@@ -38,6 +38,7 @@ TagManager:
   - ObstacleColl
   - EndTutorialColl
   - CheckpointColl
+  - WallRun
   layers:
   - Default
   - TransparentFX
