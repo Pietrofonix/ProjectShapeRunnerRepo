@@ -316,23 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d88da18b6ad295e45b770c803198820a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ghostPlatform:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_normalPlatform:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_ghostPlatform: []
+  m_normalPlatform: []
   Sphere: {fileID: 5865701378330444043}
   m_magneticForce: 1500
   m_rayUpRange: 20
@@ -357,6 +342,7 @@ MonoBehaviour:
   m_wallJumpUpForce: 13
   m_gravityJumpFromWall: 15
   m_wallRunForce: 90000
+  m_wallRunRaycastLength: 0.7
   m_shapesWheelController: {fileID: 0}
   WhatIsWall:
     serializedVersion: 2

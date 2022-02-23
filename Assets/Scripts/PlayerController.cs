@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float m_wallJumpUpForce;
     [SerializeField] float m_gravityJumpFromWall;
     [SerializeField] float m_wallRunForce;
+    [SerializeField] float m_wallRunRaycastLength;
     [SerializeField] ShapesWheelController m_shapesWheelController;
     public LayerMask WhatIsWall;
     public GameObject Cube;
@@ -215,22 +216,22 @@ public class PlayerController : MonoBehaviour
         }
 
         //Raycasts that detect the walls on the right/left side
-        m_isWallRight = Physics.Raycast(transform.position + transform.up * -0.5f, transform.right, out m_wallRunDetection, 0.7f, WhatIsWall);
-        m_isWallLeft = Physics.Raycast(transform.position + transform.up * -0.5f, -transform.right, out m_wallRunDetection, 0.7f, WhatIsWall);
+        m_isWallRight = Physics.Raycast(transform.position + transform.up * -0.5f, transform.right, out m_wallRunDetection, m_wallRunRaycastLength, WhatIsWall);
+        m_isWallLeft = Physics.Raycast(transform.position + transform.up * -0.5f, -transform.right, out m_wallRunDetection, m_wallRunRaycastLength, WhatIsWall);
 
         //Raycast that detects the gravity platform above the player
         m_platformUpHit = Physics.Raycast(transform.position, transform.up, out m_hitGravityPlatform, m_rayUpRange, PlatformUp);
 
         #region Raycast debug
         if (m_isWallRight) 
-            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 0.7f, Color.yellow);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * m_wallRunRaycastLength, Color.yellow);
         else
-            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * 0.7f, Color.red);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, transform.right * m_wallRunRaycastLength, Color.red);
 
         if (m_isWallLeft)
-            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 0.7f, Color.blue);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * m_wallRunRaycastLength, Color.blue);
         else
-            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * 0.7f, Color.red);
+            Debug.DrawRay(transform.position + transform.up * -0.5f, -transform.right * m_wallRunRaycastLength, Color.red);
         #endregion
     }
 
