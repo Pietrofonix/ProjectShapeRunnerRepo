@@ -4,8 +4,10 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Sphere variables")]
     #region GhostObj variables
-    [SerializeField] GameObject[] m_ghostPlatform;
-    [SerializeField] GameObject[] m_normalPlatform;
+    //[SerializeField] GameObject[] m_ghostPlatform;
+    //[SerializeField] GameObject[] m_normalPlatform;
+    [SerializeField] Transform m_switchPlatforms1;
+    [SerializeField] Transform m_switchPlatforms2;
     public GameObject Sphere;
     bool m_sphereButton;
     #endregion
@@ -113,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        foreach (GameObject ghostPlatform in m_ghostPlatform)
+        foreach (Transform ghostPlatform in m_switchPlatforms1)
         {
             Color trasparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
             trasparentColor.a = 0.3f;
@@ -663,7 +665,7 @@ public class PlayerController : MonoBehaviour
     #region PlatformOnOff
     void GhostPlatformOn()
     {
-        foreach (GameObject normalPlatform in m_normalPlatform)
+        foreach (Transform normalPlatform in m_switchPlatforms2)
         {
             Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
             transparentColor.a = 0.3f;
@@ -671,7 +673,7 @@ public class PlayerController : MonoBehaviour
             normalPlatform.GetComponent<BoxCollider>().enabled = false;
         }
 
-        foreach (GameObject ghostPlatform in m_ghostPlatform)
+        foreach (Transform ghostPlatform in m_switchPlatforms1)
         {
             Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
             transparentColor.a = 1f;
@@ -682,7 +684,7 @@ public class PlayerController : MonoBehaviour
 
     void GhostPlatformOff()
     {
-        foreach (GameObject normalPlatform in m_normalPlatform)
+        foreach (Transform normalPlatform in m_switchPlatforms2)
         {
             Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
             transparentColor.a = 1f;
@@ -690,7 +692,7 @@ public class PlayerController : MonoBehaviour
             normalPlatform.GetComponent<BoxCollider>().enabled = true;
         }
 
-        foreach (GameObject ghostPlatform in m_ghostPlatform)
+        foreach (Transform ghostPlatform in m_switchPlatforms1)
         {
             Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
             transparentColor.a = 0.3f;
