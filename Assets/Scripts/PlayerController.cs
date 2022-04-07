@@ -115,13 +115,16 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        foreach (Transform ghostPlatform in m_switchPlatforms1)
+        if (m_switchPlatforms1 != null)
         {
-            Color trasparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
-            trasparentColor.a = 0.3f;
-            ghostPlatform.GetComponent<MeshRenderer>().material.color = trasparentColor;
-            //ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
-            ghostPlatform.GetComponent<BoxCollider>().enabled = false;
+            foreach (Transform ghostPlatform in m_switchPlatforms1)
+            {
+                Color trasparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
+                trasparentColor.a = 0.3f;
+                ghostPlatform.GetComponent<MeshRenderer>().material.color = trasparentColor;
+                //ghostPlatform.GetComponent<MeshRenderer>().enabled = false;
+                ghostPlatform.GetComponent<BoxCollider>().enabled = false;
+            }
         }
 
         //SelectedShape();
@@ -157,6 +160,12 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Ruota: " + m_shapesWheelController.ActivateWheel);
         //Debug.Log("Gravità: " + m_gravity);
         #endregion
+
+        if (m_switchPlatforms1 == null && m_switchPlatforms2 == null)
+        {
+            m_switchPlatforms1 = null;
+            m_switchPlatforms2 = null;
+        }
 
         if (!Cone.activeInHierarchy)
         {
@@ -665,39 +674,45 @@ public class PlayerController : MonoBehaviour
     #region PlatformOnOff
     void GhostPlatformOn()
     {
-        foreach (Transform normalPlatform in m_switchPlatforms2)
+        if (m_switchPlatforms1 != null & m_switchPlatforms2 != null)
         {
-            Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
-            transparentColor.a = 0.3f;
-            normalPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
-            normalPlatform.GetComponent<BoxCollider>().enabled = false;
-        }
+            foreach (Transform normalPlatform in m_switchPlatforms2)
+            {
+                Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
+                transparentColor.a = 0.3f;
+                normalPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+                normalPlatform.GetComponent<BoxCollider>().enabled = false;
+            }
 
-        foreach (Transform ghostPlatform in m_switchPlatforms1)
-        {
-            Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
-            transparentColor.a = 1f;
-            ghostPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
-            ghostPlatform.GetComponent<BoxCollider>().enabled = true;
+            foreach (Transform ghostPlatform in m_switchPlatforms1)
+            {
+                Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
+                transparentColor.a = 1f;
+                ghostPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+                ghostPlatform.GetComponent<BoxCollider>().enabled = true;
+            }
         }
     }
 
     void GhostPlatformOff()
     {
-        foreach (Transform normalPlatform in m_switchPlatforms2)
+        if (m_switchPlatforms1 != null && m_switchPlatforms2 != null)
         {
-            Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
-            transparentColor.a = 1f;
-            normalPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
-            normalPlatform.GetComponent<BoxCollider>().enabled = true;
-        }
+            foreach (Transform normalPlatform in m_switchPlatforms2)
+            {
+                Color transparentColor = normalPlatform.GetComponent<MeshRenderer>().material.color;
+                transparentColor.a = 1f;
+                normalPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+                normalPlatform.GetComponent<BoxCollider>().enabled = true;
+            }
 
-        foreach (Transform ghostPlatform in m_switchPlatforms1)
-        {
-            Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
-            transparentColor.a = 0.3f;
-            ghostPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
-            ghostPlatform.GetComponent<BoxCollider>().enabled = false;
+            foreach (Transform ghostPlatform in m_switchPlatforms1)
+            {
+                Color transparentColor = ghostPlatform.GetComponent<MeshRenderer>().material.color;
+                transparentColor.a = 0.3f;
+                ghostPlatform.GetComponent<MeshRenderer>().material.color = transparentColor;
+                ghostPlatform.GetComponent<BoxCollider>().enabled = false;
+            }
         }
     }
     #endregion
